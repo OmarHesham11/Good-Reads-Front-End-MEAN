@@ -1,0 +1,71 @@
+<!-- 
+<section class="py-3">
+
+    Add
+    <div class="d-flex flex-row-reverse p-2 mb-2">
+        <button class="btn btn-primary p-2" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">Add</button>
+    </div>
+    <ng-template #addPopUp>
+        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-info position-absolute" (click) = 'closePopUp()'>close</button>
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeAddPopUpFunction()'>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div id="addCatogryPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
+                <form [formGroup] = 'categoryForm' (ngSubmit)="submitAddCategoryForm(categoryForm)">
+                    <div *ngIf="addMessage" class="bg-danger py-2 text-center mb-2">
+                        <p>{{addMessage}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label for="categoryName" class="form-label">Category Name</label>
+                      <input formControlName='Name' type="text" class="form-control" id="categoryName">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Category</button>
+                  </form>
+
+            </div>
+        </div>
+    </ng-template>
+
+    Table
+    <table class="table w-75 m-auto  text-center text-white">
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let category of trendingCategories, let i = index">
+                <td>{{i+1}}</td>
+                <td>{{category.Name}}</td>
+                <td><button class="btn btn-primary mx-2" (click)="showUpdatePopUpFunction(category._id, i)">Update</button> <button class="btn btn-danger" (click)="deleteCategory(category._id)">Delete</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    
+    Update
+    <div class="update-popup" *ngIf = 'showUpdatePopUp'>
+        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-info position-absolute" (click) = 'closeUPopUp()'>close</button>
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeUpdatePopUpFunction()'>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div id="updateCatogryPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
+                <form [formGroup] = 'categoryForm' (ngSubmit)="submitUpdateCategoryForm(categoryForm)">
+                    <div *ngIf="updateMessage" class="bg-danger py-2 text-center mb-2">
+                        <p>{{updateMessage}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label for="categoryName" class="form-label">Category Name</label>
+                      <input [formControl]="myUpdateInputControl" formControlName='Name' type="text" class="form-control" id="categoryName">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Category</button>
+                  </form>
+
+            </div>
+        </div>
+    </div>
+
+    
+</section> -->

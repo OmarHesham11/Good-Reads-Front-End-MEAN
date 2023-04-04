@@ -1,0 +1,21 @@
+@import '../../styles.scss';
+
+.navbar {
+    background-color: $navBgColor;
+}
+.nav-link {
+    font-size: 20px;
+    color: $fontColor;
+    text-decoration: none;
+}
+
+.nav-link:hover {
+    font-size: 18px;
+    color: $fontColor;
+    text-decoration: none;
+}
+
+.logout:hover {
+    cursor: pointer;
+}
+

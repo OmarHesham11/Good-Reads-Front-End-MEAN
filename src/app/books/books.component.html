@@ -1,0 +1,111 @@
+
+<section class="py-3">
+
+    <!-- Add -->
+    <div class="d-flex flex-row-reverse p-2 mb-2">
+        <button class="btn btn-primary p-2" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">Add</button>
+    </div>
+    <ng-template #addPopUp>
+        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
+            <!-- <button class="btn btn-info position-absolute" (click) = 'closePopUp()'>close</button> -->
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeAddPopUpFunction()'>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div id="addBookPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
+                <form [formGroup] = 'bookForm' (ngSubmit)="submitAddBookForm(bookForm)">
+                    <div *ngIf="addMessage" class="bg-danger py-2 text-center mb-2">
+                        <p>{{addMessage}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label for="bookName" class="form-label">Book Name</label>
+                      <input formControlName='name' type="text" class="form-control" id="bookName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select formControlName="category" class="form-select" aria-label="Default select example">
+                            <option  [value]="category.Name" *ngFor="let category of trendingCategories, let i = index">{{category.Name}}</option>
+                        
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="bookName" class="form-label">Author</label>
+                        <select formControlName='author'  class="form-select" aria-label="Default select example" >
+                            <option  [ngValue] = "{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of trendingAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="image" class="form-label">Image</label>
+                        <input formControlName='photo'  (change)="uploadFile($event)" type="file" class="form-control" id="image">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Book</button>
+                  </form>
+
+            </div>
+        </div>
+    </ng-template>
+
+    <!-- Table -->
+    <table class="table w-75 m-auto  text-center text-white mb-3">
+        <thead>
+            <th>Id</th>
+            <th>Photo</th>
+            <th>Name</th>
+            <th>CategoryId</th>
+            <th>AuthorId</th>
+            <th>Actions</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let book of trendingBooks, let i = index">
+                <td>{{i+1}}</td>
+                <td><img class="image" [src]="book.photo" alt="anything"></td>
+                <td>{{book.name}}</td>
+                <td>{{book.categoryId.Name}}</td>
+                <td>{{book.authorId.firstName}} {{book.authorId.lastName}}</td>
+                <!-- <td><button class="btn btn-primary mx-2" (click)="showUpdatePopUpFunction(book._id, i)">Update</button> <button class="btn btn-danger" (click)="deleteCategory(book._id)">Delete</button></td> -->
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center align-items-center ">
+        <div class="icon d-flex justify-content-center align-items-center mx-1" (click)="prevPage()">
+            <i class="fa-solid fa-chevron-left"></i>
+        </div>
+        
+        <div class="d-flex justify-content-center align-items-center  current-page mx-1">
+            {{currentPage}}
+        </div>
+        <div class="icon d-flex justify-content-center align-items-center mx-1 " (click)="nextPage()">
+            <i class="fa-solid fa-chevron-right"></i>
+        </div>
+    </div>
+    
+
+
+    
+    <!-- Update -->
+    <!-- <div class="update-popup" *ngIf = 'showUpdatePopUp'>
+        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
+            <button class="btn btn-info position-absolute" (click) = 'closeUPopUp()'>close</button>
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeUpdatePopUpFunction()'>
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+            <div id="updateCatogryPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
+                <form [formGroup] = 'categoryForm' (ngSubmit)="submitUpdateCategoryForm(categoryForm)">
+                    <div *ngIf="updateMessage" class="bg-danger py-2 text-center mb-2">
+                        <p>{{updateMessage}}</p>
+                    </div>
+                    <div class="mb-3">
+                      <label for="categoryName" class="form-label">Category Name</label>
+                      <input [formControl]="myUpdateInputControl" formControlName='Name' type="text" class="form-control" id="categoryName">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Category</button>
+                  </form>
+
+            </div>
+        </div>
+    </div> -->
+
+    
+</section>
+
