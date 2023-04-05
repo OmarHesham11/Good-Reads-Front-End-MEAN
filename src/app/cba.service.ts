@@ -13,15 +13,10 @@ export class CBAService {
   }
 
   headers = new HttpHeaders({
-    
     'Authorization': `${this._authAdmin.adminToken()}`
   });
   requestOptions = { headers: this.headers };
 
-  // header = new HttpHeaders({
-  //   'Content-Type': 'multipart/form-data'
-  // });
-  // x = {header:this.header}
 
   getCBA(mediaType:string, currentPage:number, pageSize:number):Observable<any> {
     return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}?page=${currentPage}&limit=${pageSize}`, this.requestOptions);
@@ -31,7 +26,7 @@ export class CBAService {
     return this._httpClient.delete(`https://goodreads.onrender.com/${mediaType}/${id}`, this.requestOptions);
   }
 
-  patchCBA(mediaType:string, id:string, FormData:string):Observable<any> {
+  patchCBA(mediaType:string, id:string, FormData:object):Observable<any> {
     return this._httpClient.patch(`https://goodreads.onrender.com/${mediaType}/${id}`, FormData, this.requestOptions);
   }
 

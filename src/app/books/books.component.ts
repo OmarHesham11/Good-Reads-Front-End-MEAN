@@ -62,12 +62,12 @@ export class BooksComponent {
     photo: new FormControl(null,[Validators.required]),
   });
 
-  uploadFile(event:any) {
+  uploadImage(event:any) {
     console.log("ohotooooo", this.photo);
    if(event.target.files.length>0){
      const file = event.target.files[0];
      this.photo = file
-     console.log("photo", this.photo);
+    //  console.log("photo", this.photo);
    }
   }
 
@@ -86,16 +86,16 @@ export class BooksComponent {
     });
     // Return the found object or undefined if not found
     if (author) {
-      console.log('Found author:', author);
-      console.log('author', author);
+      // console.log('Found author:', author);
+      // console.log('author', author);
       const formData:FormData = new FormData();
       formData.append('name', this.bookForm.get('name').value);
       formData.append('categoryId', category._id);
       formData.append('authorId', author._id);
       formData.append('photo', this.photo);
-      console.log(formData.get('photo'));
-      console.log(formData.get('authorId'));
-      console.log("ana hena",this.bookForm.get('name').value);
+      // console.log(formData.get('photo'));
+      // console.log(formData.get('authorId'));
+      // console.log("ana hena",this.bookForm.get('name').value);
     
       this._CBAService.postCBA('book', formData).subscribe((res) => {
         if (res.message == 'success') {
