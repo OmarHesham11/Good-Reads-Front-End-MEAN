@@ -38,7 +38,7 @@
                         <label for="image" class="form-label">Image</label>
                         <input formControlName='photo'  (change)="uploadImage($event)" type="file" class="form-control" id="image">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Book</button>
+                    <button [disabled]= 'bookForm.invalid' type="submit" class="btn btn-primary">Add Book</button>
                   </form>
 
             </div>
@@ -60,9 +60,9 @@
                 <td>{{i+1}}</td>
                 <td><img class="image" [src]="book.photo" alt="anything"></td>
                 <td>{{book.name}}</td>
-                <td>{{book.categoryId.Name}}</td>
+                <td>{{book.categoryId.name}}</td>
                 <td>{{book.authorId.firstName}} {{book.authorId.lastName}}</td>
-                <!-- <td><button class="btn btn-primary mx-2" (click)="showUpdatePopUpFunction(book._id, i)">Update</button> <button class="btn btn-danger" (click)="deleteCategory(book._id)">Delete</button></td> -->
+                <td><button class="btn btn-primary mx-2" (click)="showUpdatePopUpFunction(book._id, i)">Update</button> <button class="btn btn-danger" (click)="deleteBook(book._id)">Delete</button></td>
             </tr>
         </tbody>
     </table>
