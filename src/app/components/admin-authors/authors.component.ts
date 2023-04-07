@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { CBAService } from '../cba.service';
+import { CBAService } from '../../services/cba.service';
 
 
 @Component({
@@ -132,11 +132,11 @@ export class AuthorsComponent {
       next: (res) => {this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe({
         next:(res) => {this.trendingAuthors = res.authors.docs}, 
         error:(err) => {"err fe el get eli fe el delete"},
-        complete:() => {console.info('complete')}
+        complete:() => {console.log('complete')}
       })
     },
       error: (err) => {console.error("err fe el delete")},
-      complete: () => console.info('Complete')
+      complete: () => console.log('Complete')
       // alert(res.message);
     });
   }

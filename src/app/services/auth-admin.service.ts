@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Admin } from './admin';
+import { Admin } from '../Interfaces/admin';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import jwt_decode from 'jwt-decode';
@@ -28,6 +28,11 @@ export class Authadminservice {
 
   loginAdmin(adminLoginFormData:Admin):Observable<any> {
     return this._httpClient.post('https://goodreads.onrender.com/admin/login', adminLoginFormData);
+  }
+
+  //
+  loginUser(adminLoginFormData:Admin):Observable<any> {
+    return this._httpClient.post('https://goodreads.onrender.com/user/login', adminLoginFormData);
   }
 
   logOut() {
