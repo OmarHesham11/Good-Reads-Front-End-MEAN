@@ -20,7 +20,7 @@ import { AuthorsComponent } from './components/admin-authors/authors.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,14 +37,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule,
-    MatDatepickerModule,
-    FormsModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatNativeDateModule,
-    BrowserAnimationsModule
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
