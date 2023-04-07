@@ -12,7 +12,8 @@ import { AuthorsComponent } from './authors/authors.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RegisterComponent } from './register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
