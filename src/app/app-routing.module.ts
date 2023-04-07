@@ -9,7 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthadminGuard } from './authadmin.guard';
 
 const routes: Routes = [
-  {path:'' , redirectTo:'admin/login', pathMatch:'full'},
+  {path:'' , redirectTo:'admin/categories', pathMatch:'full'},
   {path:'admin/categories',canActivate:[AuthadminGuard], component:CategoriesComponent},
   {path:'admin/authors',canActivate:[AuthadminGuard], component:AuthorsComponent},
   {path:'admin/books',canActivate:[AuthadminGuard], component:BooksComponent},

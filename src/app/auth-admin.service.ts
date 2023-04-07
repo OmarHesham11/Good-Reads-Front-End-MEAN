@@ -16,6 +16,7 @@ export class Authadminservice {
       this.saveCurrentAdmin();
     }
    }
+
   currentAdmin = new BehaviorSubject(null);
 
   saveCurrentAdmin(){
@@ -38,8 +39,6 @@ export class Authadminservice {
   adminToken(){
     return localStorage.getItem('adminToken')
   }
-
-  
 
  
 }
