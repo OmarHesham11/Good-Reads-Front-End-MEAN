@@ -5,6 +5,7 @@
     <div class="d-flex flex-row-reverse p-2 mb-2">
         <button class="btn btn-primary p-2" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">Add</button>
     </div>
+    
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
             <!-- <button class="btn btn-info position-absolute" (click) = 'closePopUp()'>close</button> -->
