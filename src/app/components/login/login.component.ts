@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators} from '@angular/forms';
-import { Authadminservice } from '../auth-admin.service';
+import { Authadminservice } from '../../services/auth-admin.service';
 import { Router } from '@angular/router';
 
 
