@@ -17,7 +17,7 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { UserbooksComponent } from './components/login/userbooks/userbooks.component';
+import { UserbooksComponent } from './userbooks/userbooks.component';
 
 @NgModule({
   declarations: [
