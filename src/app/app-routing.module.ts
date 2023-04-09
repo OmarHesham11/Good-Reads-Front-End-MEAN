@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthadminGuard } from './guard/authadmin.guard';
-import { UserbooksComponent } from './userbooks/userbooks.component';
+import { UserbooksComponent } from './components/userbooks/userbooks.component';
 
 const routes: Routes = [
   {path:'' , redirectTo:'admin/categories', pathMatch:'full'},
