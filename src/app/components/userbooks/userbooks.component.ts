@@ -97,10 +97,13 @@ export class UserbooksComponent {
 
     if (this.selectedTabIndex === 0) {
       this.filteredBooks = this.books;
+    this.paginator.firstPage();
+
     } else {
       this.filteredBooks = this.books.filter(book => book.shelve === this.tabs[this.selectedTabIndex].value);
+      this.paginator.firstPage();
+
     }
-    this.paginator.firstPage();
   }
 
   onPageChange(event: any) {
