@@ -102,11 +102,5 @@ export class UserbooksComponent {
     const endIndex = startIndex + event.pageSize;
     this.filteredBooks = this.filteredBooks.slice(startIndex, endIndex);
   }
-    getStars(rating: number): number[] {
-    const stars = [];
-    for (let i = 0; i < rating; i++) {
-      stars.push(i);
-    }
-    return stars;
-  }
+
 }
