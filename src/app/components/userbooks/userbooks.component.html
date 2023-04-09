@@ -1,14 +1,14 @@
 <div class="container">
-    <mat-tab-group animationDuration="5000ms"  (selectedTabChange)="onTabChange($event)" [selectedIndex]="defaultTabIndex">
-        <mat-tab label="All"> All </mat-tab>
-        <mat-tab label="Read"> Read </mat-tab>
-        <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
-        <mat-tab label="Want to read"> Want to read </mat-tab>
-      </mat-tab-group>
-  
-    <div class="table-container" *ngIf="selectedTabIndex !== undefined">
-      <h2>{{ tabs[selectedTabIndex].label }} </h2>
-      <table class="table table-striped mt-3">
+  <mat-tab-group animationDuration="2000ms" (selectedTabChange)="onTabChange($event)" [selectedIndex]="selectedTabIndex">
+    <mat-tab label="All"> All </mat-tab>
+    <mat-tab label="Read"> Read </mat-tab>
+    <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
+    <mat-tab label="Want to read"> Want to read </mat-tab>
+  </mat-tab-group>
+
+  <div class="table-container"  *ngIf="selectedTabIndex !== undefined">
+    <!-- <h2>{{ tabs[selectedTabIndex].label }} </h2> -->
+    <table class="table table-striped mt-3">
         <thead>
           <tr>
             <th scope="col"> Cover</th>
@@ -47,10 +47,9 @@
           </tr>
         </tbody>
       </table>
-      <div class="pagination-container">
-  
-        <mat-paginator [length]="10" [pageSize]="1" [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
-      </div>
+     <div class="pagination-container">
+      <mat-paginator [length]="filteredBooks.length" [pageSize]="filteredBooks.length"></mat-paginator>
+    </div>
     </div>
   </div>
   

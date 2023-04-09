@@ -85,14 +85,14 @@ export class UserbooksComponent {
 
   constructor(private matPaginatorIntl: MatPaginatorIntl) {
     this.matPaginatorIntl.itemsPerPageLabel = 'Books per page:';
+    this.selectedTabIndex = this.tabs.findIndex(tab => tab.label === 'All');
   }
 
 
 
   selectedTabIndex: number;
-  defaultTabIndex = 0;
 
-  onTabChange(event: MatTabChangeEvent) {
+  onTabChange(event: any) {
     this.selectedTabIndex = event.index;
 
     if (this.selectedTabIndex === 0) {
