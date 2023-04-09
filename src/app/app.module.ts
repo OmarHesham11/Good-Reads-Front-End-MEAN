@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { NgxStarsModule } from 'ngx-stars';
 
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +23,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,13 +35,20 @@ import { UserbooksComponent } from './components/userbooks/userbooks.component';
     AuthorsComponent,
     NotfoundComponent,
     RegisterComponent,
-    UserbooksComponent
+    UserbooksComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    NgxStarsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

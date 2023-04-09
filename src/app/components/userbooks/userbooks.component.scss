@@ -1,0 +1,42 @@
+// .container1 {
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     right: 0;
+//     margin-bottom: 20px;
+//   }
+// .container {
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//   }
+  
+  .pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15%;
+  }
+  .table {
+    color: white;
+  }
+  
+  th {
+    color: white;
+  }
+  span{
+    color: white;
+
+  }
+  .rating {
+    display: inline-block;
+    font-size: 24px;
+    color: #ffd700;
+  }
+  .star {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url('/assets/star-icon.png');
+}

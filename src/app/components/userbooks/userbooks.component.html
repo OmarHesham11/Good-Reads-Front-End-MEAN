@@ -1,1 +1,52 @@
-<p>userbooks works!</p>
+<div class="container">
+    <mat-tab-group color="accent" (selectedTabChange)="onTabChange($event)" [selectedIndex]="defaultTabIndex">
+        <mat-tab label="All"> All </mat-tab>
+        <mat-tab label="Read"> Read </mat-tab>
+        <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
+        <mat-tab label="Want to read"> Want to read </mat-tab>
+      </mat-tab-group>
+  
+    <div class="table-container" *ngIf="selectedTabIndex !== undefined">
+      <h2>{{ tabs[selectedTabIndex].label }} </h2>
+      <table class="table table-striped mt-3">
+        <thead>
+          <tr>
+            <th scope="col"> Cover</th>
+            <th scope="col">Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Avg Rate</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Shelve</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of filteredBooks">
+            <td><span>{{book.cover}}</span></td>
+            <td><span>{{book.name}}</span></td>
+            <td><span>{{book.author}}</span></td>
+            <td><span>{{book.avgRate}}</span></td>
+            <td>
+                <span *ngFor="let star of getStars(book.rating)" class="star"></span>
+              </td>
+            <!-- <td><span>{{book.rating}}</span></td> -->
+            <td>
+              <div class="form-group">
+                <div class="input-group">
+                  <select id="userbook" class="form-control" formControlName="bookCategory">
+                    <option value="reading" [selected]="book.shelve === 'reading'">Reading</option>
+                    <option value="want-to-read" [selected]="book.shelve === 'want-to-read'">Want to read</option>
+                    <option value="read" [selected]="book.shelve === 'read'">Read</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="pagination-container">
+  
+        <mat-paginator [length]="10" [pageSize]="1" [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
+      </div>
+    </div>
+  </div>
+  
