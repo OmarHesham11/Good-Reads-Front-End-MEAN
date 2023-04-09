@@ -1,12 +1,22 @@
 <div class="container">
   <mat-tab-group animationDuration="2000ms" (selectedTabChange)="onTabChange($event)" [selectedIndex]="selectedTabIndex">
+    <mat-tab label="">
+     <mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-subtitle>Welcome to your shelves</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image src="../../../assets/images/shelves.jpg" alt="Card Image">
+
+
+</mat-card>
+  </mat-tab>
     <mat-tab label="All"> All </mat-tab>
     <mat-tab label="Read"> Read </mat-tab>
     <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
     <mat-tab label="Want to read"> Want to read </mat-tab>
   </mat-tab-group>
 
-  <div class="table-container"  *ngIf="selectedTabIndex !== undefined">
+  <div class="table-container"  *ngIf="selectedTabIndex !== undefined && selectedTabIndex !== 0">
     <!-- <h2>{{ tabs[selectedTabIndex].label }} </h2> -->
     <table class="table table-striped mt-3">
         <thead>

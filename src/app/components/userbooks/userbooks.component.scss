@@ -1,4 +1,26 @@
 
+.example-card {
+  max-width: 60%;
+  margin: 0 auto;
+  text-align: center;
+  background: #131722;
+  border: 5px solid #131722;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+  margin-top: 15px;
+  padding: 2%;
+}
+
+mat-card-header {
+  background-color: #131722;
+  padding: 2%;
+}
+
+mat-card-image {
+  max-height: 200px;
+  object-fit: cover;
+
+}
+
   .pagination-container {
     display: flex;
     justify-content: center;

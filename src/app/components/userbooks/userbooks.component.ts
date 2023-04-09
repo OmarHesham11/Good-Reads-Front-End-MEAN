@@ -5,7 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
-import { NgxStarsModule } from 'ngx-stars';
+import { MatCardModule } from '@angular/material/card';
 interface Book{
   cover: string;
   name: string;
@@ -95,7 +95,7 @@ export class UserbooksComponent {
   onTabChange(event: any) {
     this.selectedTabIndex = event.index;
 
-    if (this.selectedTabIndex === 0) {
+    if (this.selectedTabIndex === 1) {
       this.filteredBooks = this.books;
     this.paginator.firstPage();
 
