@@ -24,8 +24,15 @@
             <td><span>{{book.cover}}</span></td>
             <td><span>{{book.name}}</span></td>
             <td><span>{{book.author}}</span></td>
-            <td><span>{{book.avgRate}}</span></td>
-            <td><span>{{book.rating}}</span></td>
+            <td>
+      
+              <i [attr.data-star]="book.avgRate"></i>
+             
+            </td>
+            <td>
+              <i [attr.data-star]="book.rating"></i>
+               
+            </td>
             <td>
               <div class="form-group">
                 <div class="input-group">

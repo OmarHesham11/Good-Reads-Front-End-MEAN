@@ -22,6 +22,8 @@ interface Book{
 })
 
 export class UserbooksComponent {
+// ----------------------------------------------------------------------//
+                  //                  عاوز تغير هنا براحتك بس حافظ ع المسميات دى عشان مفيش حاااجة تضرب لاقتلك  ^_^
   filteredBooks: Book[] = [];
   books: Book[] = [
     {
@@ -29,15 +31,15 @@ export class UserbooksComponent {
       name: 'Book 1',
       author: 'Author 1',
       avgRate: 4.5,
-      rating: 5,
+      rating: 4.7,
       shelve: 'reading'
     },
     {
       cover: 'book 2 cover image url',
       name: 'Book 2',
       author: 'Author 2',
-      avgRate: 4.0,
-      rating: 4,
+      avgRate: 4.2,
+      rating: 3.1,
       shelve: 'want-to-read'
     },
     {
@@ -45,10 +47,9 @@ export class UserbooksComponent {
       name: 'Book 3',
       author: 'Author 3',
       avgRate: 3.5,
-      rating: 3,
+      rating: 3.8,
       shelve: 'read'
     },
-    // Add more books as needed
   ];
   tabs = [
     {
@@ -68,23 +69,28 @@ export class UserbooksComponent {
       value: 'want-to-read'
     }
   ];
-  selectedTabIndex: number;
-  defaultTabIndex = 0;
-  ngOnInit() {
-    this.setAllTabAsDefault();
-  }
-  setAllTabAsDefault() {
-    this.tabs.forEach((tab, index) => {
-      if (tab.label === 'All') {
-        this.defaultTabIndex = index;
-      }
-    });
-  }
+  //  --------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+// ملكش دعوة بال functions  دى احسنلك لقد اعذر من انذر
+
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private matPaginatorIntl: MatPaginatorIntl) {
     this.matPaginatorIntl.itemsPerPageLabel = 'Books per page:';
   }
+
+
+
+  selectedTabIndex: number;
+  defaultTabIndex = 0;
 
   onTabChange(event: MatTabChangeEvent) {
     this.selectedTabIndex = event.index;
@@ -101,6 +107,16 @@ export class UserbooksComponent {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
     this.filteredBooks = this.filteredBooks.slice(startIndex, endIndex);
+  }
+  get math() {
+    return Math;
+  }
+  floor(value: number) {
+    return this.math.floor(value);
+  }
+
+  ceil(value: number) {
+    return this.math.ceil(value);
   }
 
 }
