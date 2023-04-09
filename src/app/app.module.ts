@@ -16,7 +16,7 @@ import { AuthorsComponent } from './components/admin-authors/authors.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
 
 @NgModule({
