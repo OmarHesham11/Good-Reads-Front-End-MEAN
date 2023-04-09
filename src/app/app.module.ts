@@ -21,9 +21,10 @@ import { AuthorsComponent } from './components/admin-authors/authors.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
 import { CommonModule } from '@angular/common';
+import { AllbooksComponent } from './components/allbooks/allbooks.component';
+import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 
 @NgModule({
   declarations: [
@@ -36,10 +37,13 @@ import { CommonModule } from '@angular/common';
     NotfoundComponent,
     RegisterComponent,
     UserbooksComponent,
+    AllbooksComponent,
+    AuthorDetailsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     CommonModule,
@@ -48,7 +52,7 @@ import { CommonModule } from '@angular/common';
     MatIconModule,
     MatTabsModule,
     MatPaginatorModule,
-    NgxStarsModule
+    NgxStarsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
