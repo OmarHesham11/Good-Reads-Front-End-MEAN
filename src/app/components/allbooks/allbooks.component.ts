@@ -15,7 +15,7 @@ export class AllbooksComponent {
   keyParam: string = '';
   constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute) {
     this._ActivatedRoute.queryParams.subscribe(params => {
-      this.keyParam = params['key'];
+      this.keyParam = params['key'] || '';
       this.getBooks()
     });
     this.getBooks()
