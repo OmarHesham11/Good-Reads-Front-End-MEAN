@@ -19,16 +19,16 @@ export class AuthorDetailsComponent {
   
   getAuthor() {
     this._CBAService.getByID('author', this.id).subscribe((res) => {
-      if (res.message == 'success') {
-        this.author = res.author.author;
-        this.authorBooks = res.author.authorBooks;
+      if (res.status === 200) {
+        this.author = res.body.author.author;
+        this.authorBooks = res.body.author.authorBooks;
        
-        let authorDOB = new Date(res.author.author.DOB)        
+        let authorDOB = new Date(res.body.author.author.DOB)
         this.DOB = `${authorDOB.getDate()}/${authorDOB.getMonth()+1}/${authorDOB.getFullYear()}`
         
         console.log(this.authorBooks);
         
-      }
+      } 
     });
   }
 

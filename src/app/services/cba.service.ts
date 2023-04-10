@@ -26,7 +26,7 @@ export class CBAService {
   }
 
   getByID(mediaType:string, id:string):Observable<any> {
-    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/${id}`);
+    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/${id}`, this.requestOptions);
   }
   
   deleteCBA(mediaType:string, id:string):Observable<any> {

@@ -25,6 +25,9 @@ import { UserbooksComponent } from './components/userbooks/userbooks.component';
 import { CommonModule } from '@angular/common';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -53,6 +56,10 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
     MatTabsModule,
     MatPaginatorModule,
     NgxStarsModule,
+    MatCardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
