@@ -49,6 +49,17 @@ mat-card-image {
 
 
 /* STAR FROM HERE */
+.fa {
+  color: #ff8c00;
+  font-size: 25px;
+  margin-right: -40px;
+  margin-top: 5px;
+}
+.star-hover {
+  color: orange;
+  cursor: pointer;
+}
+
 
 [data-star] {
   text-align:left;
@@ -128,3 +139,5 @@ mat-card-image {
 [data-star^="4.8"]::after{width:96%}
 [data-star^="4.9"]::after{width:98%}
 [data-star^="5"]::after{width:100%}
+
+

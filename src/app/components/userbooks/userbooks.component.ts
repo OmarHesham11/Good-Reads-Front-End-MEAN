@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, EventEmitter, ViewChild } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -6,6 +6,7 @@ import { MatTabChangeEvent, MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
+ 
 interface Book{
   cover: string;
   name: string;
@@ -18,13 +19,16 @@ interface Book{
 @Component({
   selector: 'app-userbooks',
   templateUrl: './userbooks.component.html',
+  
   styleUrls: ['./userbooks.component.scss']
 })
 
 export class UserbooksComponent {
+  
 // ----------------------------------------------------------------------//
                   //                  عاوز تغير هنا براحتك بس حافظ ع المسميات دى عشان مفيش حاااجة تضرب لاقتلك  ^_^
   filteredBooks: Book[] = [];
+  // stars = [1, 2, 3, 4, 5];
   books: Book[] = [
     {
       cover: 'book 1 cover image url',
@@ -78,10 +82,12 @@ export class UserbooksComponent {
 
 
 
+  // starRating = 0; 
 
 // ملكش دعوة بال functions  دى احسنلك لقد اعذر من انذر
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  
+@ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private matPaginatorIntl: MatPaginatorIntl) {
     this.matPaginatorIntl.itemsPerPageLabel = 'Books per page:';
@@ -111,15 +117,36 @@ export class UserbooksComponent {
     const endIndex = startIndex + event.pageSize;
     this.filteredBooks = this.filteredBooks.slice(startIndex, endIndex);
   }
-  get math() {
-    return Math;
-  }
-  floor(value: number) {
-    return this.math.floor(value);
+  rating: number = 0;
+  large: boolean = false;
+  extraLarge: boolean = false;
+  ratingChange = new EventEmitter<number>();
+  stars: { filled: boolean, hover: boolean }[] = [];
+
+  ngOnInit(): void {
+    this.books;
+    this.stars = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
+    const roundedRating = Math.round(this.rating);
+    for (let i = 0; i < roundedRating; i++) {
+      this.stars[i].filled = true;
+    }
   }
 
-  ceil(value: number) {
-    return this.math.ceil(value);
+  onStarHover(star: any) {
+    star.hover = true;
   }
+
+  onStarLeave(star: any) {
+    star.hover = false;
+  }
+
+  onStarClick(star: any) {
+    const rating = this.stars.indexOf(star) + 1;
+    for (let i = 0; i < this.stars.length; i++) {
+      this.stars[i].filled = i < rating;
+    }
+    this.rating = rating;
+    this.ratingChange.emit(this.rating);
+  }
 
 }

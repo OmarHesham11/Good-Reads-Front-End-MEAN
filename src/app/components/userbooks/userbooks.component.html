@@ -40,8 +40,12 @@
              
             </td>
             <td>
-              <i [attr.data-star]="book.rating"></i>
-               
+              <!-- <i [attr.data-star]="book.rating"></i> -->
+              <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star)">
+                <i class="fa" [ngClass]="{'star-hover': star.hover}">
+                    {{ star.filled ? '★' : '✰' }}
+                </i>
+            </span>
             </td>
             <td>
               <div class="form-group">
