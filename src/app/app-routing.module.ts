@@ -8,17 +8,20 @@ import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthadminGuard } from './guard/authadmin.guard';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
+import { AllbooksComponent } from './components/allbooks/allbooks.component';
+import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 
 const routes: Routes = [
-  {path:'' , redirectTo:'admin/categories', pathMatch:'full'},
-  {path:'admin/categories',canActivate:[AuthadminGuard], component:CategoriesComponent},
-  {path:'admin/authors',canActivate:[AuthadminGuard], component:AuthorsComponent},
-  {path:'admin/books',canActivate:[AuthadminGuard], component:BooksComponent},
-  {path:'admin/login', component:LoginComponent},
-  {path:'register', component:RegisterComponent},
-  {path:'user/books', component:UserbooksComponent},
-
-  {path:'**', component:NotfoundComponent},
+  { path: '', redirectTo: 'admin/categories', pathMatch: 'full' },
+  { path: 'books', component: AllbooksComponent },
+  { path: 'author/:id', component: AuthorDetailsComponent },
+  { path: 'admin/categories', canActivate: [AuthadminGuard], component: CategoriesComponent },
+  { path: 'admin/authors', canActivate: [AuthadminGuard], component: AuthorsComponent },
+  { path: 'admin/books', canActivate: [AuthadminGuard], component: BooksComponent },
+  { path: 'admin/login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'user/books', component: UserbooksComponent },
+  { path: '**', component: NotfoundComponent },
 ];
 
 @NgModule({
