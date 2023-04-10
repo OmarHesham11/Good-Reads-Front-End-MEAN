@@ -23,13 +23,19 @@ export class AuthorDetailsComponent {
         this.author = res.author.author;
         this.authorBooks = res.author.authorBooks;
        
-        let authorDOB = new Date(res.author.author.DOB)        
+        let authorDOB = new Date(res.author.author.DOB)
         this.DOB = `${authorDOB.getDate()}/${authorDOB.getMonth()+1}/${authorDOB.getFullYear()}`
         
         console.log(this.authorBooks);
         
-      }
+      } 
     });
   }
 
+  // rating: number = 3;
+  starCount: number = 5;
+
+  onRatingChanged(rating: number, book) {
+    book.rating = rating;
+  }
 }
