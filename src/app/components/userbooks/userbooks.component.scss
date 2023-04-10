@@ -1,26 +1,4 @@
 
-.example-card {
-  max-width: 60%;
-  margin: 0 auto;
-  text-align: center;
-  background: #131722;
-  border: 5px solid #131722;
-  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-  margin-top: 15px;
-  padding: 2%;
-}
-
-mat-card-header {
-  background-color: #131722;
-  padding: 2%;
-}
-
-mat-card-image {
-  max-height: 200px;
-  object-fit: cover;
-
-}
-
   .pagination-container {
     display: flex;
     justify-content: center;
@@ -49,16 +27,19 @@ mat-card-image {
 
 
 /* STAR FROM HERE */
+
 .fa {
   color: #ff8c00;
   font-size: 25px;
-  margin-right: -40px;
   margin-top: 5px;
 }
+
+
 .star-hover {
   color: orange;
-  cursor: pointer;
+  cursor: pointer;
 }
+
 
 
 [data-star] {
@@ -140,4 +121,8 @@ mat-card-image {
 [data-star^="4.9"]::after{width:98%}
 [data-star^="5"]::after{width:100%}
 
-
+.image{
+  width: 100px;
+  height: 100px;
+  object-fit: cover; /* or 'cover', 'fill', 'scale-down', etc. */
+}
