@@ -30,7 +30,7 @@
                             <div class="pt-4 ps-4">
                                 <h4 class="fs-2 fw-bold">{{book.name}}</h4>
                                 <div class="rating">
-                                    <i [attr.data-star]="book.avgRate || 0"></i>
+                                    <i [attr.data-star]="book.totalRating/book.ratingNumber || 0"></i>
                                 </div>
                             </div>
                         </div>

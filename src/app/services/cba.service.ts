@@ -15,15 +15,15 @@ export class CBAService {
   headers = new HttpHeaders({
     'Authorization': `${this._authAdmin.adminToken()}`
   });
-  requestOptions = { headers: this.headers };
+  requestOptions:object = { headers: this.headers ,observe:'response'};
 
 
-  getCBA(mediaType:string, currentPage:number, pageSize:number, key:string=""):Observable<any> {
-    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/?page=${currentPage}&limit=${pageSize}&key=${key}`, this.requestOptions);
+  getCBA(mediaType:string, currentPage:number, pageSize:number,additional:string=''):Observable<any> {
+    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/?page=${currentPage}&limit=${pageSize}${additional}`, this.requestOptions);
   }
 
   getByID(mediaType:string, id:string):Observable<any> {
-    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/${id}`);
+    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/${id}`, this.requestOptions);
   }
   
   deleteCBA(mediaType:string, id:string):Observable<any> {

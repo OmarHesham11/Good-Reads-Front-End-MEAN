@@ -26,15 +26,14 @@ export class NavbarComponent {
     this._authAdmin.logOut();
   }
 
-
   searchKey:string ='';
   bookSearch = [];
   close:Boolean = false;
   search(){
     this.close=false
     if (this.searchKey.length > 2) {
-      this._CBAService.getCBA('book', 1, 5, this.searchKey).subscribe((res)=>{
-        this.bookSearch = res.books.docs;
+      this._CBAService.getCBA('book', 1, 5, `&key=${this.searchKey}`).subscribe((res)=>{
+        this.bookSearch = res.body.books.docs;
       })   
     }else{
       this.bookSearch = []

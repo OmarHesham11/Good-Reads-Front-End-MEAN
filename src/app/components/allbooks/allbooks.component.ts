@@ -22,10 +22,12 @@ export class AllbooksComponent {
   }
 
   getBooks() {
-    this._CBAService.getCBA('book', this.currentPage, this.limit, this.keyParam).subscribe((res) => {
-      if (res.message == 'success') {
-        this.books = res.books.docs;
-        this.booksRes = res.books;
+    this._CBAService.getCBA('book', this.currentPage, this.limit, `&key=${this.keyParam}`).subscribe((res) => {
+      console.log(res);
+      if (res.status === 200) {
+        
+        this.books = res.body.books.docs;
+        this.booksRes = res.body.books;
         console.log("this is book res", res.books);
       }
     });
