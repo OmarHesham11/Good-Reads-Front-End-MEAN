@@ -114,9 +114,10 @@ export class UserbooksComponent {
       "rating": rating
     }
     this._CBAService.patchCBA('user/book',bookId,obj).subscribe((res) => {
-      if(res.status==200)
+      if(res.status==200){
         console.log('Shelf Updated');
         this.getBooks()
+      }
     })
   }
 

@@ -15,7 +15,8 @@ export class CBAService {
   headers = new HttpHeaders({
     'Authorization': `${this._authAdmin.adminToken()}`
   });
-  requestOptions:object = { headers: this.headers ,observe:'response'};
+  requestOptions:object = { 
+    headers: this.headers ,observe:'response'};
 
 
   getCBA(mediaType:string, currentPage:number, pageSize:number,additional:string=''):Observable<any> {
