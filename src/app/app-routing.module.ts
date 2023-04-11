@@ -15,6 +15,8 @@ import { CatedoryComponent } from './components/catedory/catedory.component';
 const routes: Routes = [
   { path: '', redirectTo: 'admin/categories', pathMatch: 'full' },
   { path: 'books', component: AllbooksComponent },
+  { path: 'book/:id', component: BooksComponent },
+  { path: 'authors', component: AuthorsComponent },
   { path: 'author/:id', component: AuthorDetailsComponent },
   { path: 'admin/categories', canActivate: [AuthadminGuard], component: CategoriesComponent },
   { path: 'admin/authors', canActivate: [AuthadminGuard], component: AuthorsComponent },
