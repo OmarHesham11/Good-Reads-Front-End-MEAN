@@ -26,7 +26,7 @@ import { CommonModule } from '@angular/common';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { MatCardModule } from '@angular/material/card';
-import { CatedoryComponent } from './components/catedory/catedory.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,6 @@ import { CatedoryComponent } from './components/catedory/catedory.component';
     UserbooksComponent,
     AllbooksComponent,
     AuthorDetailsComponent,
-    CatedoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +56,9 @@ import { CatedoryComponent } from './components/catedory/catedory.component';
     MatPaginatorModule,
     NgxStarsModule,
     MatCardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

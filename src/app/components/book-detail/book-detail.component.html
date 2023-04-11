@@ -1,0 +1,68 @@
+<section>
+    <div class="overlay py-5">
+<div class="container my-4" id="base" >
+    <div class="row">
+        <div class="col-md-3">
+            <tbody>
+               
+                 <img src="{{book.photo}}" alt="">
+                 
+                 <div class="user-rate p-4 mt-4">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-select text-capitalize"
+                                (change)="Change($event.target,book._id,book.userRate)" id="userbook">
+                                <option value=""
+                                    [selected]="!book.shelf" disabled>Add to shelf</option>
+                                <option value="currently reading"
+                                    [selected]="book.shelf === 'currently reading'">Reading</option>
+                                <option value="want to read" [selected]="book.shelf === 'want to read'">Want
+                                    to read</option>
+                                <option value="read" [selected]="book.shelf === 'read'">Read</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="rating text-center mt-1">
+                        <span *ngFor="let star of stars" (mouseover)="onStarHover(star)"
+                            (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,book.shelf)">
+                            <i class="fa" [ngClass]="{'star-hover': star.hover}">
+                                {{ stars.indexOf(star) < book.userRate ? '★' : '✰' }} </i>
+                        </span>
+
+                    </div>
+                </div>
+
+                  
+              
+              </tbody>
+           
+        </div>
+        
+        <div class="col-md-8 mt-3">
+            <h2 class="text-capitalize">{{book.name}} </h2>
+        
+
+            <p class="tagline">
+                {{book.authorId.firstName + ' ' + book.authorId.lastName}}
+            </p>
+            <div class="d-flex mb-3">
+            
+            </div>
+            <div class="my-4">
+                <p>  {{book.categoryId.Name}}</p>
+                         
+                <i [attr.data-star]="book.avgRate"></i>
+                   
+                <p>{{'Ratings:' +book.ratingNumber}}</p>
+                <p>  {{book.reviews[0].comment}}</p>
+              
+            </div>
+     
+           
+            
+        </div>
+    </div>
+</div>
+</div>
+</section>
