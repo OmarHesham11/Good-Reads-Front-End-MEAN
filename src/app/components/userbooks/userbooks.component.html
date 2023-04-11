@@ -1,5 +1,5 @@
 <div class="container">
-<mat-tab-group animationDuration="2000ms" (selectedTabChange)="onTabChange($event)" >
+<mat-tab-group animationDuration="1000ms" (selectedTabChange)="onTabChange($event)" >
     <mat-tab  label="All"> All </mat-tab>
     <mat-tab  label="Read"> Read </mat-tab>
     <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
@@ -7,7 +7,6 @@
 </mat-tab-group>
 
 <div class="table-container"  >
-    <!-- <h2>{{ tabs[selectedTabIndex].label }} </h2> -->
     <table class="table table-striped mt-3">
         <thead>
         <tr>
@@ -21,7 +20,6 @@
         </thead>
         <tbody>
         <tr *ngFor="let book of books">
-            <!-- <td><span>{{book.bookId.photo}}</span></td> -->
             <td><img class="image" [src]="book.bookId.photo" alt="anything"></td>
             <td><span>{{book.bookId.name}}</span></td>
             <td><span>{{book.bookId.authorId.firstName}} {{book.bookId.authorId.lastName}}</span></td>
@@ -30,15 +28,11 @@
             <i [attr.data-star]="book.bookId.avgRate || 0" ></i>
             
             </td>
-            <!-- <td>
-            <i [attr.data-star]="book.rating || 0"></i>
-            
-            </td> -->
+        
             <td>
                 <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book.bookId._id,book.shelf)">
                     <i class="fa" [ngClass]="{'star-hover': star.hover}" >
                         {{ stars.indexOf(star) < book.rating ? '★' : '✰' }}
-                        <!-- {{ star.filled ? '★' : '☆' }} -->
                     </i>
                 </span>
                 </td>

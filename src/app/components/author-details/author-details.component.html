@@ -35,13 +35,28 @@
                             </div>
                         </div>
                         <div class="user-rate p-4 mt-4">
-                            <select class="form-select text-capitalize" aria-label="Default select example">
-                                <option selected>add to shelf</option>
-                                <option value="1">want to read</option>
-                                <option value="2">currently reading</option>
-                                <option value="3">read</option>
-                              </select>
-                              <div class="rating text-center mt-4">
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select class="form-select text-capitalize"
+                                        (change)="Change($event.target,book._id,book.userRate)" id="userbook">
+                                        <option value=""
+                                            [selected]="!book.shelf" disabled>Add to shelf</option>
+                                        <option value="currently reading"
+                                            [selected]="book.shelf === 'currently reading'">Reading</option>
+                                        <option value="want to read" [selected]="book.shelf === 'want to read'">Want
+                                            to read</option>
+                                        <option value="read" [selected]="book.shelf === 'read'">Read</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rating text-center mt-4">
+                                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)"
+                                    (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,book.shelf)">
+                                    <i class="fa" [ngClass]="{'star-hover': star.hover}">
+                                        {{ stars.indexOf(star) < book.userRate ? '★' : '✰' }} </i>
+                                </span>
+
                             </div>
                         </div>
                     </div>

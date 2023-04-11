@@ -27,7 +27,7 @@ import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +42,7 @@ import { MatInputModule } from '@angular/material/input';
     UserbooksComponent,
     AllbooksComponent,
     AuthorDetailsComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +60,7 @@ import { MatInputModule } from '@angular/material/input';
     MatCardModule,
     FormsModule,
     MatFormFieldModule,
-    MatInputModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
