@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { CBAService } from 'src/app/services/cba.service';
 
 @Component({
-  selector: 'app-catedory',
-  templateUrl: './catedory.component.html',
-  styleUrls: ['./catedory.component.scss']
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class CatedoryComponent {
+export class CategoryComponent {
   currentPage:number = 1;
   limit:number = 8;
   books:any = []

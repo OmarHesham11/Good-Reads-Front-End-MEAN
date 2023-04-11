@@ -27,7 +27,7 @@ import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CatedoryComponent } from './components/catedory/catedory.component';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { CatedoryComponent } from './components/catedory/catedory.component';
     UserbooksComponent,
     AllbooksComponent,
     AuthorDetailsComponent,
-    CatedoryComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,

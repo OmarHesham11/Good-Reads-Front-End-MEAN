@@ -10,7 +10,7 @@ import { AuthadminGuard } from './guard/authadmin.guard';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
-import { CatedoryComponent } from './components/catedory/catedory.component';
+import { CategoryComponent } from './components/category/category.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'admin/categories', pathMatch: 'full' },
@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'admin/login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user/books', component: UserbooksComponent },
-  { path: 'user/category', component:CatedoryComponent },
+  { path: 'user/category', component:CategoryComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
