@@ -26,6 +26,8 @@ import { CommonModule } from '@angular/common';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { MatCardModule } from '@angular/material/card';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +42,8 @@ import { MatCardModule } from '@angular/material/card';
     UserbooksComponent,
     AllbooksComponent,
     AuthorDetailsComponent,
+    BookDetailComponent,
+    AllAuthorsComponent,
   ],
   imports: [
     BrowserModule,
