@@ -1,69 +1,71 @@
 <div class="container">
-  <mat-tab-group animationDuration="2000ms" (selectedTabChange)="onTabChange($event)" [selectedIndex]="selectedTabIndex">
-    <mat-tab label="">
-     <mat-card class="example-card">
-  <mat-card-header>
-    <mat-card-subtitle>Welcome to your shelves</mat-card-subtitle>
-  </mat-card-header>
-  <img mat-card-image src="../../../assets/images/shelves.jpg" alt="Card Image">
-
-
-</mat-card>
-  </mat-tab>
-    <mat-tab label="All"> All </mat-tab>
-    <mat-tab label="Read"> Read </mat-tab>
+<mat-tab-group animationDuration="2000ms" (selectedTabChange)="onTabChange($event)" >
+    <mat-tab  label="All"> All </mat-tab>
+    <mat-tab  label="Read"> Read </mat-tab>
     <mat-tab label="Currently Reading"> Currently Reading </mat-tab>
     <mat-tab label="Want to read"> Want to read </mat-tab>
-  </mat-tab-group>
+</mat-tab-group>
 
-  <div class="table-container"  *ngIf="selectedTabIndex !== undefined && selectedTabIndex !== 0">
+<div class="table-container"  >
     <!-- <h2>{{ tabs[selectedTabIndex].label }} </h2> -->
     <table class="table table-striped mt-3">
         <thead>
-          <tr>
+        <tr>
             <th scope="col"> Cover</th>
             <th scope="col">Name</th>
             <th scope="col">Author</th>
             <th scope="col">Avg Rate</th>
             <th scope="col">Rating</th>
             <th scope="col">Shelve</th>
-          </tr>
+        </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let book of filteredBooks">
-            <td><span>{{book.cover}}</span></td>
-            <td><span>{{book.name}}</span></td>
-            <td><span>{{book.author}}</span></td>
+        <tr *ngFor="let book of books">
+            <!-- <td><span>{{book.bookId.photo}}</span></td> -->
+            <td><img class="image" [src]="book.bookId.photo" alt="anything"></td>
+            <td><span>{{book.bookId.name}}</span></td>
+            <td><span>{{book.bookId.authorId.firstName}} {{book.bookId.authorId.lastName}}</span></td>
             <td>
-      
-              <i [attr.data-star]="book.avgRate"></i>
-             
+    
+            <i [attr.data-star]="book.bookId.avgRate || 0" ></i>
+            
             </td>
+            <!-- <td>
+            <i [attr.data-star]="book.rating || 0"></i>
+            
+            </td> -->
             <td>
-              <!-- <i [attr.data-star]="book.rating"></i> -->
-              <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star)">
-                <i class="fa" [ngClass]="{'star-hover': star.hover}">
-                    {{ star.filled ? '★' : '✰' }}
-                </i>
-            </span>
-            </td>
+                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book.bookId._id,book.shelf)">
+                    <i class="fa" [ngClass]="{'star-hover': star.hover}" >
+                        {{ stars.indexOf(star) < book.rating ? '★' : '✰' }}
+                        <!-- {{ star.filled ? '★' : '☆' }} -->
+                    </i>
+                </span>
+                </td>
             <td>
-              <div class="form-group">
+            <div class="form-group">
                 <div class="input-group">
-                  <select id="userbook" class="form-control" formControlName="bookCategory">
-                    <option value="reading" [selected]="book.shelve === 'reading'">Reading</option>
-                    <option value="want-to-read" [selected]="book.shelve === 'want-to-read'">Want to read</option>
-                    <option value="read" [selected]="book.shelve === 'read'">Read</option>
-                  </select>
+                <select  (change)="Change($event.target,book.bookId._id,book.rating)" id="userbook" >
+                    <option value="currently reading" [selected]="book.shelf === 'currently reading'">Reading</option>
+                    <option value="want to read" [selected]="book.shelf === 'want to read'">Want to read</option>
+                    <option value="read" [selected]="book.shelf === 'read'">Read</option>
+                </select>
                 </div>
-              </div>
+            </div>
             </td>
-          </tr>
+        </tr>
         </tbody>
-      </table>
-     <div class="pagination-container">
-      <mat-paginator [length]="filteredBooks.length" [pageSize]="filteredBooks.length"></mat-paginator>
-    </div>
-    </div>
-  </div>
-  
+    </table>
+
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center mt-4">
+            <li class="page-item">
+                <a class="page-link" (click)="prevPage()">Previous</a>
+            </li>
+            <li class="page-item"><a class="page-link">{{currentPage}}</a></li>
+            <li class="page-item">
+                <a class="page-link" (click)="nextPage()">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

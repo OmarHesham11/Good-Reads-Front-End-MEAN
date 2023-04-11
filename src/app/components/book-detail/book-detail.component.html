@@ -7,30 +7,33 @@
                
                  <img src="{{book.photo}}" alt="">
                  
-                 <div class="form-group">
-                    <div class="input-group">
-                      <select  id="userbook" class="form-control" formControlName="bookCategory">
-                        <option value="reading" [selected]="book.shelve === 'reading'">Reading</option>
-                        <option value="want-to-read" [selected]="book.shelve === 'want-to-read'">Want to read</option>
-                        <option value="read" [selected]="book.shelve === 'read'">Read</option>
-                      </select>
+                 <div class="user-rate p-4 mt-4">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <select class="form-select text-capitalize"
+                                (change)="Change($event.target,book._id,book.userRate)" id="userbook">
+                                <option value=""
+                                    [selected]="!book.shelf" disabled>Add to shelf</option>
+                                <option value="currently reading"
+                                    [selected]="book.shelf === 'currently reading'">Reading</option>
+                                <option value="want to read" [selected]="book.shelf === 'want to read'">Want
+                                    to read</option>
+                                <option value="read" [selected]="book.shelf === 'read'">Read</option>
+                            </select>
+                        </div>
                     </div>
-                  </div>
-                 
-                   
-                
-                    <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star)">
-                      <i class="fa" [ngClass]="{'star-hover': star.hover}">
-                          {{ star.filled ? '★' : '✰' }}
-                      </i>
-                  </span>
+                    <div class="rating text-center mt-1">
+                        <span *ngFor="let star of stars" (mouseover)="onStarHover(star)"
+                            (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,book.shelf)">
+                            <i class="fa" [ngClass]="{'star-hover': star.hover}">
+                                {{ stars.indexOf(star) < book.userRate ? '★' : '✰' }} </i>
+                        </span>
+
+                    </div>
+                </div>
+
                   
-                  <td>
-                    <i [attr.data-star]="book.avgRate"></i>
-                   
-                    <p>{{'Rating:' +book.ratingNumber}}</p>
-                    
-                  </td>
               
               </tbody>
            
@@ -48,8 +51,11 @@
             </div>
             <div class="my-4">
                 <p>  {{book.categoryId.Name}}</p>
-               
-                <p>  {{book.reviews.comment}}</p>
+                         
+                <i [attr.data-star]="book.avgRate"></i>
+                   
+                <p>{{'Ratings:' +book.ratingNumber}}</p>
+                <p>  {{book.reviews[0].comment}}</p>
               
             </div>
      

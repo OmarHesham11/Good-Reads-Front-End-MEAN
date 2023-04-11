@@ -17,9 +17,9 @@ export class AllAuthorsComponent {
   
   getAuthors(){
     this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res) => {
-      if (res.message == 'success') {
-        this.authors = res.authors.docs;
-        this.authorsRes = res.authors;
+      if (res.status === 200) {
+        this.authors = res.body.authors.docs;
+        this.authorsRes = res.body.authors;
         console.log("this is authors res", res.books);
       }
     });

@@ -28,6 +28,8 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
 import { MatCardModule } from '@angular/material/card';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,9 @@ import { AllAuthorsComponent } from './components/all-authors/all-authors.compon
     MatPaginatorModule,
     NgxStarsModule,
     MatCardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

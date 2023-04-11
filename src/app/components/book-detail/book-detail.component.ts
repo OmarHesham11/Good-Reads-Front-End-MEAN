@@ -10,17 +10,16 @@ import { CBAService } from 'src/app/services/cba.service';
 export class BookDetailComponent {
   id:string = this._ActivatedRoute.snapshot.params['id'];
   book:any;
-  stars:any;
-  rating:any;
-  ratingChange:any;
+
+ 
   constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute) {
     this.getBook()
   }
   
   getBook() {
     this._CBAService.getByID('book', this.id).subscribe((res) => {
-      if (res.message == 'success') {
-        this.book= res.book.book;
+      if (res.status === 200) {
+        this.book= res.body.book.book;
 
         console.log(this.book);
         
@@ -28,30 +27,34 @@ export class BookDetailComponent {
     });
   }
 
-  ngOnInit(): void {
-  this.book;
-  this.stars = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
-  const roundedRating = Math.round(this.rating);
-  for (let i = 0; i < roundedRating; i++) {
-    this.stars[i].filled = true;
+  stars: { filled: boolean, hover: boolean }[] = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
+  onStarHover(star: any) {
+    star.hover = true;
   }
-}
 
-onStarHover(star: any) {
-  star.hover = true;
-}
-
-onStarLeave(star: any) {
-  star.hover = false;
-}
-
-onStarClick(star: any) {
-  const rating = this.stars.indexOf(star) + 1;
-  for (let i = 0; i < this.stars.length; i++) {
-    this.stars[i].filled = i < rating;
+  onStarLeave(star: any) {
+    star.hover = false;
   }
-  this.rating = rating;
-  this.ratingChange.emit(this.rating);
-  }
 
+  onStarClick(star: any,bookId:string,bookShelf:String) {
+    const rating=this.stars.indexOf(star) + 1
+    console.log(rating,bookId,bookShelf);
+    this.updateShelf(rating,bookId,bookShelf)
+  }
+
+  Change(target:any,bookId:string,rating:number){
+    this.updateShelf(rating,bookId,target.value)
+  }
+
+  updateShelf(rating: number,bookId:string,bookShelf:String){
+    const obj:object={
+      "shelf": bookShelf,
+      "rating": rating
+    }
+    this._CBAService.patchCBA('user/book',bookId,obj).subscribe((res) => {
+      if(res.status==200)
+        console.log('Shelf Updated');
+        this.getBook()
+    })
+  }
 }

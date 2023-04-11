@@ -19,17 +19,47 @@ export class AuthorDetailsComponent {
   
   getAuthor() {
     this._CBAService.getByID('author', this.id).subscribe((res) => {
-      if (res.message == 'success') {
-        this.author = res.author.author;
-        this.authorBooks = res.author.authorBooks;
+      if (res.status === 200) {
+        this.author = res.body.author.author;
+        this.authorBooks = res.body.author.authorBooks;
        
-        let authorDOB = new Date(res.author.author.DOB)        
+        let authorDOB = new Date(res.body.author.author.DOB)
         this.DOB = `${authorDOB.getDate()}/${authorDOB.getMonth()+1}/${authorDOB.getFullYear()}`
         
         console.log(this.authorBooks);
         
-      }
+      } 
     });
   }
 
+  stars: { filled: boolean, hover: boolean }[] = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
+  onStarHover(star: any) {
+    star.hover = true;
+  }
+
+  onStarLeave(star: any) {
+    star.hover = false;
+  }
+
+  onStarClick(star: any,bookId:string,bookShelf:String) {
+    const rating=this.stars.indexOf(star) + 1
+    console.log(rating,bookId,bookShelf);
+    this.updateShelf(rating,bookId,bookShelf)
+  }
+
+  Change(target:any,bookId:string,rating:number){
+    this.updateShelf(rating,bookId,target.value)
+  }
+
+  updateShelf(rating: number,bookId:string,bookShelf:String){
+    const obj:object={
+      "shelf": bookShelf,
+      "rating": rating
+    }
+    this._CBAService.patchCBA('user/book',bookId,obj).subscribe((res) => {
+      if(res.status==200)
+        console.log('Shelf Updated');
+        this.getAuthor()
+    })
+  }
 }

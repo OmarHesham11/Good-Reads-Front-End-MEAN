@@ -1,1 +1,6 @@
-@import url('../userbooks/userbooks.component.scss');
+@import '../../../styles.scss';
+@import '../userbooks/userbooks.component.scss';
+
+section{
+    background-color: $navBgColor;
+}
