@@ -20,7 +20,12 @@ import { AuthorsComponent } from './components/admin-authors/authors.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeComponent } from './components/home/home.component';
+import { HomeheaderComponent } from './components/homeheader/homeheader.component';
+import { RouterModule, Routes } from '@angular/router';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+
 
 @NgModule({
   declarations: [
@@ -31,13 +36,17 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BooksComponent,
     AuthorsComponent,
     NotfoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    HomeComponent,
+    HomeheaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CarouselModule
   ],
   providers: [],
   bootstrap: [AppComponent]

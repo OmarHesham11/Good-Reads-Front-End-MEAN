@@ -7,9 +7,11 @@ import { LoginComponent } from './components/login/login.component';
 import { NotfoundComponent } from './components/notfound/notfound.component';
 import { RegisterComponent } from './components/register/register.component';
 import { AuthadminGuard } from './guard/authadmin.guard';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  {path:'' , redirectTo:'admin/categories', pathMatch:'full'},
+  {path:'' , redirectTo:'home', pathMatch:'full'},
+  {path:'home', component:HomeComponent},
   {path:'admin/categories',canActivate:[AuthadminGuard], component:CategoriesComponent},
   {path:'admin/authors',canActivate:[AuthadminGuard], component:AuthorsComponent},
   {path:'admin/books',canActivate:[AuthadminGuard], component:BooksComponent},

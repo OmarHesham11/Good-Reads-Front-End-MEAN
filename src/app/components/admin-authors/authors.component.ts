@@ -129,10 +129,12 @@ export class AuthorsComponent {
   deleteAuthor(id:string) {
     console.log(id);
     this._CBAService.deleteCBA('author', id).subscribe({
-      next: (res) => {this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe({
-        next:(res) => {this.trendingAuthors = res.authors.docs}, 
-        error:(err) => {"err fe el get eli fe el delete"},
-        complete:() => {console.log('complete')}
+      next: (res) => {
+        console.log(res);
+        this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe({
+          next:(res) => {this.trendingAuthors = res.authors.docs}, 
+          error:(err) => {"err fe el get eli fe el delete"},
+          complete:() => {console.log('complete')}
       })
     },
       error: (err) => {console.error("err fe el delete")},

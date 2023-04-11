@@ -18,7 +18,7 @@ export class CBAService {
   requestOptions = { headers: this.headers };
 
 
-  getCBA(mediaType:string, currentPage:number, pageSize:number):Observable<any> {
+  getCBA(mediaType:string, pageSize:number, currentPage:number):Observable<any> {
     return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/?page=${currentPage}&limit=${pageSize}`, this.requestOptions);
   }
 

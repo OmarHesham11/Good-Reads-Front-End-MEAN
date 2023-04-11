@@ -19,15 +19,27 @@
           <li class="nav-item">
             <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/authors">Auther</a>
           </li>
+
+          <li class="nav-item">
+            <a  class="nav-link" routerLink="admin/authors">Popular Categories</a>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link" routerLink="admin/authors">Popular Books</a>
+          </li>
+
+          <li class="nav-item">
+            <a  class="nav-link" routerLink="admin/authors">Popular Authors</a>
+          </li>
         </ul>
         
         <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
               <a *ngIf='!adminIsLogin' class="nav-link" routerLink="admin/login">Login</a>
             </li>
-            <!-- <li class="nav-item">
+            <li class="nav-item">
               <a *ngIf='!adminIsLogin' class="nav-link" routerLink="register">Register</a>
-            </li> -->
+            </li>
             <li class="nav-item logout">
               <a *ngIf='adminIsLogin' class="nav-link" (click)='adminLogOut()'>Logout</a>
             </li>
