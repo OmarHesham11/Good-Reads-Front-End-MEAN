@@ -2,7 +2,7 @@
     <div class="overlay py-5">
         <div class="container shadow-lg rounded p-5">
             <div class="text-center heading">
-                <h2 class="mt-2">{{category}} Books</h2>
+                <h2 *ngIf="category" class="mt-2">{{category.Name}}  Books</h2>
             </div>
             <div class="row gx-5">
                 <div class="col-md-3 mt-5" *ngFor="let book of books">

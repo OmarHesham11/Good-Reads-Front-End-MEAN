@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'admin/login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'user/books', component: UserbooksComponent },
-  { path: 'user/category', component:CategoryComponent },
+  { path: 'category/:id', component:CategoryComponent },
   { path: '**', component: NotfoundComponent },
 ];
 
