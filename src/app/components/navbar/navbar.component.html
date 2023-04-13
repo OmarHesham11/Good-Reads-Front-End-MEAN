@@ -28,15 +28,15 @@
         </li>
 
         <li class="nav-item">
-          <a  class="nav-link" routerLink="admin/authors">Popular Categories</a>
+          <a *ngIf='userIsLogin' class="nav-link" routerLink="admin/authors">Popular Categories</a>
         </li>
 
         <li class="nav-item">
-          <a  class="nav-link" routerLink="admin/authors">Popular Books</a>
+          <a *ngIf='userIsLogin' class="nav-link" routerLink="admin/authors">Popular Books</a>
         </li>
 
         <li class="nav-item">
-          <a  class="nav-link" routerLink="admin/authors">Popular Authors</a>
+          <a *ngIf='userIsLogin' class="nav-link" routerLink="admin/authors">Popular Authors</a>
         </li>
       </ul>
 
@@ -72,13 +72,13 @@
       <div>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <a *ngIf='!adminIsLogin' class="nav-link" routerLink="admin/login">Login</a>
+              <a *ngIf="!nav" class="nav-link" routerLink="user/login">Login</a>
             </li>
             <li class="nav-item">
-                  <a *ngIf='!adminIsLogin' class="nav-link" routerLink="register">Register</a>
+                  <a *ngIf="!nav" class="nav-link" routerLink="register">Register</a>
             </li>
             <li class="nav-item logout">
-              <a *ngIf='adminIsLogin' class="nav-link" (click)='adminLogOut()'>Logout</a>
+              <a *ngIf="nav" class="nav-link" (click)='logOut()'>Logout</a>
             </li>
           </ul>
       </div>

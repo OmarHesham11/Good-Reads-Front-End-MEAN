@@ -11,26 +11,54 @@ import { AuthuserService } from 'src/app/services/authuser.service';
 export class NavbarComponent {
 
   adminIsLogin:boolean = false;
+  userIsLogin:boolean = false;
+  nav:any;
 
   constructor(private _authAdmin:Authadminservice, private _CBAService:CBAService, private _authUser:AuthuserService){
     this._authAdmin.currentAdmin.subscribe(() => {
       if(_authAdmin.currentAdmin.getValue()!= null) {
         this.adminIsLogin = true;
+       
       }
       else {
         this.adminIsLogin = false;
+        
+      }
+    });
+
+    this._authUser.currentUser.subscribe(() => {
+      if(_authUser.currentUser.getValue()!= null) {
+        this.userIsLogin = true;
+      }
+      else {
+        this.userIsLogin = false;
       }
     })
+
+    if(this.adminIsLogin === true) {
+      this.nav = this.adminIsLogin;
+      console.log("ana fe el admin",this.adminIsLogin);
+      console.log(this.nav);
+      
+    }
+    else if(this.userIsLogin === true){
+      this.nav = this.userIsLogin;
+      console.log("ana fe el user",this.userIsLogin);
+      console.log(this.nav);
+      
+    }
   } 
 
-  adminLogOut(){
-    this._authAdmin.logOut();
+  logOut(){
+    if(this.adminIsLogin === true) {
+      this._authAdmin.logOut();
+    }
+    else if(this.userIsLogin === true) {
+      this._authUser.logOut();
+    }
   }
-
-  userLogOut(){
-    this._authUser.logOut();
-  }
-
+  
+  
   searchKey:string ='';
   bookSearch = [];
   close:Boolean = false;
