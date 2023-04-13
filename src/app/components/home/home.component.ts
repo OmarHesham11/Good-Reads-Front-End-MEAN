@@ -23,7 +23,7 @@ export class HomeComponent {
     })
 
     this._cbaService.getCBA('author', this.currentPage, this.limit).subscribe({
-      next:(res) => this.authors = res.authors.docs,
+      next:(res) => this.authors = res.body.authors.docs,
       error:(err) => console.error('Error while getting authors in the home component'),
       complete:() => console.info('Complete')
     })
