@@ -83,26 +83,7 @@ export class UserbooksComponent {
       this.getBooks();
     }
   }
-  //rating: number = 0;
-  //ratingChange = new EventEmitter<number>();
-  stars: { filled: boolean, hover: boolean }[] = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
-
-
-
-  onStarHover(star: any) {
-    star.hover = true;
-  }
-
-  onStarLeave(star: any) {
-    star.hover = false;
-  }
-
-  onStarClick(star: any,bookId:string,bookShelf:String) {
-    const rating=this.stars.indexOf(star) + 1
-    console.log(rating,bookId,bookShelf);
-    this.updateShelf(rating,bookId,bookShelf)
-  }
-
+ 
   Change(target:any,bookId:string,rating:number){
     this.updateShelf(rating,bookId,target.value)
   }
