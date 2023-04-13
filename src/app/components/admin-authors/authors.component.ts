@@ -34,22 +34,22 @@ export class AuthorsComponent {
   constructor(private _CBAService:CBAService){
     //get
     this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe((res) => {
-      if(res.message == 'success'){
-        this.trendingAuthors = res.authors.docs;
-        ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.authors);
+      if(res.body.message == 'success'){
+        this.trendingAuthors = res.body.authors.docs;
+        ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.body.authors);
         console.log("this is author res", this.authorResponse);
       }
     });
 
     this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.message == 'success'){
-        this.trendingCategories = res.category.docs;
+      if(res.body.message == 'success'){
+        this.trendingCategories = res.body.category.docs;
       }
     });
     
     this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.message == 'success'){
-        this.trendingBooks = res.books.docs;
+      if(res.body.message == 'success'){
+        this.trendingBooks = res.body.books.docs;
       }
     })
 
@@ -82,7 +82,7 @@ export class AuthorsComponent {
 
     this._CBAService.postCBA('author',formData).subscribe({
       next:(res) => {this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe({
-        next:(res) => this.trendingAuthors = res.authors.docs,
+        next:(res) => this.trendingAuthors = res.body.authors.docs,
         error:(err) => alert('error fe el getauthor eli feh add'),
         complete: () => console.info('complete')
 
@@ -100,9 +100,9 @@ export class AuthorsComponent {
       this.currentPage++;
       console.log(this.currentPage);
       this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingAuthors = res.authors.docs;
-          ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.authors);
+        if(res.body.message == 'success'){
+          this.trendingAuthors = res.body.authors.docs;
+          ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.body.authors);
           console.log("this is authors res", this.authorResponse);
         }
       });
@@ -115,9 +115,9 @@ export class AuthorsComponent {
       this.currentPage--;
       console.log(this.currentPage);
       this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingAuthors = res.authors.docs;
-          ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.authors);
+        if(res.body.message == 'success'){
+          this.trendingAuthors = res.body.authors.docs;
+          ({totalDocs: this.authorResponse.totalDocs,limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage} = res.body.authors);
           console.log("this is author res", this.authorResponse);
         }
       });
@@ -132,14 +132,14 @@ export class AuthorsComponent {
       next: (res) => {
         console.log(res);
         this._CBAService.getCBA('author',this.currentPage, this.limit).subscribe({
-          next:(res) => {this.trendingAuthors = res.authors.docs}, 
+          next:(res) => {this.trendingAuthors = res.body.authors.docs}, 
           error:(err) => {"err fe el get eli fe el delete"},
           complete:() => {console.log('complete')}
       })
     },
       error: (err) => {console.error("err fe el delete")},
       complete: () => console.log('Complete')
-      // alert(res.message);
+      // alert(res.body.message);
     });
   }
 
@@ -188,7 +188,7 @@ export class AuthorsComponent {
 
     this._CBAService.patchCBA('author', this.currentAuthorId, formData).subscribe({
       next:(res) => {this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe({
-        next:(res) => this.trendingAuthors = res.authors.docs,
+        next:(res) => this.trendingAuthors = res.body.authors.docs,
         error:(err) => alert('error fe el getauthor eli feh add'),
         complete: () => console.info('complete')
 
