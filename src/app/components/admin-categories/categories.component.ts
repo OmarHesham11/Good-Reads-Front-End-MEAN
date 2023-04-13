@@ -21,12 +21,13 @@ export class CategoriesComponent {
   currentPage:number = 1;
   limit:number = 10;
   categoryResponse:any = {};
-
+  
+  error:string = '';
   constructor(private _CBAService:CBAService){
     //get
    this. _CBAService.getCBA('categories', this.currentPage, this.limit).subscribe({
-      next: (res) => {this.trendingCategories = res.category.docs;
-        ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.category);
+      next: (res) => {this.trendingCategories = res.body.category.docs;
+        ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.body.category);
       },
       error: (err) => console.error('error while getting categories'),
       complete: () => console.info('Complete')
@@ -43,14 +44,15 @@ export class CategoriesComponent {
   
   //delete
   deleteCategory(id:string) {
+    console.log(this.categoryResponse);
     console.log(id);
     this._CBAService.deleteCBA('categories', id).subscribe({
       next:(res) => this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe({
-        next:(res) => this.trendingCategories = res.category.docs,
+        next:(res) => this.trendingCategories = res.body.category.docs,
         error:(err) => console.error('error while getting categories in the delete methode'),
         complete:() => console.info('complete')
       }),
-      error:(err) => console.error('error while deleting category'),
+      error:(err) => {this.error = err.error.error},
       complete:() => console.info('Complete')
     })
   }
@@ -85,9 +87,9 @@ export class CategoriesComponent {
   //Update
   submitUpdateCategoryForm(updateCategoryForm:FormGroup){
     this._CBAService.patchCBA('categories', this.currentCategoryId, this.updateCategoryForm.value).subscribe((res)=>{
-      if(res.message == 'success'){
+      if(res.body.message == 'success'){
         this._CBAService.getCBA('categories',this.currentPage,this.limit).subscribe((res) => {
-          this.trendingCategories = res.category.docs;
+          this.trendingCategories = res.body.category.docs;
         });
         this.updateMessageS = 'Updated successfully'
         
@@ -104,7 +106,7 @@ export class CategoriesComponent {
   submitAddCategoryForm(categoryForm:FormGroup){
     this._CBAService.postCBA('categories',categoryForm.value).subscribe({
       next:(res) => this._CBAService.getCBA('categories',this.currentPage,this.limit).subscribe({
-        next: (res) => this.trendingCategories = res.category.docs,
+        next: (res) => this.trendingCategories = res.body.category.docs,
         error:(err) => console.error('error while getting categories in the add method'),
         complete: () => console.info('Complete')
         }),
@@ -115,12 +117,12 @@ export class CategoriesComponent {
 
   nextPage() {
     if(this.categoryResponse.hasNextPage && this.currentPage<this.categoryResponse.totalPages){
-      this.currentPage++;
       console.log(this.currentPage);
-      this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingCategories = res.category.docs;
-          ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.category);
+      this._CBAService.getCBA('categories',this.currentPage, this.limit).subscribe((res) => {
+        if(res.body.message == 'success'){
+          this.trendingCategories = res.body.category.docs;
+          console.log(this.trendingCategories);
+          ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.body.category);
           console.log("this is category res", this.categoryResponse);
         }
       });
@@ -132,10 +134,10 @@ export class CategoriesComponent {
     if(this.categoryResponse.hasPrevPage && this.currentPage>1){
       this.currentPage--;
       console.log(this.currentPage);
-      this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingCategories = res.category.docs;
-          ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.category);
+      this._CBAService.getCBA('categories',this.currentPage, this.limit).subscribe((res) => {
+        if(res.body.message == 'success'){
+          this.trendingCategories = res.body.category.docs;
+          ({totalDocs: this.categoryResponse.totalDocs,limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage} = res.body.category);
           console.log("this is category res", this.categoryResponse);
         }
       });
