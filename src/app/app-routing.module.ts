@@ -14,6 +14,7 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
 import { CategoryComponent } from './components/category/category.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { AuthUserGuard } from './guard/auth-user.guard';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
 
 const routes: Routes = [
   {path:'' , redirectTo:'home', pathMatch:'full'},
@@ -26,7 +27,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'userhome', canActivate:[AuthUserGuard], component:UserHomeComponent},
   { path: 'books', component: AllbooksComponent },
-  { path: 'book/:id', component: BooksComponent },
+  { path: 'book/:id', component:BookDetailComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'author/:id', component: AuthorDetailsComponent },
   { path: 'user/books', component: UserbooksComponent },
