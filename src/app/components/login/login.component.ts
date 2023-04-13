@@ -39,6 +39,7 @@ export class LoginComponent {
       if(this.route == 'admin/login'){
         this._authAdmin.loginAdmin(loginForm.value).subscribe((res) => {
           if(res.token){
+            localStorage.removeItem('userToken');
             localStorage.setItem('adminToken',res.token);
             this._authAdmin.saveCurrentAdmin();
             this._router.navigate(['admin/categories']);
@@ -50,6 +51,7 @@ export class LoginComponent {
       }else if (this.route == 'user/login'){
         this._authUser.loginUser(loginForm.value).subscribe({
           next: (res) => {
+            localStorage.removeItem('adminToken');
             localStorage.setItem('userToken',res.token),
             this._authUser.saveCurrentUser(),
             this._router.navigate(['userhome'])

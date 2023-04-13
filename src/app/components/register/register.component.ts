@@ -52,7 +52,7 @@ export class RegisterComponent {
 
     this._CBAService.postUser('user/signUp',formData).subscribe({
         next:(res) => {if(res.status == 201){
-          this._router.navigate(['admin/login']);
+          this._router.navigate(['user/login']);
         }},
         error:(err) => alert('error fe el registration bat3t el user'),
         complete: () => console.info('complete')

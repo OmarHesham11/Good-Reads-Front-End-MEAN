@@ -18,11 +18,14 @@
             <div *ngFor='let book of books' class="col-md-2">
 
                 <div class="book my-2 bg-danger h-75 position-relative">
-                    <img class="w-100 h-100" [src]="book.photo" [alt]="book.name">
-                    <h3 class="my-2 h6">{{book.name}}</h3>
-                    <div class="vote">
-                        {{book.avgRate | number: '1.1-1'}}
-                    </div>
+                    <a routerLink ="bookDetails">
+
+                        <img class="w-100 h-100" [src]="book.photo" [alt]="book.name">
+                        <h3 class="my-2 h6">{{book.name}}</h3>
+                        <div class="vote">
+                            {{book.avgRate | number: '1.1-1'}}
+                        </div>
+                    </a>
                 </div>
             </div>
 

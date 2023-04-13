@@ -23,7 +23,7 @@ export class Authadminservice {
     let token:any = localStorage.getItem('adminToken');
     this.currentAdmin.next(jwt_decode(token));
     // console.log(this.currentAdmin.getValue());
-    // console.log(token);
+    // console.log(adminToken);
   }
 
   loginAdmin(adminLoginFormData:Admin):Observable<any> {
