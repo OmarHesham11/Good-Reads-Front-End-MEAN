@@ -31,9 +31,9 @@ export class Authadminservice {
   }
 
   //
-  loginUser(adminLoginFormData:Admin):Observable<any> {
-    return this._httpClient.post('https://goodreads.onrender.com/user/login', adminLoginFormData);
-  }
+  // loginUser(adminLoginFormData:Admin):Observable<any> {
+  //   return this._httpClient.post('https://goodreads.onrender.com/user/login', adminLoginFormData);
+  // }
 
   logOut() {
     this.currentAdmin.next(null);

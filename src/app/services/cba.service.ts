@@ -41,4 +41,8 @@ export class CBAService {
     return this._httpClient.post(`https://goodreads.onrender.com/${mediaType}`, FormData, this.requestOptions);
   }
 
+  postUser(mediaType:string, FormData:object):Observable<any> {
+    return this._httpClient.post(`https://goodreads.onrender.com/${mediaType}`, FormData, {observe: 'response'});
+  }
+
 }
