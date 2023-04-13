@@ -37,6 +37,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
+import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
     UserHomeComponent,
     RatingComponent,
     BookDetailComponent,
+    AllAuthorsComponent,
   ],
   imports: [
     BrowserModule,

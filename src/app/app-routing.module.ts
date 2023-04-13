@@ -15,7 +15,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { AuthUserGuard } from './guard/auth-user.guard';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
-
+import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 const routes: Routes = [
   {path:'' , redirectTo:'home', pathMatch:'full'},
   {path:'home', component:HomeComponent},
@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'userhome', canActivate:[AuthUserGuard], component:UserHomeComponent},
   { path: 'books', component: AllbooksComponent },
   { path: 'book/:id', component:BookDetailComponent },
-  { path: 'authors', component: AuthorsComponent },
+  { path: 'authors', component: AllAuthorsComponent},
   { path: 'author/:id', component: AuthorDetailsComponent },
   { path: 'user/books', component: UserbooksComponent },
   { path: 'category/:id', component:CategoryComponent },
