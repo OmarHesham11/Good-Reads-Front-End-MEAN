@@ -17,7 +17,7 @@
 
             <div *ngFor='let book of books' class="col-md-2">
 
-                <div class="book my-2 bg-danger h-75 position-relative">
+                <div class="book my-2 h-75 position-relative">
                     <a routerLink ="bookDetails">
 
                         <img class="w-100 h-100" [src]="book.photo" [alt]="book.name">
@@ -48,12 +48,15 @@
 
             <div *ngFor='let author of authors' class="col-md-2">
 
-                <div class="book my-2 bg-danger h-75 position-relative">
-                    <img class="w-100" height="270" [src]="author.photo" [alt]="author.name">
-                    <h3 class="my-2 h6">{{author.firstName}} {{author.lastName}}</h3>
-                    <!-- <div class="vote">
-                        {{author.avgRate | number: '1.1-1'}}
-                    </div> -->
+                <div class="book my-2 h-75 position-relative">
+                    <a class="links" [routerLink]='["/author", author._id]'>
+
+                        <img class="w-100" height="270" [src]="author.photo" [alt]="author.name">
+                        <h3 class="my-2 h6">{{author.firstName}} {{author.lastName}}</h3>
+                        <!-- <div class="vote">
+                            {{author.avgRate | number: '1.1-1'}}
+                        </div> -->
+                    </a>
                 </div>
             </div>
 

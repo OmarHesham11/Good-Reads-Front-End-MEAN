@@ -27,7 +27,7 @@ const routes: Routes = [
   {path:'register', component:RegisterComponent},
   {path:'userhome', canActivate:[AuthUserGuard], component:UserHomeComponent},
   { path: 'books', component: AllbooksComponent },
-  { path: 'book/:id', component: BookDetailComponent  },
+  { path: 'book/:id', component:BookDetailComponent },
   { path: 'authors', component: AuthorsComponent },
   { path: 'author/:id', component: AuthorDetailsComponent },
   { path: 'user/books', component: UserbooksComponent },
