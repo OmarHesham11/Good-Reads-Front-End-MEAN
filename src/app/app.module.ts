@@ -35,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryComponent } from './components/category/category.component';
 import { UserHomeComponent } from './components/user-home/user-home.component';
 import { RatingComponent } from './components/rating/rating.component';
+import { BookDetailComponent } from './components/book-detail/book-detail.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RatingComponent } from './components/rating/rating.component';
     CategoryComponent,
     UserHomeComponent,
     RatingComponent,
+    BookDetailComponent,
   ],
   imports: [
     BrowserModule,

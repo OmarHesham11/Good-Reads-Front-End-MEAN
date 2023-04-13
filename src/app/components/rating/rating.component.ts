@@ -9,6 +9,7 @@ export class RatingComponent {
   @Input() book:any;
   @Input() bookId:any;
   @Input() rating:any;
+  @Input() shelf:any;
   @Output() rateUpdateEvent = new EventEmitter();
 
   constructor(){    
@@ -22,6 +23,10 @@ export class RatingComponent {
     if (this.book.userRate) {
       this.book.userRate = this.stars.indexOf(star) + 1
     }
+    if (this.shelf) {
+      this.shelf.rating = this.stars.indexOf(star) + 1
+    }
+
 
     this.rateUpdateEvent.emit(this.bookId)
   }

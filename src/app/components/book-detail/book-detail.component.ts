@@ -10,6 +10,7 @@ import { CBAService } from 'src/app/services/cba.service';
 export class BookDetailComponent {
   id:string = this._ActivatedRoute.snapshot.params['id'];
   book:any;
+  shelf:any={};
 
  
   constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute) {
@@ -20,27 +21,14 @@ export class BookDetailComponent {
     this._CBAService.getByID('book', this.id).subscribe((res) => {
       if (res.status === 200) {
         this.book= res.body.book.book;
-
-        console.log(this.book);
-        
+        if (res.body.book.shelf) {
+          this.shelf = res.body.book.shelf[0];        
+          
+        }
       }
     });
   }
 
-  stars: { filled: boolean, hover: boolean }[] = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
-  onStarHover(star: any) {
-    star.hover = true;
-  }
-
-  onStarLeave(star: any) {
-    star.hover = false;
-  }
-
-  onStarClick(star: any,bookId:string,bookShelf:String) {
-    const rating=this.stars.indexOf(star) + 1
-    console.log(rating,bookId,bookShelf);
-    this.updateShelf(rating,bookId,bookShelf)
-  }
 
   Change(target:any,bookId:string,rating:number){
     this.updateShelf(rating,bookId,target.value)
