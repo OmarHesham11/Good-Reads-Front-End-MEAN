@@ -17,7 +17,7 @@ export class HomeComponent {
 
   constructor(private _cbaService:CBAService ){
     this._cbaService.getCBA('book', this.currentPage, this.limit).subscribe({
-      next:(res) => this.books = res.books.docs,
+      next:(res) => {this.books = res.body.books.docs, console.log("ana hena",res.status)},
       error:(err) => console.error('Error while getting books in the home component'),
       complete:() => console.info('Complete')
     })

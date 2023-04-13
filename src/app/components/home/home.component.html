@@ -46,7 +46,7 @@
             <div *ngFor='let author of authors' class="col-md-2">
 
                 <div class="book my-2 bg-danger h-75 position-relative">
-                    <img class="w-100" height="270 [src]="author.photo" [alt]="author.name">
+                    <img class="w-100" height="270" [src]="author.photo" [alt]="author.name">
                     <h3 class="my-2 h6">{{author.firstName}} {{author.lastName}}</h3>
                     <!-- <div class="vote">
                         {{author.avgRate | number: '1.1-1'}}

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule} from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 import { FormsModule} from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatNativeDateModule } from '@angular/material/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -25,7 +26,13 @@ import { HomeheaderComponent } from './components/homeheader/homeheader.componen
 import { RouterModule, Routes } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
-
+import { UserbooksComponent } from './components/userbooks/userbooks.component';
+import { CommonModule } from '@angular/common';
+import { AllbooksComponent } from './components/allbooks/allbooks.component';
+import { AuthorDetailsComponent } from './components/author-details/author-details.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { CategoryComponent } from './components/category/category.component';
 
 @NgModule({
   declarations: [
@@ -38,15 +45,30 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     NotfoundComponent,
     RegisterComponent,
     HomeComponent,
-    HomeheaderComponent
+    HomeheaderComponent,
+    UserbooksComponent,
+    AllbooksComponent,
+    AuthorDetailsComponent,
+    CategoryComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CarouselModule
+    CarouselModule,
+    CommonModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule,
+    MatPaginatorModule,
+    MatCardModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
