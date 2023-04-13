@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { CBAService } from 'src/app/services/cba.service';
 
 @Component({
@@ -7,39 +8,40 @@ import { CBAService } from 'src/app/services/cba.service';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent {
+
+  id:string = this._ActivatedRoute.snapshot.params['id'];
+
   currentPage:number = 1;
-  limit:number = 8;
-  books:any = []
-  booksRes:any = []
-  constructor(private _CBAService: CBAService) {
-    this.getBooks()
+  pageSize:number = 2;
+  books:any = [];
+  option:any = [];
+  category:any;
+  constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute) {    
+    this.getBooksByCategory()
   }
-  categories = ['fantasy', 'Technology', 'thriller', 'historical fiction', 'fiction', 'mystery'];
 
-  category = this.categories[0];
 
-  getBooks(){
-    this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
-      if (res.message == 'success') {
-        this.books = res.books.docs.filter((book: any) => {
-          return book.categoryId.Name === this.category;
-        });
-        this.booksRes = res.books;
-        console.log(res.books);
-      }
-    });
-  }
+  getBooksByCategory(){
+    this._CBAService.getByID('categories', this.id,`?page=${this.currentPage}&limit=${this.pageSize}`).subscribe((res) => {
+      if (res.status == 200) {
+        this.books=res.body.data.book.docs;
+        this.category=res.body.data.cate;
+        const {docs, ...paginate}=res.body.data.book;
+        this.option=paginate;        
+      };
+    })
+  }  
 
   nextPage(){
-    if(this.booksRes.hasNextPage) {
+    if(this.option.hasNextPage) {
       this.currentPage++;
-      this.getBooks()
+      this.getBooksByCategory()
     }
   }
   prevPage(){
-    if(this.booksRes.hasPrevPage) {      
+    if(this.option.hasPrevPage) {      
       this.currentPage--;
-      this.getBooks()
+      this.getBooksByCategory()
     }
   }
 }
