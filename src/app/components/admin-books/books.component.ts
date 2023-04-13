@@ -36,22 +36,22 @@ export class BooksComponent {
   constructor(private _CBAService:CBAService, public fb: FormBuilder){
     //get
     this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-      if(res.message == 'success'){
-        this.trendingBooks = res.books.docs;
-        ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.books);
+      if(res.body.message == 'success'){
+        this.trendingBooks = res.body.books.docs;
+        ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
         console.log("this is book res", this.bookResponse);
       }
     });
 
     this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.message == 'success'){
-        this.trendingCategories = res.category.docs;
+      if(res.body.message == 'success'){
+        this.trendingCategories = res.body.category.docs;
       }
     });
     
     this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.message == 'success'){
-        this.trendingAuthors = res.authors.docs;
+      if(res.body.message == 'success'){
+        this.trendingAuthors = res.body.authors.docs;
       }
     })
 
@@ -99,8 +99,11 @@ export class BooksComponent {
       // console.log("ana hena",this.bookForm.get('name').value);
     
       this._CBAService.postCBA('book', formData).subscribe((res) => {
-        if (res.message == 'success') {
+        if (res.body.message == 'success') {
           this.addMessageS = 'Book is added successfully ';
+          this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res)=> {
+            this.trendingBooks = res.body.books.docs;
+          })
         }
         else{
           this.addMessageF = 'Failed';
@@ -120,9 +123,9 @@ export class BooksComponent {
       this.currentPage++;
       console.log(this.currentPage);
       this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingBooks = res.books.docs;
-          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.books);
+        if(res.body.message == 'success'){
+          this.trendingBooks = res.body.books.docs;
+          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
           console.log("this is book res", this.bookResponse);
         }
       });
@@ -135,9 +138,9 @@ export class BooksComponent {
       this.currentPage--;
       console.log(this.currentPage);
       this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.message == 'success'){
-          this.trendingBooks = res.books.docs;
-          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.books);
+        if(res.body.message == 'success'){
+          this.trendingBooks = res.body.books.docs;
+          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
           console.log("this is book res", this.bookResponse);
         }
       });
@@ -150,15 +153,15 @@ export class BooksComponent {
     console.log(id);
     this._CBAService.deleteCBA('book', id).subscribe({
       next: (res) => {this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe({
-        next:(res) => {this.trendingBooks = res.books.docs}, 
+        next:(res) => {this.trendingBooks = res.body.books.docs}, 
         error:(err) => {"err fe el get eli fe el delete"},
         complete:() => {console.info('complete')}
       }); 
-      console.log(res.message);
+      console.log(res.body.message);
     },
       error: (err) => {console.error("err fe el delete")},
       complete: () => console.info('Complete')
-      // alert(res.message);
+      // alert(res.body.message);
     });
   }
 
@@ -214,7 +217,7 @@ export class BooksComponent {
     
       this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
         next:(res) => {this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
-          next:(res) => this.trendingBooks = res.books.docs,
+          next:(res) => this.trendingBooks = res.body.books.docs,
           error:(err) => alert('error fe el getauthor eli feh add'),
           complete: () => console.info('complete')
   
