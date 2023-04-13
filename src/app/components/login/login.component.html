@@ -2,27 +2,27 @@
 <div class="w-50 m-auto py-3">
     
     
-    <h1 class="text-center mb-3">Welcome To Admin Panel</h1>
-    <form [formGroup] = 'adminloginForm' (ngSubmit)='submitRegisterForm(adminloginForm)'>
+    <h1 class="text-center mb-3">{{header}}</h1>
+    <form [formGroup] = 'loginForm' (ngSubmit)='submitLoginForm(loginForm)'>
         <div class="mb-2 text-center">
             <img class="w-50" src="../../assets/images/adminlogin.png" alt="">
         </div>
         <div class="mb-5">
-            <label for="email">Admin name:</label>
+            <label for="email">{{email}}</label>
             <input formControlName='email' class="form-control mb-2" type="text" id="email">
-            <p class="text-danger" *ngIf="adminloginForm.get('email')?.errors?.['required'] && adminloginForm.get('email')?.touched">Admin User Name is required</p>
-            <p class="text-danger" *ngIf="adminloginForm.get('email')?.errors?.['pattern'] && adminloginForm.get('email')?.touched">Invalid User Name</p>
+            <p class="text-danger" *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">User Name is required</p>
+            <p class="text-danger" *ngIf="loginForm.get('email')?.errors?.['pattern'] && loginForm.get('email')?.touched">Invalid User Name</p>
 
         </div>
 
         <div class="mb-5">
             <label for="password">Password:</label>
             <input formControlName='password' class="form-control mb-2" type="text" id="password">
-            <p class="text-danger" *ngIf="adminloginForm.get('password')?.errors?.['required'] && adminloginForm.get('password')?.touched">Password is required</p>
-            <p class="text-danger" *ngIf="adminloginForm.get('password')?.errors?.['pattern'] && adminloginForm.get('password')?.touched">Invalid Password</p>
+            <p class="text-danger" *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">Password is required</p>
+            <p class="text-danger" *ngIf="loginForm.get('password')?.errors?.['pattern'] && loginForm.get('password')?.touched">Invalid Password</p>
         </div>
 
-        <button [disabled]= 'adminloginForm.invalid' class="btn btn-info" type="submit">Login</button>
+        <button [disabled]= 'loginForm.invalid' class="btn btn-info" type="submit">Login</button>
 
     </form>
 </div>

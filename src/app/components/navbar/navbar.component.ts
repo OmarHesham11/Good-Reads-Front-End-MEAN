@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Authadminservice } from '../../services/auth-admin.service';
 import { CBAService } from 'src/app/services/cba.service';
+import { AuthuserService } from 'src/app/services/authuser.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,7 @@ export class NavbarComponent {
 
   adminIsLogin:boolean = false;
 
-  constructor(private _authAdmin:Authadminservice, private _CBAService:CBAService){
+  constructor(private _authAdmin:Authadminservice, private _CBAService:CBAService, private _authUser:AuthuserService){
     this._authAdmin.currentAdmin.subscribe(() => {
       if(_authAdmin.currentAdmin.getValue()!= null) {
         this.adminIsLogin = true;
@@ -24,6 +25,10 @@ export class NavbarComponent {
 
   adminLogOut(){
     this._authAdmin.logOut();
+  }
+
+  userLogOut(){
+    this._authUser.logOut();
   }
 
   searchKey:string ='';

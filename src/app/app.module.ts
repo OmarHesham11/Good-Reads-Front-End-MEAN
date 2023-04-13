@@ -33,6 +33,7 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryComponent } from './components/category/category.component';
+import { UserHomeComponent } from './components/user-home/user-home.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CategoryComponent } from './components/category/category.component';
     AllbooksComponent,
     AuthorDetailsComponent,
     CategoryComponent,
+    UserHomeComponent,
   ],
   imports: [
     BrowserModule,
