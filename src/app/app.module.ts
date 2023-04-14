@@ -23,7 +23,6 @@ import { RegisterComponent } from './components/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HomeComponent } from './components/home/home.component';
 import { HomeheaderComponent } from './components/homeheader/homeheader.component';
-import { RouterModule, Routes } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
 
@@ -34,7 +33,6 @@ import { AuthorDetailsComponent } from './components/author-details/author-detai
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CategoryComponent } from './components/category/category.component';
-import { RatingComponent } from './components/rating/rating.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 import { AllCategoriesComponent } from './components/all-categories/all-categories.component';
@@ -55,7 +53,6 @@ import { AllCategoriesComponent } from './components/all-categories/all-categori
     AllbooksComponent,
     AuthorDetailsComponent,
     CategoryComponent,
-    RatingComponent,
     BookDetailComponent,
     AllAuthorsComponent,
     AllCategoriesComponent,

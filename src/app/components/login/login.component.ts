@@ -43,8 +43,7 @@ export class LoginComponent {
     submitLoginForm(loginForm:FormGroup) {
       if(this.route == 'admin/login'){
         this._auth.loginAdmin(loginForm.value).subscribe({
-          next: (res) => {
-          
+          next: (res) => {       
           if(res.token){
             localStorage.removeItem('token');
             localStorage.setItem('token',res.token);
