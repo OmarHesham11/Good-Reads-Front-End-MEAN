@@ -56,4 +56,8 @@ export class NavbarComponent {
   closeRes(){
     this.close= true
   }
+  activateSearch() {
+    const searchInput = document.querySelector('.form-control') as HTMLInputElement;
+    searchInput.focus();
+  }
 }

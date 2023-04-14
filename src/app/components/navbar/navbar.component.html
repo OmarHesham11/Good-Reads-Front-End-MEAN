@@ -4,7 +4,7 @@
     <!--logo -->
     <div>
       <a class="navbar-brand">
-        <img src="../../assets/images/logo-dark.webp" alt="">
+        <img src="../../../assets/images/Bookify.png" alt=""class="logo-img">
       </a>
     </div>
     
@@ -35,7 +35,12 @@
 
       <!-- search -->
       <div class="position-relative w-25 m-auto">
-        <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="search books" (keyup)="search()">
+        <div class="input-group">
+          <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="Search books" (keyup)="search()">
+          <span class="input-group-text search-icon" (click)="activateSearch()">
+            <i class="fa">&#xf002;</i>
+          </span>
+        </div>
         <div *ngIf="searchKey.length>2 && !close" class="search-res bg-white position-absolute top-100 start-0 end-0">
           <div *ngFor="let book of bookSearch"
             class="book-result text-black border-bottom py-2 d-flex align-items-center"

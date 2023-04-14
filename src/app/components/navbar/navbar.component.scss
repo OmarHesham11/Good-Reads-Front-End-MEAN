@@ -1,6 +1,9 @@
 @import '../../../styles.scss';
 @import '../userbooks/userbooks.component.scss';
-
+.logo-img {
+    width: 120px;
+    height: auto;
+  }
 .navbar {
     background-color: $navBgColor;
 }
