@@ -23,7 +23,7 @@ export class CategoriesComponent {
   categoryResponse:any = {};
   
   error:string = '';
-  constructor(private _CBAService:CBAService){
+  constructor(private _CBAService:CBAService    ){
     //get
    this. _CBAService.getCBA('categories', this.currentPage, this.limit).subscribe({
       next: (res) => {this.trendingCategories = res.body.category.docs;
@@ -61,6 +61,7 @@ export class CategoriesComponent {
   showAddPopUpFunction() {
     this.showAddButton  = false;
   };
+ 
 
   closeAddPopUpFunction(){
     this.showAddButton  = true;
@@ -68,6 +69,7 @@ export class CategoriesComponent {
     this.addMessageF = '';
     this.addMessageS = '';
   };
+  // close
 
   // myUpdateInputControl = new FormControl();
   showUpdatePopUpFunction(categoryId:string, tableId:number) {
@@ -112,7 +114,8 @@ export class CategoriesComponent {
         }),
       error:(err) => this.addMessageF = 'Failed',
       complete: () => this.addMessageS = 'Added successfully'
-      })   
+      }) 
+      
   }
 
   nextPage() {
@@ -144,5 +147,12 @@ export class CategoriesComponent {
     }
 
   }
+  onLightBoxContainerClick(event: MouseEvent) {
+    const form = document.querySelector('#addCatogryPopUp');
+    if (!form.contains(event.target as Node)) {
+      this.closeAddPopUpFunction();
+    }
+  }
+  
   
 }

@@ -12,26 +12,26 @@ import { UserbooksComponent } from './components/userbooks/userbooks.component';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';
 import { AuthorDetailsComponent } from './components/author-details/author-details.component';
 import { CategoryComponent } from './components/category/category.component';
-import { UserHomeComponent } from './components/user-home/user-home.component';
-import { AuthUserGuard } from './guard/auth-user.guard';
+import { AuthuserGuard } from './guard/auth-user.guard';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
-
+import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
+import { AllCategoriesComponent } from './components/all-categories/all-categories.component';
 const routes: Routes = [
-  {path:'' , redirectTo:'home', pathMatch:'full'},
-  {path:'home', component:HomeComponent},
-  {path:'admin/categories',canActivate:[AuthadminGuard], component:CategoriesComponent},
-  {path:'admin/authors',canActivate:[AuthadminGuard], component:AuthorsComponent},
-  {path:'admin/books',canActivate:[AuthadminGuard], component:BooksComponent},
-  {path:'admin/login', component:LoginComponent},
-  {path:'user/login', component:LoginComponent},
-  {path:'register', component:RegisterComponent},
-  {path:'userhome', canActivate:[AuthUserGuard], component:UserHomeComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'admin/categories', canActivate: [AuthadminGuard], component: CategoriesComponent },
+  { path: 'admin/authors', canActivate: [AuthadminGuard], component: AuthorsComponent },
+  { path: 'admin/books', canActivate: [AuthadminGuard], component: BooksComponent },
+  { path: 'admin/login', component: LoginComponent },
+  { path: 'user/login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'books', component: AllbooksComponent },
-  { path: 'book/:id', component:BookDetailComponent },
-  { path: 'authors', component: AuthorsComponent },
+  { path: 'book/:id', component: BookDetailComponent },
+  { path: 'authors', component: AllAuthorsComponent },
   { path: 'author/:id', component: AuthorDetailsComponent },
-  { path: 'user/books', component: UserbooksComponent },
-  { path: 'category/:id', component:CategoryComponent },
+  { path: 'categories', component: AllCategoriesComponent },
+  { path: 'category/:id', component: CategoryComponent },
+  { path: 'user/books', canActivate: [AuthuserGuard], component: UserbooksComponent },
   { path: '**', component: NotfoundComponent },
 ];
 

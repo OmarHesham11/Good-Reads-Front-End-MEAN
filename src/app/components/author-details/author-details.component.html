@@ -51,11 +51,11 @@
                                 </div>
                             </div>
                             <div class="rating text-center mt-4">
-                                <app-rating [book]="book" 
-                                [bookId]="book._id" 
-                                [rating]="book.userRate"
-                                (rateUpdateEvent)="updateShelf(book.userRate,book._id,book.shelf)"
-                                ></app-rating>
+                                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,book.shelf)">
+                                    <i class="fa" [ngClass]="{'star-hover': star.hover}" >
+                                        {{ stars.indexOf(star) < book.userRate ? '★' : '✰' }}
+                                    </i>
+                                </span>
                             </div>
                         </div>
                     </div>

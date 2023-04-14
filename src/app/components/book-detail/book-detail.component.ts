@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CBAService } from 'src/app/services/cba.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class BookDetailComponent {
   shelf:any={};
 
  
-  constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute) {
+  constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute, private _router: Router) {
     this.getBook()
   }
   
@@ -28,7 +28,20 @@ export class BookDetailComponent {
       }
     });
   }
+  stars: { filled: boolean, hover: boolean }[] = Array(5).fill(null).map(() => ({ filled: false, hover: false }));
+  onStarHover(star: any) {
+    star.hover = true;
+  }
 
+  onStarLeave(star: any) {
+    star.hover = false;
+  }
+
+  onStarClick(star: any, bookId: string, bookShelf: String) {
+    const rating = this.stars.indexOf(star) + 1
+    console.log(rating, bookId, bookShelf);
+    this.updateShelf(rating, bookId, bookShelf)
+  }
 
   Change(target:any,bookId:string,rating:number){
     this.updateShelf(rating,bookId,target.value)
@@ -39,10 +52,14 @@ export class BookDetailComponent {
       "shelf": bookShelf,
       "rating": rating
     }
-    this._CBAService.patchCBA('user/book',bookId,obj).subscribe((res) => {
+    this._CBAService.patchCBA('user/book',bookId,obj).subscribe({
+      next:(res) => {
       if(res.status==200)
         console.log('Shelf Updated');
         this.getBook()
-    })
+    },
+    error:(err) => this._router.navigate(['/user/login'])
+    
+  })
   }
 }

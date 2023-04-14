@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { Authadminservice } from '../../services/auth-admin.service';
+import { AuthService } from '../../services/auth.service';
 import { CBAService } from 'src/app/services/cba.service';
-import { AuthuserService } from 'src/app/services/authuser.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +12,9 @@ export class NavbarComponent {
   adminIsLogin:boolean = false;
   userIsLogin:boolean = false;
 
-  constructor(private _authAdmin:Authadminservice, private _CBAService:CBAService, private _authUser:AuthuserService){
-    this._authAdmin.currentAdmin.subscribe(() => {
-      if(_authAdmin.currentAdmin.getValue()!= null) {
+  constructor(private _auth:AuthService, private _CBAService:CBAService){
+    this._auth.currentUser.subscribe(() => {
+      if(_auth.currentUser.getValue()!= null && this._auth.currentUser.getValue().role === 'admin') {
         this.adminIsLogin = true;
       }
       else {
@@ -23,8 +22,8 @@ export class NavbarComponent {
       }
     })
 
-    this._authUser.currentUser.subscribe(() => {
-      if(_authUser.currentUser.getValue()!= null) {
+    this._auth.currentUser.subscribe(() => {
+      if(_auth.currentUser.getValue()!= null && this._auth.currentUser.getValue().role === 'user') {
         this.userIsLogin = true;
       }
       else {
@@ -34,11 +33,11 @@ export class NavbarComponent {
   } 
 
   adminLogOut(){
-    this._authAdmin.logOut();
+    this._auth.logOut();
   }
 
   userLogOut(){
-    this._authUser.logOut();
+    this._auth.userLogOut();
   }
 
   searchKey:string ='';
@@ -57,6 +56,8 @@ export class NavbarComponent {
   closeRes(){
     this.close= true
   }
-
-
+  activateSearch() {
+    const searchInput = document.querySelector('.form-control') as HTMLInputElement;
+    searchInput.focus();
+  }
 }

@@ -1,10 +1,10 @@
-<nav class="navbar navbar-expand-lg shadow-lg">
+<nav class="navbar navbar-expand-lg shadow-lg sticky-top">
   <div class="container-fluid">
 
     <!--logo -->
     <div>
       <a class="navbar-brand">
-        <img src="../../assets/images/logo-dark.webp" alt="">
+        <img src="../../../assets/images/Bookify.png" alt=""class="logo-img">
       </a>
     </div>
     
@@ -12,44 +12,35 @@
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/categories">Categories</a>
-          <a *ngIf='userIsLogin' class="nav-link" routerLink="">Categoriesss</a>
+          <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="home">Home</a>
+          <a *ngIf='userIsLogin' class="nav-link" routerLink="/user/books">Home</a>
         </li>
-
         <li class="nav-item">
           <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/books">Books</a>
-          <a *ngIf='userIsLogin' class="nav-link" routerLink="">Bookssss</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/books">Books</a>
         </li>
-
         <li class="nav-item">
-          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/authors">Author</a>
-          <a *ngIf='userIsLogin' class="nav-link" routerLink="">Authorsssss</a>
+          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/authors">Authors</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/authors">Authors</a>
         </li>
-
         <li class="nav-item">
-          <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="home">Home</a>
-        </li>
-
-        <li class="nav-item">
-          <a *ngIf='!userIsLogin && !adminIsLogin'  class="nav-link" routerLink="">Popular Categories</a>
-        </li>
-
-        <li class="nav-item">
-          <a *ngIf='!userIsLogin && !adminIsLogin'  class="nav-link" routerLink="">Popular Books</a>
-        </li>
-
-        <li class="nav-item">
-          <a *ngIf='!userIsLogin && !adminIsLogin'  class="nav-link" routerLink="">Popular Authors</a>
+          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/categories">Categories</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/categories">Categories</a>
         </li>
       </ul>
 
       <!-- search -->
       <div class="position-relative w-25 m-auto">
-        <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="search books" (keyup)="search()">
+        <div class="input-group">
+          <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="Search books" (keyup)="search()">
+          <span class="input-group-text search-icon" (click)="activateSearch()">
+            <i class="fa">&#xf002;</i>
+          </span>
+        </div>
         <div *ngIf="searchKey.length>2 && !close" class="search-res bg-white position-absolute top-100 start-0 end-0">
           <div *ngFor="let book of bookSearch"
             class="book-result text-black border-bottom py-2 d-flex align-items-center"
@@ -86,7 +77,7 @@
             </li>
             <li class="nav-item logout">
               <a *ngIf='adminIsLogin' class="nav-link" (click)='adminLogOut()'>Logout</a>
-              <a *ngIf='userIsLogin' class="nav-link" (click)='userLogOut()'>Logoutttt</a>
+              <a *ngIf='userIsLogin' class="nav-link" (click)='userLogOut()'>Logout</a>
             </li>
           </ul>
       </div>

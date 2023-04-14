@@ -1,57 +1,73 @@
 
-<section class="py-3">
+<section class="py-3" >
 
     <!-- Add -->
-     <div class="d-flex flex-row-reverse p-2 mb-2">
-        <button class="btn btn-primary p-2" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">Add</button>
+     <div  class="d-flex justify-content-end mb-3" style="margin-top: 10px;margin-right: 3rem;">
+        <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">   <i class="fa">&#xf4ff;</i>Add Author</button>
     </div>
+    
     <ng-template #addPopUp>
-        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center">
-            <!-- <button class="btn btn-info position-absolute" (click) = 'closePopUp()'>close</button> -->
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeAddPopUpFunction()'>
+        <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 10%; right: 32%;">
                 <i class="fa-solid fa-xmark"></i>
-            </div>
-            <div id="addAuthorPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
-                <form [formGroup] = 'authorForm' (ngSubmit)="submitAddAuthorForm(authorForm)">
+              </div>
+              <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
+                <form [formGroup] = 'authorForm' (ngSubmit)="submitAddAuthorForm(authorForm); closeAddPopUpFunction()">
                     
-                    <p *ngIf="addMessageS" class="message py-2 text-center mb-2" style="color: #28a745;">{{addMessageS}}</p>
+                    <div class="form-group">
+                           <label for="firstName" class="form-label">First Name</label>
+                        <div class="input-group">
+                            <input formControlName='firstName' type="text" class="form-control" id="firstName">
+                         </div>
+                    <p class="text-danger" *ngIf="authorForm.get('firstName')?.errors?.['required'] && authorForm.get('firstName')?.touched">Author First Name is required</p>
+                      </div>
                     
-                    <p *ngIf="addMessageF" class="message py-2 text-center mb-2 text-danger">{{addMessageF}}</p>
-                    
-                    <div class="mb-3">
-                      <label for="firstName" class="form-label">First Name</label>
-                      <input formControlName='firstName' type="text" class="form-control" id="firstName">
-                    </div>
-                    <div class="mb-3">
+                      <div class="form-group">
                         <label for="lastName" class="form-label">Last Name</label>
+                        <div class="input-group">
                         <input formControlName='lastName' type="text" class="form-control" id="lastName">
                     </div>
-
-                    <div class="mb-3">
+                    <p class="text-danger" *ngIf="authorForm.get('lastName')?.errors?.['required'] && authorForm.get('lastName')?.touched">Author Last Name is required</p>
+                      </div>
+                    
+                      <div class="form-group">
                         <label for="DOB" class="form-label">DOB</label>
+                        <div class="input-group">
                         <input formControlName='DOB' type="date" class="form-control" id="DOB">
                     </div>
-
-                    <div class="mb-3">
+                    <p class="text-danger" *ngIf="authorForm.get('DOB')?.errors?.['required'] && authorForm.get('DOB')?.touched">Author Date of Birth is required</p>
+                     </div>
+                    
+                     <div class="form-group">
                         <label for="image" class="form-label">Image</label>
+                        <div class="input-group">
                         <input formControlName='photo' (change)="uploadImage($event)" type="file" class="form-control" id="image">
                     </div>
+                    <p class="text-danger" *ngIf="authorForm.get('photo')?.errors?.['required'] && authorForm.get('photo')?.touched">Author photo is required</p>
+                    </div>
+                    <div class="text-center">
+
                     <button [disabled]='authorForm.invalid' type="submit" class="btn btn-primary">Add Author</button>
-                  </form>
+                    </div>
+                </form>
 
             </div>
         </div>
     </ng-template> 
+  
 
     <!-- Table -->
-    <table class="table w-75 m-auto  text-center text-white mb-3">
+    <table class="table w-75 m-auto mb-3 text-center text-white mb-3 table-hover">
         <thead>
+            <tr>
             <th>Id</th>
             <th>Photo</th>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Date Of Birth</th>
-            <th>Actions</th>
+            <th>Action</th>  
+            </tr>
+       
         </thead>
         <tbody>
             <tr *ngFor="let author of trendingAuthors, let i = index">
@@ -60,25 +76,35 @@
                 <td>{{author.firstName}}</td>
                 <td>{{author.lastName}}</td>
                 <td>{{author.DOB|date : 'yyyy/MM/dd'}}</td>
-                <td><button class="btn btn-primary mx-2" (click)="showUpdatePopUpFunction(author._id, i, author)">Update</button> <button class="btn btn-danger" (click)="deleteAuthor(author._id)">Delete</button></td>
+                <td>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" (click)="deleteAuthor(author._id)" >
+                          <i class="fa">&#xf1f8;</i>
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"   (click)="showUpdatePopUpFunction(author._id, i, author)">
+                          <i class="fa">&#xf044;</i>
+                        </button>
+                      </div>
+                  
             </tr>
         </tbody>
     </table>
+    <!-- pagintaion -->
 
-    <div class="d-flex justify-content-center align-items-center ">
-        <div class="icon d-flex justify-content-center align-items-center mx-1" (click)="prevPage()">
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="icon d-flex justify-content-center align-items-center mx-1" ng-click="prevPage()">
             <i class="fa-solid fa-chevron-left"></i>
         </div>
         
-        <div class="d-flex justify-content-center align-items-center  current-page mx-1">
+        <div class="d-flex justify-content-center align-items-center current-page mx-1">
             {{currentPage}}
         </div>
-        <div class="icon d-flex justify-content-center align-items-center mx-1 " (click)="nextPage()">
+        
+        <div class="icon d-flex justify-content-center align-items-center mx-1" ng-click="nextPage()">
             <i class="fa-solid fa-chevron-right"></i>
         </div>
     </div>
     
-
 
     
     <!-- Update -->
@@ -89,7 +115,7 @@
                 <i class="fa-solid fa-xmark"></i>
             </div>
             <div id="updateCatogryPopUp" class="w-25 bg-black p-5 col-md-8 col-sm-8">
-                <form [formGroup] = 'authorForm' (ngSubmit)="submitUpdateAuthorForm(authorForm)">
+                <form [formGroup] = 'authorFormUpdate' (ngSubmit)="submitUpdateAuthorForm(authorFormUpdate)">
                     <p *ngIf="updateMessageS" class="message py-2 text-center mb-2" style="color: #28a745;">{{updateMessageS}}</p>
                     
                     <p *ngIf="updateMessageF" class="message py-2 text-center mb-2 text-danger">{{updateMessageF}}</p>
@@ -109,7 +135,7 @@
                         <label for="photo" class="form-label">Photo</label>
                         <input  formControlName='photo' (change)="uploadImage($event)" type="file" class="form-control" id="photo">
                       </div>
-                    <button [disabled]= 'authorForm.invalid'  type="submit" class="btn btn-primary">Update Author</button>
+                    <button [disabled]= 'authorFormUpdate.invalid'  type="submit" class="btn btn-primary">Update Author</button>
                   </form>
 
             </div>

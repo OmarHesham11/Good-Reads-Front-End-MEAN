@@ -1,0 +1,8 @@
+@import '../../../styles.scss';
+
+.form-cont{
+    border-radius: 50px;
+    background: $navBgColor;
+    box-shadow:  20px 20px 60px #000,
+                 -20px -20px 60px #000;
+}

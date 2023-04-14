@@ -26,7 +26,6 @@ export class AuthorsComponent {
   limit:number = 5;
   authorResponse:any = {};
   
-  // selectedFile!:File;
   photo:any;
   currentAuthorId: string;
   
@@ -62,8 +61,14 @@ export class AuthorsComponent {
     photo: new FormControl(null,[Validators.required]),
   });
 
+  authorFormUpdate:any = new FormGroup({
+    firstName: new FormControl(null),
+    lastName: new FormControl(null),
+    DOB: new FormControl(null),
+    photo: new FormControl(null)
+  });
+
   uploadImage(event:any) {
-    // console.log("Photo", this.photo);
    if(event.target.files.length>0){
      const file = event.target.files[0];
      this.photo = file
@@ -139,7 +144,6 @@ export class AuthorsComponent {
     },
       error: (err) => {console.error("err fe el delete")},
       complete: () => console.log('Complete')
-      // alert(res.body.message);
     });
   }
 
@@ -155,19 +159,10 @@ export class AuthorsComponent {
     this.addMessageF = '';
   };
 
-  // myUpdateInputControl = new FormControl();
-  // myUpdateInputControl2 = new FormControl();
-  // myUpdateInputControl3 = new FormControl();
-  // myUpdateInputControl4 = new FormControl();
+
   showUpdatePopUpFunction(authorId:string, tableId:number,author:any) {
     this.showUpdatePopUp = true;
     this.currentAuthorId = authorId;
-    // this.myUpdateInputControl.setValue(author.firstName);
-    // this.myUpdateInputControl2.setValue(author.lastName);
-    // this.myUpdateInputControl3.setValue(this.trendingAuthors[tableId].DOB);
-    // this.myUpdateInputControl4.setValue(this.trendingAuthors[tableId].photo);
-    // this.myUpdateInputControl.setValue(this.trendingAuthors[tableId].DOB);
-    // this.myUpdateInputControl.setValue(this.trendingAuthors[tableId].photo);
     
   };
 
@@ -179,11 +174,11 @@ export class AuthorsComponent {
 
 
   // //Update
-  submitUpdateAuthorForm(authorForm:FormGroup){
+  submitUpdateAuthorForm(authorFormUpdate:FormGroup){
     const formData:FormData = new FormData();
-    formData.append('firstName', this.authorForm.get('firstName').value);
-    formData.append('lastName', this.authorForm.get('lastName').value);
-    formData.append('DOB', this.authorForm.get('DOB').value);
+    formData.append('firstName', this.authorFormUpdate.get('firstName').value);
+    formData.append('lastName', this.authorFormUpdate.get('lastName').value);
+    formData.append('DOB', this.authorFormUpdate.get('DOB').value);
     formData.append('photo', this.photo);
 
     this._CBAService.patchCBA('author', this.currentAuthorId, formData).subscribe({
@@ -198,4 +193,12 @@ export class AuthorsComponent {
     })
   }
 
+  onLightBoxContainerClick(event: MouseEvent) {
+    const form = document.querySelector('#addCatogryPopUp ');
+    const formElements = form.querySelectorAll('input, button');
+  
+    if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
+      this.closeAddPopUpFunction();
+    }
+  }
 }
