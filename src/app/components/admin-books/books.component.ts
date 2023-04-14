@@ -185,16 +185,27 @@ export class BooksComponent {
 
   closeUpdatePopUpFunction(){
     this.showUpdatePopUp = false;
+    this.updateBookForm.get('name').value = null;
+    this.updateBookForm.get('category').value = null;
+    this.updateBookForm.get('author').value = null;
+    this.updateBookForm.get('photo').value = null;
     this.updateMessageS = '';
     this.updateMessageF = '';
   };
 
 
+  updateBookForm:any = new FormGroup({
+    name: new FormControl(null),
+    category: new FormControl(null),
+    author: new FormControl(null),
+    photo: new FormControl(null)
+  });
+
   // //Update
-  submitUpdateCategoryForm(bookForm:FormGroup){
-    let category = this.trendingCategories.find((u) => u.Name === this.bookForm.get('category').value);
+  submitUpdateCategoryForm(updateBookForm:FormGroup){
+    let category = this.trendingCategories.find((u) => u.Name === this.updateBookForm.get('category').value);
     let author = this.trendingAuthors.find((item) => {
-      let authorFormValue = this.bookForm.get('author').value;
+      let authorFormValue = this.updateBookForm.get('author').value;
       for (let prop in authorFormValue) {
         if (authorFormValue.hasOwnProperty(prop) && item[prop] !== authorFormValue[prop]) {
           return false;
@@ -202,19 +213,24 @@ export class BooksComponent {
       }
       return true;
     });
-    // Return the found object or undefined if not found
-    if (author) {
-      // console.log('Found author:', author);
-      // console.log('author', author);
-      const formData:FormData = new FormData();
-      formData.append('name', this.bookForm.get('name').value);
-      formData.append('categoryId', category._id);
-      formData.append('authorId', author._id);
-      formData.append('photo', this.photo);
-      // console.log(formData.get('photo'));
-      // console.log(formData.get('authorId'));
-      // console.log("ana hena",this.bookForm.get('name').value);
-    
+   // Return the found object or undefined if not found
+    const formData:FormData = new FormData();
+    if(this.updateBookForm.get('name').value){
+      formData.append('name', this.updateBookForm.get('name').value);
+   };
+
+   if(this.updateBookForm.get('category').value){
+     formData.append('categoryId', category._id);
+   };
+
+   if(this.updateBookForm.get('author').value){
+     formData.append('authorId', author._id);
+   };
+
+   if(this.updateBookForm.get('photo').value){
+     formData.append('photo', this.photo);
+   };
+      
       this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
         next:(res) => {this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
           next:(res) => this.trendingBooks = res.body.books.docs,
@@ -225,12 +241,10 @@ export class BooksComponent {
         error:(err) => this.updateMessageF = 'Failed',
         complete:() => this.updateMessageS = 'Updated Successfully'
       })
-      return author;
-    } else {
-      console.log('Author not found');
-      return undefined;
-    }
+
   }
+
+
   onLightBoxContainerClick(event: MouseEvent) {
     const form = document.querySelector('#addCatogryPopUp ');
     if (!form.contains(event.target as Node)) {

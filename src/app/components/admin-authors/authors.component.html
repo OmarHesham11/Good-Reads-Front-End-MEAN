@@ -8,7 +8,7 @@
     
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 10%; right: 32%;">
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 15%; right: 5%;">
                 <i class="fa-solid fa-xmark"></i>
               </div>
               <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
@@ -45,7 +45,7 @@
                     </div>
                     <p class="text-danger" *ngIf="authorForm.get('photo')?.errors?.['required'] && authorForm.get('photo')?.touched">Author photo is required</p>
                     </div>
-                    <div class="text-center">
+                    <div class="text-center mt-3">
 
                     <button [disabled]='authorForm.invalid' type="submit" class="btn btn-primary">Add Author</button>
                     </div>
@@ -57,7 +57,7 @@
   
 
     <!-- Table -->
-    <table class="table w-75 m-auto mb-3 text-center text-white mb-3 table-hover">
+    <table class="table w-75 m-auto mb-3 text-center text-white mb-3">
         <thead>
             <tr>
             <th>Id</th>
@@ -78,10 +78,10 @@
                 <td>{{author.DOB|date : 'yyyy/MM/dd'}}</td>
                 <td>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" (click)="deleteAuthor(author._id)" >
+                        <button type="button" class="btn btn-outline-danger"  (click)="deleteAuthor(author._id)" >
                           <i class="fa">&#xf1f8;</i>
                         </button>
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"   (click)="showUpdatePopUpFunction(author._id, i, author)">
+                        <button type="button" class="btn btn-outline-primary"  (click)="showUpdatePopUpFunction(author._id, i, author)">
                           <i class="fa">&#xf044;</i>
                         </button>
                       </div>
