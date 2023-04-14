@@ -14,20 +14,20 @@ export class HomeComponent {
   limit:number = 10;
   books:any[];
   authors:any[];
+  categories:any[];
 
   constructor(private _cbaService:CBAService ){
-    this._cbaService.getCBA('book', this.currentPage, this.limit).subscribe({
-      next:(res) => {this.books = res.body.books.docs, console.log("ana hena",res.status)},
+    this._cbaService.getPopularCBA('book').subscribe({
+      next:(res) => {this.books = res.body.books, console.log("ana hena",res.status)},
       error:(err) => console.error('Error while getting books in the home component'),
       complete:() => console.info('Complete')
     })
 
-    this._cbaService.getCBA('author', this.currentPage, this.limit).subscribe({
-      next:(res) => this.authors = res.body.authors.docs,
+    this._cbaService.getPopularCBA('author').subscribe({
+      next:(res) => this.authors = res.body.authors,
       error:(err) => console.error('Error while getting authors in the home component'),
       complete:() => console.info('Complete')
     })
-    
   }
 
 }

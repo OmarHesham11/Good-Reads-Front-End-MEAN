@@ -28,7 +28,6 @@ export class AllbooksComponent {
         
         this.books = res.body.books.docs;
         this.booksRes = res.body.books;
-        console.log("this is book res", res.books);
       }
     });
   }
