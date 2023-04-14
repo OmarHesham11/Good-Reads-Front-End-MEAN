@@ -1,5 +1,0 @@
-<span *ngFor="let star of stars" (mouseover)="onStarHover(star)"
-(mouseout)="onStarLeave(star)" (click)="onStarClick(star)">
-<i class="fa" [ngClass]="{'star-hover': star.hover}">
-    {{ stars.indexOf(star) < rating ? '★' : '✰' }} </i>
-</span>

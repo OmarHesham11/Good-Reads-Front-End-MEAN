@@ -1,70 +1,63 @@
-<section *ngIf="book" >
+<section *ngIf="book">
     <div class="overlay py-5">
-<div class="container my-4" id="base" >
-    <div class="row">
-        <div class="col-md-3">
-            <tbody>
-               
-                 <img src="{{book.photo}}" alt="">
-                 
-                 <div class="user-rate p-4 mt-4">
+        <div class="container my-4" id="base">
+            <div class="row">
+                <div class="col-md-3">
+                    <tbody>
 
-                    <div class="form-group">
-                        <div class="input-group">
-                            <select class="form-select text-capitalize"
-                                (change)="Change($event.target,book._id,shelf.rating)" id="userbook">
-                                <option value=""
-                                    [selected]="!shelf.shelf" disabled>Add to shelf</option>
-                                <option value="currently reading"
-                                    [selected]="shelf.shelf === 'currently reading'">Reading</option>
-                                <option value="want to read" [selected]="shelf.shelf === 'want to read'">Want
-                                    to read</option>
-                                <option value="read" [selected]="shelf.shelf === 'read'">Read</option>
-                            </select>
+                        <img src="{{book.photo}}" alt="">
+
+                        <div class="user-rate p-4 mt-4">
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select class="form-select text-capitalize"
+                                        (change)="Change($event.target,book._id,shelf.rating)" id="userbook">
+                                        <option value="" [selected]="!shelf.shelf" disabled>Add to shelf</option>
+                                        <option value="currently reading"
+                                            [selected]="shelf.shelf === 'currently reading'">Reading</option>
+                                        <option value="want to read" [selected]="shelf.shelf === 'want to read'">Want
+                                            to read</option>
+                                        <option value="read" [selected]="shelf.shelf === 'read'">Read</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rating text-center mt-1">
+                                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)"
+                                    (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,shelf.shelf)">
+                                    <i class="fa" [ngClass]="{'star-hover': star.hover}">
+                                        {{ stars.indexOf(star) < shelf.rating ? '★' : '✰' }} </i>
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="rating text-center mt-1">
-                        <app-rating [book]="book" 
-                        [bookId]="book._id" 
-                        [rating]="shelf.rating"
-                        [shelf]="shelf"
-                        (rateUpdateEvent)="updateShelf(shelf.rating,book._id,shelf.shelf)"
-                        ></app-rating>
 
-                    </div>
+                    </tbody>
                 </div>
 
-                  
-              
-              </tbody>
-           
-        </div>
-        
-        <div class="col-md-8 mt-3">
-            <h2 class="text-capitalize">{{book.name}} </h2>
-        
+                <div class="col-md-8 mt-3">
+                    <h2 class="text-capitalize">{{book.name}} </h2>
 
-            <p class="tagline">
-                {{book.authorId.firstName + ' ' + book.authorId.lastName}}
-            </p>
-            <div class="d-flex mb-3">
-            
+
+                    <p class="tagline">
+                        {{book.authorId.firstName + ' ' + book.authorId.lastName}}
+                    </p>
+                    <div class="d-flex mb-3">
+
+                    </div>
+                    <div class="my-4">
+                        <p> {{book.categoryId.Name}}</p>
+
+                        <i [attr.data-star]="book.avgRate"></i>
+
+                        <p>{{'Ratings:' +book.ratingNumber}}</p>
+                        <p *ngIf="book.reviews.length>0"> {{book.reviews[0].comment}}</p>
+
+                    </div>
+
+
+
+                </div>
             </div>
-            <div class="my-4">
-                <p>  {{book.categoryId.Name}}</p>
-                         
-                <i [attr.data-star]="book.avgRate"></i>
-                   
-                <p>{{'Ratings:' +book.ratingNumber}}</p>
-                <p *ngIf="book.reviews.length>0">Reviews:</p>
-                <p *ngFor="let review of book.reviews"  >  {{review.comment}}</p>
-              
-            </div>
-     
-           
-            
         </div>
     </div>
-</div>
-</div>
 </section>

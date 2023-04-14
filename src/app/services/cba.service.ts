@@ -1,19 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Authadminservice } from './auth-admin.service';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CBAService {
 
-  constructor(private _httpClient:HttpClient, private _authAdmin:Authadminservice) { 
+  constructor(private _httpClient:HttpClient, private _auth:AuthService) { 
 
   }
 
   headers = new HttpHeaders({
-    'Authorization': `${this._authAdmin.adminToken()}`
+    'Authorization': `${this._auth.token()}`
   });
   requestOptions:object = { 
     headers: this.headers 
@@ -23,6 +23,9 @@ export class CBAService {
 
   getCBA(mediaType:string, currentPage:number, pageSize:number,additional:string=''):Observable<any> {
     return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/?page=${currentPage}&limit=${pageSize}${additional}`, this.requestOptions);
+  }
+  getPopularCBA(mediaType:string):Observable<any> {
+    return this._httpClient.get(`https://goodreads.onrender.com/${mediaType}/popular`, this.requestOptions);
   }
 
   getByID(mediaType:string, id:string,additional:string=''):Observable<any> {

@@ -25,17 +25,10 @@
                 </div>
                 <div class="book mt-3 border border-light" *ngFor="let book of authorBooks">
                     <div class="d-flex justify-content-between">
-                        
-                          
-
-
-                        <div class="book-details d-flex" style="cursor: pointer;">
-                            <img [routerLink]="['/book',book._id]" src="{{book.photo}}" width="150px" alt="">
+                        <div class="book-details d-flex">
+                            <img src="{{book.photo}}" width="150px" alt="">
                             <div class="pt-4 ps-4">
-                                <a  [routerLink]="['/book',book._id]" >
-                                    <h3 class="text-capitalize text-center">{{book.name}}</h3>
-                                </a>
-    
+                                <h4 class="fs-2 fw-bold">{{book.name}}</h4>
                                 <div class="rating">
                                     <i [attr.data-star]="book.totalRating/book.ratingNumber || 0"></i>
                                 </div>
@@ -58,11 +51,11 @@
                                 </div>
                             </div>
                             <div class="rating text-center mt-4">
-                                <app-rating [book]="book" 
-                                [bookId]="book._id" 
-                                [rating]="book.userRate"
-                                (rateUpdateEvent)="updateShelf(book.userRate,book._id,book.shelf)"
-                                ></app-rating>
+                                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book._id,book.shelf)">
+                                    <i class="fa" [ngClass]="{'star-hover': star.hover}" >
+                                        {{ stars.indexOf(star) < book.userRate ? '★' : '✰' }}
+                                    </i>
+                                </span>
                             </div>
                         </div>
                     </div>

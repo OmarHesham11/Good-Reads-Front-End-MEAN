@@ -30,11 +30,11 @@
             </td>
         
             <td>
-                <app-rating [book]="book" 
-                [bookId]="book.bookId._id" 
-                [rating]="book.rating"
-                (rateUpdateEvent)="updateShelf(book.rating,book.bookId._id,book.shelf)"
-                ></app-rating>
+                <span *ngFor="let star of stars" (mouseover)="onStarHover(star)" (mouseout)="onStarLeave(star)" (click)="onStarClick(star,book.bookId._id,book.shelf)">
+                    <i class="fa" [ngClass]="{'star-hover': star.hover}" >
+                        {{ stars.indexOf(star) < book.rating ? '★' : '✰' }}
+                    </i>
+                </span>
                 </td>
             <td>
             <div class="form-group">
