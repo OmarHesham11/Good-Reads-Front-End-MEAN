@@ -16,14 +16,14 @@
               </div>
               <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
     <form [formGroup]="categoryForm" (ngSubmit)="submitAddCategoryForm(categoryForm); closeAddPopUpFunction()">
-        <!-- <p *ngIf="addMessageS" class="message py-2 text-center mb-2" style="color: #28a745;">{{addMessageS}}</p> -->
-        <!-- <p *ngIf="addMessageF" class="message py-2 text-center mb-2 text-danger">{{addMessageF}}</p> -->
-        <div class="mb-3">
-            <label for="categoryName" class="form-label">Category Name</label>
-            <input formControlName="Name" type="text" class="form-control" id="categoryName">
-        <p class="text-danger" *ngIf="categoryForm.get('categoryName')?.errors?.['required'] && categoryForm.get('categoryName')?.touched">Category Name is required</p>
-
-        </div>
+               <div class="form-group">   
+                    <label for="categoryName" class="form-label">Category Name</label>
+                  <div class="input-group">
+                       <input formControlName="Name" type="text" class="form-control" id="categoryName">
+                    </div>
+                       <p class="text-danger" *ngIf="categoryForm.get('Name')?.errors?.['required'] && categoryForm.get('Name')?.touched">Category Name is required</p>
+                      </div>
+                      
         <div class="text-center">
         <button [disabled]="categoryForm.invalid" type="submit" class="btn btn-info mt-3">Add Category</button>
         </div>

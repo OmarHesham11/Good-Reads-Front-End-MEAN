@@ -115,10 +115,7 @@ export class CategoriesComponent {
       error:(err) => this.addMessageF = 'Failed',
       complete: () => this.addMessageS = 'Added successfully'
       }) 
-        // 
-        // this.categories.push(newCategory);
-        // this.modalService.dismissAll();
-        // this.categoryForm.reset();
+      
   }
 
   nextPage() {

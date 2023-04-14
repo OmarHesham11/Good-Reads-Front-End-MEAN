@@ -8,35 +8,43 @@
     
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 6%; right: 32%;">
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 10%; right: 32%;">
                 <i class="fa-solid fa-xmark"></i>
               </div>
               <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
                 <form [formGroup] = 'authorForm' (ngSubmit)="submitAddAuthorForm(authorForm); closeAddPopUpFunction()">
                     
-                    <!-- <p *ngIf="addMessageS" class="message py-2 text-center mb-2" style="color: #28a745;">{{addMessageS}}</p> -->
+                    <div class="form-group">
+                           <label for="firstName" class="form-label">First Name</label>
+                        <div class="input-group">
+                            <input formControlName='firstName' type="text" class="form-control" id="firstName">
+                         </div>
+                    <p class="text-danger" *ngIf="authorForm.get('firstName')?.errors?.['required'] && authorForm.get('firstName')?.touched">Author First Name is required</p>
+                      </div>
                     
-                    <!-- <p *ngIf="addMessageF" class="message py-2 text-center mb-2 text-danger">{{addMessageF}}</p> -->
-                    
-                    <div class="mb-3">
-                      <label for="firstName" class="form-label">First Name</label>
-                      <input formControlName='firstName' type="text" class="form-control" id="firstName">
-                    </div>
-                    <div class="mb-3">
+                      <div class="form-group">
                         <label for="lastName" class="form-label">Last Name</label>
+                        <div class="input-group">
                         <input formControlName='lastName' type="text" class="form-control" id="lastName">
                     </div>
-
-                    <div class="mb-3">
+                    <p class="text-danger" *ngIf="authorForm.get('lastName')?.errors?.['required'] && authorForm.get('lastName')?.touched">Author Last Name is required</p>
+                      </div>
+                    
+                      <div class="form-group">
                         <label for="DOB" class="form-label">DOB</label>
+                        <div class="input-group">
                         <input formControlName='DOB' type="date" class="form-control" id="DOB">
                     </div>
-
-                    <div class="mb-3">
+                    <p class="text-danger" *ngIf="authorForm.get('DOB')?.errors?.['required'] && authorForm.get('DOB')?.touched">Author Date of Birth is required</p>
+                     </div>
+                    
+                     <div class="form-group">
                         <label for="image" class="form-label">Image</label>
+                        <div class="input-group">
                         <input formControlName='photo' (change)="uploadImage($event)" type="file" class="form-control" id="image">
                     </div>
-
+                    <p class="text-danger" *ngIf="authorForm.get('photo')?.errors?.['required'] && authorForm.get('photo')?.touched">Author photo is required</p>
+                    </div>
                     <div class="text-center">
 
                     <button [disabled]='authorForm.invalid' type="submit" class="btn btn-primary">Add Author</button>

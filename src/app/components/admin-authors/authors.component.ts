@@ -26,7 +26,6 @@ export class AuthorsComponent {
   limit:number = 5;
   authorResponse:any = {};
   
-  // selectedFile!:File;
   photo:any;
   currentAuthorId: string;
   
@@ -63,7 +62,6 @@ export class AuthorsComponent {
   });
 
   uploadImage(event:any) {
-    // console.log("Photo", this.photo);
    if(event.target.files.length>0){
      const file = event.target.files[0];
      this.photo = file
@@ -139,7 +137,6 @@ export class AuthorsComponent {
     },
       error: (err) => {console.error("err fe el delete")},
       complete: () => console.log('Complete')
-      // alert(res.body.message);
     });
   }
 
@@ -155,19 +152,10 @@ export class AuthorsComponent {
     this.addMessageF = '';
   };
 
-  // myUpdateInputControl = new FormControl();
-  // myUpdateInputControl2 = new FormControl();
-  // myUpdateInputControl3 = new FormControl();
-  // myUpdateInputControl4 = new FormControl();
+
   showUpdatePopUpFunction(authorId:string, tableId:number,author:any) {
     this.showUpdatePopUp = true;
     this.currentAuthorId = authorId;
-    // this.myUpdateInputControl.setValue(author.firstName);
-    // this.myUpdateInputControl2.setValue(author.lastName);
-    // this.myUpdateInputControl3.setValue(this.trendingAuthors[tableId].DOB);
-    // this.myUpdateInputControl4.setValue(this.trendingAuthors[tableId].photo);
-    // this.myUpdateInputControl.setValue(this.trendingAuthors[tableId].DOB);
-    // this.myUpdateInputControl.setValue(this.trendingAuthors[tableId].photo);
     
   };
 
@@ -197,6 +185,7 @@ export class AuthorsComponent {
       complete:() => this.updateMessageS = 'Updated Successfully'
     })
   }
+
   onLightBoxContainerClick(event: MouseEvent) {
     const form = document.querySelector('#addCatogryPopUp ');
     const formElements = form.querySelectorAll('input, button');
