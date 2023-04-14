@@ -197,5 +197,12 @@ export class AuthorsComponent {
       complete:() => this.updateMessageS = 'Updated Successfully'
     })
   }
-
+  onLightBoxContainerClick(event: MouseEvent) {
+    const form = document.querySelector('#addCatogryPopUp ');
+    const formElements = form.querySelectorAll('input, button');
+  
+    if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
+      this.closeAddPopUpFunction();
+    }
+  }
 }

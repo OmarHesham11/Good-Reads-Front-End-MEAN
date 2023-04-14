@@ -6,10 +6,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
-
+// import {MatDialogModule} from '@angular/material/dialog';
 
 import { FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,7 +27,7 @@ import { HomeheaderComponent } from './components/homeheader/homeheader.componen
 import { RouterModule, Routes } from '@angular/router';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 
-
+import {MatDialogModule} from '@angular/material/dialog';
 import { UserbooksComponent } from './components/userbooks/userbooks.component';
 import { CommonModule } from '@angular/common';
 import { AllbooksComponent } from './components/allbooks/allbooks.component';

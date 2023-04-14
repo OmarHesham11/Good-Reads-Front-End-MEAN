@@ -231,4 +231,10 @@ export class BooksComponent {
       return undefined;
     }
   }
+  onLightBoxContainerClick(event: MouseEvent) {
+    const form = document.querySelector('#addCatogryPopUp ');
+    if (!form.contains(event.target as Node)) {
+      this.closeAddPopUpFunction();
+    }
+  }
 }
