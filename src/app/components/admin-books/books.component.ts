@@ -16,6 +16,9 @@ export class BooksComponent {
   trendingCategories:any[] = [];
   trendingAuthors:any[] = [];
 
+  allCategories:any[];
+  allAuthors:any[];
+
   showAddButton:boolean = true;
   showUpdatePopUp:boolean = false;
 
@@ -46,12 +49,14 @@ export class BooksComponent {
     this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res)=> {
       if(res.body.message == 'success'){
         this.trendingCategories = res.body.category.docs;
+        this.allCategories = res.body.category.docs;
       }
     });
     
     this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res)=> {
       if(res.body.message == 'success'){
         this.trendingAuthors = res.body.authors.docs;
+        this.allAuthors = res.body.authors.docs;
       }
     })
 
