@@ -9,7 +9,7 @@
         <div class="col-md-7 m-auto form-cont">
         <form class="w-75 m-auto pb-5" [formGroup] = 'registerForm' (ngSubmit)='submitRegisterForm(registerForm)'>
             <div class="mb-2">
-            <label for="firstName">First_name:</label>
+            <label for="firstName">First name:</label>
             <input formControlName='firstName' class="form-control mb-2" type="text" id="firstName">
             <p class="text-danger" *ngIf="registerForm.get('firstName')?.errors?.['required'] && registerForm.get('firstName')?.touched">firstName is required</p>
             <p class="text-danger" *ngIf="registerForm.get('firstName')?.errors?.['minlength'] && registerForm.get('firstName')?.touched">firstName minLength is 3</p>
@@ -17,7 +17,7 @@
         </div>
 
         <div class="mb-2">
-            <label for="lastName">lastName:</label>
+            <label for="lastName">Last Name:</label>
             <input formControlName='lastName' class="form-control mb-2" type="text" id="lastName">
             <p class="text-danger" *ngIf="registerForm.get('lastName')?.errors?.['required'] && registerForm.get('lastName')?.touched">lastName is required</p>
             <p class="text-danger" *ngIf="registerForm.get('lastName')?.errors?.['minlength'] && registerForm.get('lastName')?.touched">lastName minLength is 3</p>
@@ -28,8 +28,6 @@
             <label for="DOB">DOB:</label>
             <input formControlName='DOB' class="form-control mb-2" type="date" id="DOB">
             <p class="text-danger" *ngIf="registerForm.get('DOB')?.errors?.['required'] && registerForm.get('DOB')?.touched">DOB is required</p>
-            <!-- <p class="text-danger" *ngIf="registerForm.get('DOB')?.errors?.['max'] && registerForm.get('DOB')?.touched">Max age is 80</p> -->
-            <!-- <p class="text-danger" *ngIf="registerForm.get('age')?.errors?.['pattern'] && registerForm.get('age')?.touched">Age should be a number</p> -->
         </div>
 
         <div class="mb-2">
