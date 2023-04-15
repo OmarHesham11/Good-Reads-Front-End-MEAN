@@ -31,6 +31,7 @@ export class BooksComponent {
   currentPage: number = 1;
   limit: number = 5;
   bookResponse: any = {};
+  categoryResponse:any ={};
 
   // selectedFile!:File;
   photo: any;
@@ -49,6 +50,7 @@ export class BooksComponent {
       if (res.body.message == 'success') {
         this.trendingCategories = res.body.category.docs;
         this.allCategories = res.body.category.docs;
+        ({ totalDocs: this.categoryResponse.totalDocs, limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage } = res.body.category);
       }
     });
 
@@ -166,6 +168,7 @@ export class BooksComponent {
 
   showAddPopUpFunction() {
     this.showAddButton = false;
+    console.log(this.trendingCategories);
   };
 
   closeAddPopUpFunction() {
@@ -186,7 +189,7 @@ export class BooksComponent {
     this.updateBookForm.get('name').value = null;
     this.updateBookForm.get('category').value = null;
     this.updateBookForm.get('author').value = null;
-    this.updateBookForm.get('photo').value = null;
+    // this.updateBookForm.get('photo').value = null;
     this.updateMessageS = '';
     this.updateMessageF = '';
   };
@@ -218,13 +221,15 @@ export class BooksComponent {
     if (this.updateBookForm.get('author').value) {
       formData.append('authorId', author._id);
     };
-    formData.append('photo', this.photo);
+    if(this.updateBookForm.get('photo').value){
+      formData.append('photo', this.photo);
+    };
 
     this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
       next: (res) => {
         this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
           next: (res) => this.trendingBooks = res.body.books.docs,
-          error: (err) => alert('error fe el getauthor eli feh add')
+          error: (err) => alert('error fe el getauthor eli feh update')
         })
       },
       error: (err) => this.updateMessageF = 'Failed',
@@ -247,5 +252,38 @@ export class BooksComponent {
     if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
       this.closeUpdatePopUpFunction();
     }
+  }
+
+  selectedCategory:any;
+  onSelectCategory(event: MouseEvent){
+    event.preventDefault();
+    // event.stopPropagation();
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    if (value === "see-more") {
+      
+      console.log("ay7aga");
+      console.log(this.categoryResponse);
+      console.log(this.allCategories);
+      if (this.categoryResponse.hasNextPage && this.currentPage < this.categoryResponse.totalPages) {
+        this.currentPage++;
+        this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res) => {
+          if (res.body.message == 'success') {
+            this.allCategories.push(...res.body.category.docs);
+            console.log(this.allCategories);
+            ({ totalDocs: this.categoryResponse.totalDocs, limit: this.categoryResponse.limit, totalPages: this.categoryResponse.totalPages, page: this.categoryResponse.page, hasPrevPage: this.categoryResponse.hasPrevPage, hasNextPage: this.categoryResponse.hasNextPage } = res.body.category);
+          }
+        });
+      }
+      this.updateBookForm.controls['category'].setValue(null);
+      this.bookForm.controls['category'].setValue(null);
+      // target.open = true;
+      const dropdown = target.parentElement;
+      dropdown.classList.add('keep-open');
+      setTimeout(() => {
+      dropdown.classList.remove('keep-open');
+      }, 0);
+    }
+
   }
 }

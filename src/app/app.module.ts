@@ -25,6 +25,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { BookDetailComponent } from './components/book-detail/book-detail.component';
 import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 import { AllCategoriesComponent } from './components/all-categories/all-categories.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { AllCategoriesComponent } from './components/all-categories/all-categori
     MatTabsModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
