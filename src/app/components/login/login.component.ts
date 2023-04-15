@@ -46,18 +46,22 @@ export class LoginComponent {
     if (this.route == 'admin/login') {
       this._auth.loginAdmin(loginForm.value).subscribe({
         next: (res) => {
-          if (res.token) {
-            this._cookieService.delete('token');
-            // localStorage.removeItem('token');
-            this._cookieService.set('token', res.token)
-            // localStorage.setItem('token', res.token);
-            this._auth.saveCurrentUser();
-            this._router.navigate(['admin/categories']);
-          }
-          else {
-            //throw error
-            this.errors = "Authentication failed"
-          }
+          console.log("ana token",res.token);
+            
+          this._cookieService.delete('token');
+          
+          // localStorage.removeItem('token');
+          this._cookieService.set('token', res.token),
+          // console.log("ana token",res.body.token);
+          // // localStorage.setItem('token', res.token)
+          this._auth.saveCurrentUser();
+          this._router.navigate(['admin/books']);
+          // this.isLoggedIn = true;
+          // this.isLoading = false;
+          // else {
+          //   //throw error
+          //   this.errors = "Authentication failed"
+          // }
         },
         error: (err) => {
           this.errors = err.error.error

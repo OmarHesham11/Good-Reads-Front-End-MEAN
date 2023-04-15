@@ -96,7 +96,7 @@
     <!-- pagintaion -->
 
     <div class="d-flex justify-content-center align-items-center">
-        <div class="icon d-flex justify-content-center align-items-center mx-1" ng-click="prevPage()">
+        <div class="icon d-flex justify-content-center align-items-center mx-1" (click)="prevPage()">
             <i class="fa-solid fa-chevron-left"></i>
         </div>
         
@@ -104,7 +104,7 @@
             {{currentPage}}
         </div>
         
-        <div class="icon d-flex justify-content-center align-items-center mx-1" ng-click="nextPage()">
+        <div class="icon d-flex justify-content-center align-items-center mx-1" (click)="nextPage()">
             <i class="fa-solid fa-chevron-right"></i>
         </div>
     </div>
