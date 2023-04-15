@@ -80,7 +80,7 @@ export class CategoriesComponent {
 
   closeUpdatePopUpFunction(){
     this.showUpdatePopUp = false;
-    this.updateCategoryForm.reset();
+    // this.updateCategoryForm.reset();
     this.updateMessageS = '';
     this.updateMessageF = '';
   };
@@ -148,11 +148,17 @@ export class CategoriesComponent {
 
   }
   onLightBoxContainerClick(event: MouseEvent) {
-    const form = document.querySelector('#addCatogryPopUp');
-    if (!form.contains(event.target as Node)) {
+    const form = document.querySelector('#addCatogryPopUp ');
+    const formElements = form.querySelectorAll('input, button');
+    if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
       this.closeAddPopUpFunction();
     }
   }
-  
-  
+  onLightBoxContainerClickUpdate(event: MouseEvent) {
+    const form = document.querySelector('#updateCatogryPopUp');
+    const formElements = form.querySelectorAll('input, button');
+    if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
+      this. closeUpdatePopUpFunction();
+    }
+  }
 }
