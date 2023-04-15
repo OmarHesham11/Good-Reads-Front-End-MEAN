@@ -92,8 +92,9 @@ export class AuthorsComponent {
         complete: () => console.info('complete')
 
       })},
-      error:(err) => this.addMessageF = 'Failed',
-      complete:() => this.addMessageS = 'Added Successfully'
+      error:(err) => alert('Failed to add Author'),
+
+      complete:() =>  alert('Author is added successfully')
     })
 
   }
@@ -200,8 +201,8 @@ export class AuthorsComponent {
         complete: () => console.info('complete')
 
       })},
-      error:(err) => this.updateMessageF = 'Failed',
-      complete:() => this.updateMessageS = 'Updated Successfully'
+      error:(err) => alert('Failed'),
+      complete:() => alert('Updated Successfully') 
     })
   }
 

@@ -109,9 +109,14 @@ export class BooksComponent {
           this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
             this.trendingBooks = res.body.books.docs;
           })
+          alert('Book is added successfully')
         }
         else {
           this.addMessageF = 'Failed';
+          alert('Failed to add book')
+      
+          // complete: () => this.updateMessageS = 'Updated Successfully'
+       
         }
       });
       return author;
@@ -119,6 +124,7 @@ export class BooksComponent {
       console.log('Author not found');
       return undefined;
     }
+    
 
   }
 
@@ -194,7 +200,7 @@ export class BooksComponent {
 
 
   // //Update
-  submitUpdateCategoryForm(updateBookForm: FormGroup) {
+  submitUpdateBookForm(updateBookForm: FormGroup) {
     let category = this.trendingCategories.find((u) => u.Name === this.updateBookForm.get('category').value);
     let author = this.trendingAuthors.find((item) => {
       let authorFormValue = this.updateBookForm.get('author').value;
@@ -218,7 +224,10 @@ export class BooksComponent {
     if (this.updateBookForm.get('author').value) {
       formData.append('authorId', author._id);
     };
-    formData.append('photo', this.photo);
+    
+    if (this.updateBookForm.get('photo').value) {
+      formData.append('photo', author._id);
+    };
 
     this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
       next: (res) => {
@@ -227,8 +236,12 @@ export class BooksComponent {
           error: (err) => alert('error fe el getauthor eli feh add')
         })
       },
-      error: (err) => this.updateMessageF = 'Failed',
-      complete: () => this.updateMessageS = 'Updated Successfully'
+      // error: (err) => this.updateMessageF = 'Failed',
+      // complete: () => this.updateMessageS = 'Updated Successfully'
+         
+      error: (err) => alert('Failed to update'),
+      complete: () =>alert('Updated Successfully')
+
     })
 
   }
@@ -249,3 +262,4 @@ export class BooksComponent {
     }
   }
 }
+

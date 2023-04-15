@@ -120,7 +120,7 @@
               <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" style="top: 0; right: 0; opacity: 0.25; " (click)="closeUpdatePopUpFunction()" >
                 <i class="fa-solid fa-xmark"></i>
               </div> 
-              <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
+              <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateBookForm( updateBookForm); closeUpdatePopUpFunction()">
                   <div class="form-group">           
                     <label for="bookName" class="form-label">Book Name</label>
                     <div class="input-group mb-2">
@@ -156,7 +156,7 @@
 
 
                       <div class="text-center">
-                    <button [disabled]= ' updateBookForm.invalid'  type="submit" class="btn btn-primary">Update Category</button>
+                    <button [disabled]= ' updateBookForm.invalid'  type="submit" class="btn btn-primary">Update Book</button>
                   </div>
                   </form>
             </div>

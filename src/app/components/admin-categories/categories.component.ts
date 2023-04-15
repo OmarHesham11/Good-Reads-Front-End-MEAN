@@ -32,6 +32,7 @@ export class CategoriesComponent {
       error: (err) => console.error('error while getting categories'),
       complete: () => console.info('Complete')
     });
+    
   }
 
   categoryForm:any = new FormGroup({
@@ -94,10 +95,12 @@ export class CategoriesComponent {
           this.trendingCategories = res.body.category.docs;
         });
         this.updateMessageS = 'Updated successfully'
-        
+        alert('Category is updated successfully')
       }
       else {
         this.updateMessageF = 'Failed';
+        alert('Failed to update Category')
+
       }
     });
   }
@@ -112,8 +115,9 @@ export class CategoriesComponent {
         error:(err) => console.error('error while getting categories in the add method'),
         complete: () => console.info('Complete')
         }),
-      error:(err) => this.addMessageF = 'Failed',
-      complete: () => this.addMessageS = 'Added successfully'
+        error:(err) => alert('Failed to add Category'),
+
+        complete:() =>  alert('Category is added successfully')
       }) 
       
   }
