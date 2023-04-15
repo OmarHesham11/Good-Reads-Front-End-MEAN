@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg shadow-lg sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark shadow-lg sticky-top">
   <div class="container-fluid">
 
     <!--logo -->
@@ -10,31 +10,39 @@
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+      <span class="navbar-toggler-icon "></span>
     </button>
     
     <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="home">Home</a>
-          <a *ngIf='userIsLogin' class="nav-link" routerLink="/user/books">Home</a>
+          <a *ngIf='!userIsLogin && !adminIsLogin' data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" class="nav-link" routerLink="home">Home</a>
+          <a *ngIf='userIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="/user/books">Home</a>
         </li>
         <li class="nav-item">
-          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/books">Books</a>
-          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/books">Books</a>
+          <a *ngIf='adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="admin/books">Books</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="/books">Books</a>
         </li>
         <li class="nav-item">
-          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/authors">Authors</a>
-          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/authors">Authors</a>
+          <a *ngIf='adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="admin/authors">Authors</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="/authors">Authors</a>
         </li>
         <li class="nav-item">
-          <a *ngIf='adminIsLogin' class="nav-link" routerLink="admin/categories">Categories</a>
-          <a *ngIf='!adminIsLogin' class="nav-link" routerLink="/categories">Categories</a>
+          <a *ngIf='adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="admin/categories">Categories</a>
+          <a *ngIf='!adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+          data-bs-target=".navbar-collapse.show" routerLink="/categories">Categories</a>
         </li>
       </ul>
 
       <!-- search -->
-      <div class="position-relative w-25 m-auto" *ngIf="!adminIsLogin">
+      <div class="search position-relative w-25 m-auto" *ngIf="!adminIsLogin">
         <div class="input-group">
           <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="Search books" (keyup)="search()">
           <span class="input-group-text search-icon" (click)="activateSearch()">
@@ -61,23 +69,25 @@
             </a>
           </div>
         </div>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
       </div> 
+
 
       <!-- login/logout/reg -->
       <div>
           <ul class="navbar-nav mb-2 mb-lg-0">
             <li class="nav-item">
-              <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="user/login">Login</a>
+              <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="user/login" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show">Login</a>
             </li>
             <li class="nav-item">
-                  <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="register">Register</a>
+                  <a *ngIf='!userIsLogin && !adminIsLogin' class="nav-link" routerLink="register" data-bs-toggle="collapse"
+                  data-bs-target=".navbar-collapse.show">Register</a>
             </li>
-            <li class="nav-item logout">
-              <a *ngIf='adminIsLogin' class="nav-link" (click)='adminLogOut()'>Logout</a>
-              <a *ngIf='userIsLogin' class="nav-link" (click)='userLogOut()'>Logout</a>
+            <li class="nav-item logout" >
+              <a *ngIf='adminIsLogin' class="nav-link" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show" (click)='adminLogOut()'>Logout</a>
+              <a *ngIf='userIsLogin' class="nav-link" data-bs-toggle="collapse"
+              data-bs-target=".navbar-collapse.show" (click)='userLogOut()'>Logout</a>
             </li>
           </ul>
       </div>

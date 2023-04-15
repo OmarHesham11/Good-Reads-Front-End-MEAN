@@ -24,8 +24,8 @@ export class RegisterComponent {
     photo: new FormControl(null, [Validators.required]),
     DOB: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.email, Validators.required]),
-    password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('^[A-Z][a-z0-9]{5,15}$')]),
-    cPassword: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('^[A-Z][a-z0-9]{5,15}$')]),
+    password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
+    cPassword: new FormControl(null, [Validators.required, Validators.minLength(8)]),
   })
 
   uploadImage(event: any) {
