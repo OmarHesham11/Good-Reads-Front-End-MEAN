@@ -2,8 +2,8 @@
 <section class="py-3">
 
     <!-- Add -->
-    <div class="d-flex justify-content-end mb-3" style="margin-top: 10px;margin-right: 3rem;">
-        <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal"  *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
+    <div class="d-flex justify-content-end mb-3" style="margin-top: 2%;margin-right: 2%;">
+        <button  type="button" class="btn btn-outline-primary " data-bs-toggle="modal"  *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
             <i class="fa">&#xf02d;</i>Add Book</button>
     </div>
 
@@ -13,12 +13,12 @@
             <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 10%; right: 32%;">
                 <i class="fa-solid fa-xmark"></i>
               </div>
-              <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
+              <div id="addCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
             <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
                
               <div class="form-group">           
                          <label for="bookName" class="form-label">Book Name</label>
-                         <div class="input-group">
+                         <div class="input-group mb-2">
                          <input formControlName="name" type="text" class="form-control" id="bookName">
                          </div>
                        <p class="text-danger" *ngIf="bookForm.get('name')?.errors?.['required'] && bookForm.get('name')?.touched">Book name is required</p>
@@ -26,7 +26,7 @@
                     
                        <div class="form-group">   
                              <label class="form-label">Category</label>
-                             <div class="input-group">
+                             <div class="input-group mb-2">
                              <select formControlName="category" class="form-select" aria-label="Default select example">
                   <option [value]="category.Name" *ngFor="let category of trendingCategories, let i = index">{{category.Name}}</option>
                 </select>
@@ -36,7 +36,7 @@
          
               <div class="form-group">    
                             <label for="bookName" class="form-label">Author</label>
-                            <div class="input-group">
+                            <div class="input-group mb-2">
                             <select formControlName="author" class="form-select" aria-label="Default select example">
                   <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of trendingAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
                 </select>
@@ -46,7 +46,7 @@
              
             <div class="form-group">   
                              <label for="image" class="form-label">Image</label>
-                             <div class="input-group">
+                             <div class="input-group mb-2">
                              <input formControlName="photo" (change)="uploadImage($event)" type="file" class="form-control" id="image">
               </div>
               <p class="text-danger" *ngIf="bookForm.get('photo')?.errors?.['required'] && bookForm.get('photo')?.touched">Book photo is required</p>
@@ -61,7 +61,7 @@
       </ng-template>
 
     <!-- Table -->
-    <table class="table w-100 m-auto  text-center text-white mb-3">
+    <table class="table w-75 m-auto mb-3 text-center text-white mb-3">
         <thead>
             <tr>
              <th>Id</th>

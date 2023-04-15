@@ -2,7 +2,7 @@
 <section class="py-3">
 
     <!-- Add -->
-    <div class="d-flex justify-content-end mb-3 " style="margin-top: 10px;margin-right: 3rem;">
+    <div class="d-flex justify-content-end mb-3 " style="margin-top: 2%;margin-right: 2%;">
         <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
             <i class="fa">&#xf46d;</i> Add Category
         </button>
@@ -14,12 +14,12 @@
             <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 15%; right: 5%;">
                 <i class="fa-solid fa-xmark"></i>
               </div>
-              <div id="addCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-    <form [formGroup]="categoryForm" (ngSubmit)="submitAddCategoryForm(categoryForm); closeAddPopUpFunction()">
+              <div id="addCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
+          <form [formGroup]="categoryForm" (ngSubmit)="submitAddCategoryForm(categoryForm); closeAddPopUpFunction()">
               
         <div class="form-group">   
                     <label for="categoryName" class="form-label">Category Name</label>
-                  <div class="input-group">
+                  <div class="input-group mb-3">
                        <input formControlName="Name" type="text" class="form-control" id="categoryName">
                     </div>
                        <p class="text-danger" *ngIf="categoryForm.get('Name')?.errors?.['required'] && categoryForm.get('Name')?.touched">Category Name is required</p>
