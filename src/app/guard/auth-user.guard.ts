@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../services/auth.service';
   providedIn: 'root'
 })
 export class AuthuserGuard implements CanActivate {
-  constructor(private _auth:AuthService, private _router:Router){}
+  constructor(private _auth:AuthService, private _router:Router, private _activatedRoute: ActivatedRoute){}
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -17,6 +17,7 @@ export class AuthuserGuard implements CanActivate {
           return true;
         }
         alert('not authorized')
+        this._router.navigate(['/admin/books']);
         return false;
       }
       else {

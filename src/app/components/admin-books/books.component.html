@@ -1,21 +1,20 @@
-
 <section class="py-3">
 
-    <!-- Add -->
-    <div class="d-flex justify-content-end mb-3" style="margin-top: 2%;margin-right: 2%;">
-        <button  type="button" class="btn btn-outline-primary " data-bs-toggle="modal"  *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
-            <i class="fa">&#xf02d;</i>Add Book</button>
-    </div>
+  <!-- Add -->
+  <div class="d-flex justify-content-end mb-3" style="margin-top: 10px;margin-right: 3rem;">
+    <button type="button" class="btn btn-outline-primary" *ngIf="showAddButton; else addPopUp"
+      (click)="showAddPopUpFunction()">
+      <i class="fa">&#xf02d;</i>Add Book</button>
+  </div>
 
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
             
-        
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()">
+                <i class="fa-solid fa-xmark"></i>
+              </div>
               <div id="addCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-                <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute"style="top: 0; right: 0; opacity: 0.25; " (click)="closeAddPopUpFunction()">
-                  <i class="fa-solid fa-xmark"></i>
-                </div>
-                <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
+            <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
                
               <div class="form-group">           
                          <label for="bookName" class="form-label">Book Name</label>
@@ -53,47 +52,47 @@
               <p class="text-danger" *ngIf="bookForm.get('photo')?.errors?.['required'] && bookForm.get('photo')?.touched">Book photo is required</p>
             </div>
 
-              <div class="text-center">
-              <button [disabled]="bookForm.invalid" type="submit" class="btn btn-primary">Add Book</button>
-            </div>
-            </form>
+          <div class="text-center">
+            <button [disabled]="bookForm.invalid" type="submit" class="btn btn-primary">Add Book</button>
           </div>
-        </div>
-      </ng-template>
+        </form>
+      </div>
+    </div>
+  </ng-template>
 
-    <!-- Table -->
-    <table class="table w-75 m-auto mb-3 text-center text-white mb-3">
-        <thead>
-            <tr>
-             <th>Id</th>
-            <th>Photo</th>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Author</th>
-            <th>Action</th>  
+  <!-- Table -->
+  <table class="table w-75 m-auto  text-center text-white mb-3">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Photo</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Author</th>
+        <th>Action</th>
 
-        </tr>
-           
-        </thead>
-        <tbody>
-            <tr *ngFor="let book of trendingBooks, let i = index">
-                <td>{{i+1}}</td>
-                <td><img class="image" [src]="book.photo" alt="anything"></td>
-                <td>{{book.name}}</td>
-                <td>{{book.categoryId.Name}}</td>
-                <td>{{book.authorId.firstName}} {{book.authorId.lastName}}</td>
-                <td>
-                    <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-outline-danger"  (click)="  deleteBook(book._id)" >
-                          <i class="fa">&#xf1f8;</i>
-                        </button>
-                        <button type="button" class="btn btn-outline-primary" (click)="showUpdatePopUpFunction(book._id, i)">
-                          <i class="fa">&#xf044;</i>
-                        </button>
-                      </div>
-            </tr>
-        </tbody>
-    </table>
+      </tr>
+
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of trendingBooks, let i = index">
+        <td>{{i+1}}</td>
+        <td><img class="image" [src]="book.photo" alt="anything"></td>
+        <td>{{book.name}}</td>
+        <td>{{book.categoryId.Name}}</td>
+        <td>{{book.authorId.firstName}} {{book.authorId.lastName}}</td>
+        <td>
+          <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-outline-danger" (click)="deleteBook(book._id)">
+              <i class="fa">&#xf1f8;</i>
+            </button>
+            <button type="button" class="btn btn-outline-primary" (click)="showUpdatePopUpFunction(book._id, i)">
+              <i class="fa">&#xf044;</i>
+            </button>
+          </div>
+      </tr>
+    </tbody>
+  </table>
 
     <!-- pagintaion -->
     <div class="d-flex justify-content-center align-items-center ">
@@ -115,12 +114,11 @@
     <!-- Update -->
     <div class="update-popup" *ngIf = 'showUpdatePopUp'>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center"(click)="onLightBoxContainerClickUpdate($event)">
-     
+          <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeUpdatePopUpFunction()" >
+            <i class="fa-solid fa-xmark"></i>
+          </div>
             <div id="updateCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-              <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute"style="top: 0; right: 0; opacity: 0.25; " (click)="closeUpdatePopUpFunction()" >
-                <i class="fa-solid fa-xmark"></i>
-              </div> 
-              <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
+                <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
                   <div class="form-group">           
                     <label for="bookName" class="form-label">Book Name</label>
                     <div class="input-group mb-2">
@@ -163,6 +161,5 @@
         </div>
     </div>
 
-    
-</section>
 
+</section>

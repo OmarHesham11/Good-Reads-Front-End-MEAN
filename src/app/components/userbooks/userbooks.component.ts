@@ -21,18 +21,14 @@ export class UserbooksComponent {
 
   getBooks(){
     this._CBAService.getCBA('user/book', this.currentPage, this.limit,`&shelf=${this.shelf}`).subscribe((res) => {      
-      if (res.status == 200) {
-        console.log(res);
-        
+      if (res.status == 200) {        
         this.option = res.body.data.option;
         this.books = res.body.data.docs;
-        console.log(this.books);
       }
     });
   }
 
   onTabChange(event: any) {
-    console.log(event.index);
     if(event.index===0){
       this.shelf='';
       this.getBooks();
@@ -94,7 +90,6 @@ export class UserbooksComponent {
 
   onStarClick(star: any,bookId:string,bookShelf:String) {
     const rating=this.stars.indexOf(star) + 1
-    console.log(rating,bookId,bookShelf);
     this.updateShelf(rating,bookId,bookShelf)
   }
   Change(target:any,bookId:string,rating:number){
@@ -109,7 +104,6 @@ export class UserbooksComponent {
     }
     this._CBAService.patchCBA('user/book',bookId,obj).subscribe((res) => {
       if(res.status==200){
-        console.log('Shelf Updated');
         this.getBooks()
       }
     })

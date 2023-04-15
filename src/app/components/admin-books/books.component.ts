@@ -12,49 +12,48 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class BooksComponent {
 
-  trendingBooks:any[] = [];
-  trendingCategories:any[] = [];
-  trendingAuthors:any[] = [];
+  trendingBooks: any[] = [];
+  trendingCategories: any[] = [];
+  trendingAuthors: any[] = [];
 
-  allCategories:any[];
-  allAuthors:any[];
+  allCategories: any[];
+  allAuthors: any[];
 
-  showAddButton:boolean = true;
-  showUpdatePopUp:boolean = false;
+  showAddButton: boolean = true;
+  showUpdatePopUp: boolean = false;
 
-  updateMessageS:string= '';
-  updateMessageF:string= '';
-  addMessageS:string = '';
-  addMessageF:string = '';
-  currentBookId:string = '';
+  updateMessageS: string = '';
+  updateMessageF: string = '';
+  addMessageS: string = '';
+  addMessageF: string = '';
+  currentBookId: string = '';
 
-  currentPage:number = 1;
-  limit:number = 5;
-  bookResponse:any = {};
-  
+  currentPage: number = 1;
+  limit: number = 5;
+  bookResponse: any = {};
+
   // selectedFile!:File;
-  photo:any;
-  
-  
-  constructor(private _CBAService:CBAService, public fb: FormBuilder){
+  photo: any;
+
+
+  constructor(private _CBAService: CBAService, public fb: FormBuilder) {
     //get
-    this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-      if(res.body.message == 'success'){
+    this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
+      if (res.body.message == 'success') {
         this.trendingBooks = res.body.books.docs;
-        ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
-        console.log("this is book res", this.bookResponse);
+        ({ totalDocs: this.bookResponse.totalDocs, limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage } = res.body.books);
       }
     });
 
-    this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.body.message == 'success'){
+    this._CBAService.getCBA('categories', this.currentPage, this.limit).subscribe((res) => {
+      if (res.body.message == 'success') {
         this.trendingCategories = res.body.category.docs;
         this.allCategories = res.body.category.docs;
       }
     });
-    
-    this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res)=> {
-      if(res.body.message == 'success'){
+
+    this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res) => {
+      if (res.body.message == 'success') {
         this.trendingAuthors = res.body.authors.docs;
         this.allAuthors = res.body.authors.docs;
       }
@@ -62,27 +61,25 @@ export class BooksComponent {
 
   }
 
-  bookForm:any = new FormGroup({
+  bookForm: any = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    category: new FormControl(null,[Validators.required]),
-    author: new FormControl(null,[Validators.required]),
-    photo: new FormControl(null,[Validators.required]),
+    category: new FormControl(null, [Validators.required]),
+    author: new FormControl(null, [Validators.required]),
+    photo: new FormControl(null, [Validators.required]),
   });
-  
-  updateBookForm:any = new FormGroup({
+
+  updateBookForm: any = new FormGroup({
     name: new FormControl(null),
     category: new FormControl(null),
     author: new FormControl(null),
     photo: new FormControl(null)
   });
 
-  uploadImage(event:any) {
-    console.log("photo", this.photo);
-   if(event.target.files.length>0){
-     const file = event.target.files[0];
-     this.photo = file
-    //  console.log("photo", this.photo);
-   }
+  uploadImage(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.photo = file
+    }
   }
 
   //Post
@@ -99,25 +96,21 @@ export class BooksComponent {
     });
     // Return the found object or undefined if not found
     if (author) {
-      // console.log('Found author:', author);
-      // console.log('author', author);
-      const formData:FormData = new FormData();
+
+      const formData: FormData = new FormData();
       formData.append('name', this.bookForm.get('name').value);
       formData.append('categoryId', category._id);
       formData.append('authorId', author._id);
       formData.append('photo', this.photo);
-      // console.log(formData.get('photo'));
-      // console.log(formData.get('authorId'));
-      // console.log("ana hena",this.bookForm.get('name').value);
-    
+
       this._CBAService.postCBA('book', formData).subscribe((res) => {
         if (res.body.message == 'success') {
           this.addMessageS = 'Book is added successfully ';
-          this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res)=> {
+          this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
             this.trendingBooks = res.body.books.docs;
           })
         }
-        else{
+        else {
           this.addMessageF = 'Failed';
         }
       });
@@ -126,19 +119,17 @@ export class BooksComponent {
       console.log('Author not found');
       return undefined;
     }
-    
+
   }
 
 
   nextPage() {
-    if(this.bookResponse.hasNextPage && this.currentPage<this.bookResponse.totalPages){
+    if (this.bookResponse.hasNextPage && this.currentPage < this.bookResponse.totalPages) {
       this.currentPage++;
-      console.log(this.currentPage);
-      this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.body.message == 'success'){
+      this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
+        if (res.body.message == 'success') {
           this.trendingBooks = res.body.books.docs;
-          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
-          console.log("this is book res", this.bookResponse);
+          ({ totalDocs: this.bookResponse.totalDocs, limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage } = res.body.books);
         }
       });
     }
@@ -146,56 +137,51 @@ export class BooksComponent {
   }
 
   prevPage() {
-    if(this.bookResponse.hasPrevPage && this.currentPage>1){
+    if (this.bookResponse.hasPrevPage && this.currentPage > 1) {
       this.currentPage--;
-      console.log(this.currentPage);
-      this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe((res) => {
-        if(res.body.message == 'success'){
+      this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe((res) => {
+        if (res.body.message == 'success') {
           this.trendingBooks = res.body.books.docs;
-          ({totalDocs: this.bookResponse.totalDocs,limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage} = res.body.books);
-          console.log("this is book res", this.bookResponse);
+          ({ totalDocs: this.bookResponse.totalDocs, limit: this.bookResponse.limit, totalPages: this.bookResponse.totalPages, page: this.bookResponse.page, hasPrevPage: this.bookResponse.hasPrevPage, hasNextPage: this.bookResponse.hasNextPage } = res.body.books);
         }
       });
     }
 
   }
-  
+
   //delete
-  deleteBook(id:string) {
-    console.log(id);
+  deleteBook(id: string) {
     this._CBAService.deleteCBA('book', id).subscribe({
-      next: (res) => {this._CBAService.getCBA('book',this.currentPage, this.limit).subscribe({
-        next:(res) => {this.trendingBooks = res.body.books.docs}, 
-        error:(err) => {"err fe el get eli fe el delete"},
-        complete:() => {console.info('complete')}
-      }); 
-      console.log(res.body.message);
-    },
-      error: (err) => {console.error("err fe el delete")},
-      complete: () => console.info('Complete')
+      next: (res) => {
+        this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
+          next: (res) => { this.trendingBooks = res.body.books.docs },
+          error: (err) => { "err fe el get eli fe el delete" },
+        });
+      },
+      error: (err) => { console.error("err fe el delete") },
       // alert(res.body.message);
     });
   }
 
 
   showAddPopUpFunction() {
-    this.showAddButton  = false;
+    this.showAddButton = false;
   };
 
-  closeAddPopUpFunction(){
-    this.showAddButton  = true;
+  closeAddPopUpFunction() {
+    this.showAddButton = true;
     this.bookForm.reset();
     this.addMessageS = '';
     this.addMessageF = '';
   };
 
   // myUpdateInputControl = new FormControl();
-  showUpdatePopUpFunction(bookId:string, tableId:number) {
+  showUpdatePopUpFunction(bookId: string, tableId: number) {
     this.showUpdatePopUp = true;
     this.currentBookId = bookId;
   };
 
-  closeUpdatePopUpFunction(){
+  closeUpdatePopUpFunction() {
     this.showUpdatePopUp = false;
     this.updateBookForm.get('name').value = null;
     this.updateBookForm.get('category').value = null;
@@ -208,7 +194,7 @@ export class BooksComponent {
 
 
   // //Update
-  submitUpdateCategoryForm(updateBookForm:FormGroup){
+  submitUpdateCategoryForm(updateBookForm: FormGroup) {
     let category = this.trendingCategories.find((u) => u.Name === this.updateBookForm.get('category').value);
     let author = this.trendingAuthors.find((item) => {
       let authorFormValue = this.updateBookForm.get('author').value;
@@ -219,34 +205,31 @@ export class BooksComponent {
       }
       return true;
     });
-   // Return the found object or undefined if not found
-    const formData:FormData = new FormData();
-    if(this.updateBookForm.get('name').value){
+    // Return the found object or undefined if not found
+    const formData: FormData = new FormData();
+    if (this.updateBookForm.get('name').value) {
       formData.append('name', this.updateBookForm.get('name').value);
-   };
+    };
 
-   if(this.updateBookForm.get('category').value){
-     formData.append('categoryId', category._id);
-   };
+    if (this.updateBookForm.get('category').value) {
+      formData.append('categoryId', category._id);
+    };
 
-   if(this.updateBookForm.get('author').value){
-     formData.append('authorId', author._id);
-   };
+    if (this.updateBookForm.get('author').value) {
+      formData.append('authorId', author._id);
+    };
+    formData.append('photo', this.photo);
 
-   if(this.updateBookForm.get('photo').value){
-     formData.append('photo', this.photo);
-   };
-      
-      this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
-        next:(res) => {this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
-          next:(res) => this.trendingBooks = res.body.books.docs,
-          error:(err) => alert('error fe el getauthor eli feh add'),
-          complete: () => console.info('complete')
-  
-        })},
-        error:(err) => this.updateMessageF = 'Failed',
-        complete:() => this.updateMessageS = 'Updated Successfully'
-      })
+    this._CBAService.patchCBA('book', this.currentBookId, formData).subscribe({
+      next: (res) => {
+        this._CBAService.getCBA('book', this.currentPage, this.limit).subscribe({
+          next: (res) => this.trendingBooks = res.body.books.docs,
+          error: (err) => alert('error fe el getauthor eli feh add')
+        })
+      },
+      error: (err) => this.updateMessageF = 'Failed',
+      complete: () => this.updateMessageS = 'Updated Successfully'
+    })
 
   }
 
@@ -262,7 +245,7 @@ export class BooksComponent {
     const form = document.querySelector('#updateCatogryPopUp');
     const formElements = form.querySelectorAll('input, button');
     if (!form.contains(event.target as Element) && !Array.from(formElements).includes(event.target as Element)) {
-      this. closeUpdatePopUpFunction();
+      this.closeUpdatePopUpFunction();
     }
   }
 }

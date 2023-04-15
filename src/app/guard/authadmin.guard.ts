@@ -17,7 +17,7 @@ export class AuthadminGuard implements CanActivate {
           return true;
         }
         alert('not authorized')
-        this._router.navigate(['/home']);
+        this._router.navigate(['/user/books']);
         return false;
       }
       else {

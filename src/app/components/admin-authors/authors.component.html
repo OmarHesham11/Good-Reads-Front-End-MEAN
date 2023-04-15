@@ -3,7 +3,7 @@
 
     <!-- Add -->
      <div  class="d-flex justify-content-end mb-3" style="margin-top: 2%;margin-right: 2%;">
-        <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()"> 
+        <button  type="button" class="btn btn-outline-primary" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()"> 
               <i class="fa">&#xf4ff;</i>Add Author</button>
     </div>
     
@@ -57,7 +57,9 @@
         </div>
     </ng-template> 
   
-
+    <div *ngIf="error" class="err mt-3 d-flex justify-content-center">
+        <p class="text-danger">{{error}}</p>
+    </div>
     <!-- Table -->
     <table class="table w-75 m-auto mb-3 text-center text-white mb-3">
         <thead>
