@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule} from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatTabsModule } from '@angular/material/tabs';
-import { FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +26,7 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
 import { AllAuthorsComponent } from './components/all-authors/all-authors.component';
 import { AllCategoriesComponent } from './components/all-categories/all-categories.component';
 import { CookieService } from 'ngx-cookie-service';
+import { AuthAdminInterceptorService } from './services/auth-admin-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { CookieService } from 'ngx-cookie-service';
     MatTabsModule,
     FormsModule,
   ],
-  providers: [CookieService],
+  providers: [CookieService, { provide: HTTP_INTERCEPTORS, useClass: AuthAdminInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

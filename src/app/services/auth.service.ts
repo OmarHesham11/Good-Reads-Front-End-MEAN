@@ -15,8 +15,8 @@ export class AuthService {
     'Authorization': `${this.token()}`
   });
   requestOptions:object = { 
-    headers: this.headers 
-    , observe: 'response'
+    //headers: this.headers, 
+    observe: 'response'
   };
 
   constructor(private _router: Router, private _httpClient: HttpClient, private _cookieService:CookieService) {
