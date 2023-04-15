@@ -17,6 +17,9 @@ export class LoginComponent {
     image:string;
     errors: string = '';
 
+    isLoggedIn:boolean = false;
+    isLoading:boolean = false;
+
     constructor(private _auth:AuthService, private _router:Router, private _activatedRoute:ActivatedRoute){
         this.route = this._activatedRoute.snapshot.routeConfig.path;
         console.log(this.route);
@@ -60,15 +63,19 @@ export class LoginComponent {
         },
         })
       }else if (this.route == 'user/login'){
+        this.isLoading = true;
         this._auth.userLogin(loginForm.value).subscribe({
           next: (res) => {
             localStorage.removeItem('token');
             localStorage.setItem('token',res.token),
             this._auth.saveCurrentUser(),
             this._router.navigate(['user/books'])
+            this.isLoggedIn = true;
+            this.isLoading = false;
           },
           error: (err) => {
-            this.errors= err.error.error            
+            this.errors= err.error.error
+            this.isLoading = false;            
           },
           complete: () => console.info('Complete')
         })

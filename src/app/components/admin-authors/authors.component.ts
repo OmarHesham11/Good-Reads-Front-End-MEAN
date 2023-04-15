@@ -61,6 +61,13 @@ export class AuthorsComponent {
     photo: new FormControl(null,[Validators.required]),
   });
 
+  authorFormUpdate:any = new FormGroup({
+    firstName: new FormControl(null),
+    lastName: new FormControl(null),
+    DOB: new FormControl(null),
+    photo: new FormControl(null)
+  });
+
   uploadImage(event:any) {
    if(event.target.files.length>0){
      const file = event.target.files[0];
@@ -167,12 +174,24 @@ export class AuthorsComponent {
 
 
   // //Update
-  submitUpdateAuthorForm(authorForm:FormGroup){
+  submitUpdateAuthorForm(authorFormUpdate:FormGroup){
     const formData:FormData = new FormData();
-    formData.append('firstName', this.authorForm.get('firstName').value);
-    formData.append('lastName', this.authorForm.get('lastName').value);
-    formData.append('DOB', this.authorForm.get('DOB').value);
-    formData.append('photo', this.photo);
+    if(this.authorFormUpdate.get('firstName').value){
+       formData.append('firstName', this.authorFormUpdate.get('firstName').value);
+    };
+
+    if(this.authorFormUpdate.get('lastName').value){
+      formData.append('lastName', this.authorFormUpdate.get('lastName').value);
+    };
+
+    if(this.authorFormUpdate.get('DOB').value){
+      formData.append('DOB', this.authorFormUpdate.get('DOB').value);
+    };
+
+    if(this.authorFormUpdate.get('photo').value){
+      formData.append('photo', this.photo);
+    };
+    console.log(formData.get('firstName'));
 
     this._CBAService.patchCBA('author', this.currentAuthorId, formData).subscribe({
       next:(res) => {this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe({
