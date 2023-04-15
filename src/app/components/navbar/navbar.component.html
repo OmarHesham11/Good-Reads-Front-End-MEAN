@@ -34,7 +34,7 @@
       </ul>
 
       <!-- search -->
-      <div class="position-relative w-25 m-auto">
+      <div class="position-relative w-25 m-auto" *ngIf="!adminIsLogin">
         <div class="input-group">
           <input class="form-control" type="text" [(ngModel)]="searchKey" placeholder="Search books" (keyup)="search()">
           <span class="input-group-text search-icon" (click)="activateSearch()">

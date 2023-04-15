@@ -5,7 +5,11 @@
     align-items: center;
     margin-right: 15%;
   }
- 
+  .page-link {
+    background-color: transparent;
+    cursor          : pointer;
+    color           : #fff;
+}
   
   th {
     color: white;
