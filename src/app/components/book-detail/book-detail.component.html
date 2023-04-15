@@ -34,18 +34,24 @@
                     </tbody>
                 </div>
 
-                <div class="col-md-8 mt-3">
-                    <h2 class="text-capitalize">{{book.name}} </h2>
-
-
-                    <p class="tagline">
-                        {{book.authorId.firstName + ' ' + book.authorId.lastName}}
-                    </p>
-                    <div class="d-flex mb-3">
-
-                    </div>
-                    <div class="my-4">
-                        <p> {{book.categoryId.Name}}</p>
+                 
+        <div class="col-md-8 mt-3" style="cursor: pointer;">
+            <h2 class="text-capitalize">{{book.name}} </h2>
+        
+            
+            
+                    <a  [routerLink]="['/author',author._id]" >
+                        <h3 class="text-capitalize "> {{book.authorId.firstName + ' ' + book.authorId.lastName}}</h3>
+                    </a>
+            
+            <div class="d-flex mb-3">
+            
+            </div>
+            <div class="my-4" style="cursor: pointer;">
+                <a  [routerLink]="['/category',category._id]" >
+                    <h3 class="text-capitalize "> {{book.categoryId.Name }}</h3>
+                </a>
+                        
 
                         <i [attr.data-star]="book.avgRate"></i>
 

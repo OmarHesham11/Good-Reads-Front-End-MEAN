@@ -11,8 +11,11 @@ export class BookDetailComponent {
   id:string = this._ActivatedRoute.snapshot.params['id'];
   book:any;
   shelf:any={};
-
+  category:any;
+  author:any;
  
+ 
+
   constructor(private _CBAService: CBAService, private _ActivatedRoute: ActivatedRoute, private _router: Router) {
     this.getBook()
   }
@@ -21,6 +24,8 @@ export class BookDetailComponent {
     this._CBAService.getByID('book', this.id).subscribe((res) => {
       if (res.status === 200) {
         this.book= res.body.book.book;
+        this.category= res.body.book.book.categoryId;
+        this.author= res.body.book.book.authorId;
         if (res.body.book.shelf) {
           this.shelf = res.body.book.shelf[0];        
           
