@@ -115,13 +115,12 @@
                 <i class="fa-solid fa-xmark"></i>
             </div>
             <div id="updateCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-                <form [formGroup] = 'authorForm' (ngSubmit)="submitUpdateAuthorForm(authorForm);closeUpdatePopUpFunction()">
+                <form [formGroup] = 'authorFormUpdate' (ngSubmit)="submitUpdateAuthorForm(authorFormUpdate);closeUpdatePopUpFunction()">
                     <div class="form-group">
                         <label for="firstName" class="form-label">First Name</label>
                         <div class="input-group">
                         <input  formControlName='firstName' type="text" class="form-control" id="firstName">
                     </div>
-                    <p class="text-danger" *ngIf="authorForm.get('firstName')?.errors?.['required'] && authorForm.get('firstName')?.touched">Author First Name is required</p>
                      </div>
 
                     <div class="form-group">
@@ -129,7 +128,6 @@
                         <div class="input-group">
                         <input  formControlName='lastName' type="text" class="form-control" id="lastName">
                       </div>
-                      <p class="text-danger" *ngIf="authorForm.get('lastName')?.errors?.['required'] && authorForm.get('lastName')?.touched">Author Last Name is required</p>
                     </div>
 
                      <div class="form-group">
@@ -137,19 +135,17 @@
                         <div class="input-group">
                         <input formControlName='DOB' type="date" class="form-control" id="DOB">
                     </div>
-                    <p class="text-danger" *ngIf="authorForm.get('DOB')?.errors?.['required'] && authorForm.get('DOB')?.touched">Author Date of Birth is required</p>
                      </div>
                      <div class="form-group">
                         <label for="image" class="form-label">Image</label>
                         <div class="input-group">
                         <input formControlName='photo' (change)="uploadImage($event)" type="file" class="form-control" id="image">
                     </div>
-                    <p class="text-danger" *ngIf="authorForm.get('photo')?.errors?.['required'] && authorForm.get('photo')?.touched">Author photo is required</p>
                     </div>
                     <br>
                     <div class="text-center">
 
-                    <button [disabled]='authorForm.invalid' type="submit" class="btn btn-primary">Add Author</button>
+                    <button [disabled]='authorFormUpdate.invalid' type="submit" class="btn btn-primary">Add Author</button>
                     </div>
                 </form>
             </div>

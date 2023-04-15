@@ -68,6 +68,13 @@ export class BooksComponent {
     author: new FormControl(null,[Validators.required]),
     photo: new FormControl(null,[Validators.required]),
   });
+  
+  updateBookForm:any = new FormGroup({
+    name: new FormControl(null),
+    category: new FormControl(null),
+    author: new FormControl(null),
+    photo: new FormControl(null)
+  });
 
   uploadImage(event:any) {
     console.log("photo", this.photo);
@@ -199,12 +206,6 @@ export class BooksComponent {
   };
 
 
-  updateBookForm:any = new FormGroup({
-    name: new FormControl(null),
-    category: new FormControl(null),
-    author: new FormControl(null),
-    photo: new FormControl(null)
-  });
 
   // //Update
   submitUpdateCategoryForm(updateBookForm:FormGroup){

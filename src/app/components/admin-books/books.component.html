@@ -114,17 +114,16 @@
     <!-- Update -->
     <div class="update-popup" *ngIf = 'showUpdatePopUp'>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center"(click)="onLightBoxContainerClickUpdate($event)">
-          <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" >
+          <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeUpdatePopUpFunction()" >
             <i class="fa-solid fa-xmark"></i>
           </div>
             <div id="updateCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-                <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
+                <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
                   <div class="form-group">           
                     <label for="bookName" class="form-label">Book Name</label>
                     <div class="input-group mb-2">
                     <input formControlName="name" type="text" class="form-control" id="bookName">
                     </div>
-                  <p class="text-danger" *ngIf="bookForm.get('name')?.errors?.['required'] && bookForm.get('name')?.touched">Book name is required</p>
                   </div> 
                
                   <div class="form-group">   
@@ -134,7 +133,6 @@
              <option [value]="category.Name" *ngFor="let category of trendingCategories, let i = index">{{category.Name}}</option>
            </select>
          </div>
-       <p class="text-danger" *ngIf="bookForm.get('category')?.errors?.['required'] && bookForm.get('category')?.touched">Book category is required</p>
        </div> 
     
          <div class="form-group">    
@@ -144,7 +142,6 @@
              <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of trendingAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
            </select>
          </div>
-         <p class="text-danger" *ngIf="bookForm.get('author')?.errors?.['required'] && bookForm.get('author')?.touched">Book author is required</p>
        </div> 
         
        <div class="form-group">   
@@ -152,13 +149,12 @@
                         <div class="input-group mb-2">
                         <input formControlName="photo" (change)="uploadImage($event)" type="file" class="form-control" id="image">
          </div>
-         <p class="text-danger" *ngIf="bookForm.get('photo')?.errors?.['required'] && bookForm.get('photo')?.touched">Book photo is required</p>
        </div>
 
 
 
                       <div class="text-center">
-                    <button [disabled]= 'bookForm.invalid'  type="submit" class="btn btn-primary">Update Category</button>
+                    <button [disabled]= ' updateBookForm.invalid'  type="submit" class="btn btn-primary">Update Category</button>
                   </div>
                   </form>
             </div>
