@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Admin } from '../Interfaces/admin';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient , HttpHeaders} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import jwt_decode from 'jwt-decode';
 
@@ -10,23 +10,30 @@ import jwt_decode from 'jwt-decode';
 })
 export class AuthService {
 
-  
-  constructor(private _router:Router, private _httpClient:HttpClient) {
-    if(localStorage.getItem('token') != null ){
+  headers = new HttpHeaders({
+    'Authorization': `${this.token()}`
+  });
+  requestOptions:object = { 
+    headers: this.headers 
+    , observe: 'response'
+  };
+
+  constructor(private _router: Router, private _httpClient: HttpClient) {
+    if (localStorage.getItem('token') != null) {
       this.saveCurrentUser();
     }
-   }
+  }
 
   currentUser = new BehaviorSubject(null);
 
-  saveCurrentUser(){
-    let token:any = localStorage.getItem('token');
+  saveCurrentUser() {
+    let token: any = localStorage.getItem('token');
     this.currentUser.next(jwt_decode(token));
     // console.log(this.currentAdmin.getValue());
     // console.log(token);
   }
 
-  loginAdmin(adminLoginFormData:Admin):Observable<any> {
+  loginAdmin(adminLoginFormData: Admin): Observable<any> {
     return this._httpClient.post('https://goodreads.onrender.com/admin/login', adminLoginFormData);
   }
 
@@ -35,8 +42,8 @@ export class AuthService {
     localStorage.removeItem('token');
     this._router.navigate(['/admin/login']);
   }
- 
-  userLogin(userLoginFormData:Admin):Observable<any> {    
+
+  userLogin(userLoginFormData: Admin): Observable<any> {
     return this._httpClient.post('https://goodreads.onrender.com/user/login', userLoginFormData);
   }
 
@@ -46,9 +53,13 @@ export class AuthService {
     this._router.navigate(['/user/login']);
   }
 
-  token(){
+  token() {
     return localStorage.getItem('token')
   }
- 
+
+  userById(id: string) {
+    return this._httpClient.get(`https://goodreads.onrender.com/user/${id}`, this.requestOptions);
+  }
+
 }
 

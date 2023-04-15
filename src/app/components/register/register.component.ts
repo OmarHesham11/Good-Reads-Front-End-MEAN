@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CBAService } from 'src/app/services/cba.service';
 
@@ -12,36 +12,31 @@ import { CBAService } from 'src/app/services/cba.service';
 
 export class RegisterComponent {
 
-  photo:any;
-
-  constructor(private _CBAService:CBAService, private _router:Router){
+  photo: any;
+  errors: string = '';
+  constructor(private _CBAService: CBAService, private _router: Router) {
 
   }
 
   registerForm = new FormGroup({
-    firstName: new FormControl(null, [Validators.minLength(3), Validators.maxLength(20), Validators.required ,Validators.pattern('[A-Za-z0-9]{3,20}$')]),
-    lastName: new FormControl(null, [Validators.minLength(3), Validators.maxLength(20), Validators.required ,Validators.pattern('[A-Za-z0-9]{3,20}$')]),
-    photo: new FormControl(null,[Validators.required]),
+    firstName: new FormControl(null, [Validators.minLength(3), Validators.maxLength(20), Validators.required, Validators.pattern('[A-Za-z0-9]{3,20}$')]),
+    lastName: new FormControl(null, [Validators.minLength(3), Validators.maxLength(20), Validators.required, Validators.pattern('[A-Za-z0-9]{3,20}$')]),
+    photo: new FormControl(null, [Validators.required]),
     DOB: new FormControl(null, [Validators.required]),
     email: new FormControl(null, [Validators.email, Validators.required]),
     password: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('^[A-Z][a-z0-9]{5,15}$')]),
     cPassword: new FormControl(null, [Validators.required, Validators.minLength(8), Validators.maxLength(15), Validators.pattern('^[A-Z][a-z0-9]{5,15}$')]),
   })
 
-  uploadImage(event:any) {
-    // console.log("photo", this.photo);
-   if(event.target.files.length>0){
-     const file = event.target.files[0];
-     this.photo = file
-     console.log("photo", this.photo);
-   }
+  uploadImage(event: any) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.photo = file
+    }
   }
 
-  submitRegisterForm(registerForm:FormGroup){
-    console.log(registerForm);
-    console.log(registerForm.value);
-
-    const formData:FormData = new FormData();
+  submitRegisterForm(registerForm: FormGroup) {
+    const formData: FormData = new FormData();
     formData.append('firstName', this.registerForm.get('firstName').value);
     formData.append('lastName', this.registerForm.get('lastName').value);
     formData.append('DOB', this.registerForm.get('DOB').value);
@@ -50,13 +45,21 @@ export class RegisterComponent {
     formData.append('cPassword', this.registerForm.get('cPassword').value);
     formData.append('photo', this.photo);
 
-    this._CBAService.postUser('user/signUp',formData).subscribe({
-        next:(res) => {if(res.status == 201){
+    this._CBAService.postUser('user/signUp', formData).subscribe({
+      next: (res) => {
+        if (res.status == 201) {
           this._router.navigate(['user/login']);
-        }},
-        error:(err) => alert('error fe el registration bat3t el user'),
-        complete: () => console.info('complete')
-      })
-    }
+        }
+      },
+      error: (err) => {
+        if (err.error.error.includes('E11000 duplicate key error')) {
+
+          this.errors = "Email already exists!";
+        }
+      }
+
+
+    })
+  }
 
 }
