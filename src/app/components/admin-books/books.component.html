@@ -10,11 +10,12 @@
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
             
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()">
-                <i class="fa-solid fa-xmark"></i>
-              </div>
+        
               <div id="addCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-            <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
+                <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute"style="top: 0; right: 0; opacity: 0.25; " (click)="closeAddPopUpFunction()">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <form [formGroup]="bookForm" (ngSubmit)="submitAddBookForm(bookForm); closeAddPopUpFunction()">
                
               <div class="form-group">           
                          <label for="bookName" class="form-label">Book Name</label>
@@ -114,11 +115,12 @@
     <!-- Update -->
     <div class="update-popup" *ngIf = 'showUpdatePopUp'>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center"(click)="onLightBoxContainerClickUpdate($event)">
-          <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeUpdatePopUpFunction()" >
-            <i class="fa-solid fa-xmark"></i>
-          </div>
+     
             <div id="updateCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
-                <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
+              <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute"style="top: 0; right: 0; opacity: 0.25; " (click)="closeUpdatePopUpFunction()" >
+                <i class="fa-solid fa-xmark"></i>
+              </div> 
+              <form [formGroup]=" updateBookForm" (ngSubmit)=" submitUpdateCategoryForm( updateBookForm); closeUpdatePopUpFunction()">
                   <div class="form-group">           
                     <label for="bookName" class="form-label">Book Name</label>
                     <div class="input-group mb-2">

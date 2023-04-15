@@ -47,4 +47,33 @@
       transform: rotate(1800deg);
     }
   }
+ 
+  @keyframes hide-login {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #loginImage {
+    animation: hide-login 3s ease-in-out;
+  }
+
+  #loginImage:hover {
+    animation-name: rotate-image;
+  }
+
+  @keyframes rotate-image {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   
