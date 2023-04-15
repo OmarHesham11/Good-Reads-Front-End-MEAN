@@ -11,7 +11,7 @@
     <ng-template #addPopUp>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center" (click)="onLightBoxContainerClick($event)">            
             
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()" style="top: 15%; right: 5%;">
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click)="closeAddPopUpFunction()">
                 <i class="fa-solid fa-xmark"></i>
               </div>
               <div id="addCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
@@ -85,16 +85,16 @@
     <!-- Update -->
     <div class="update-popup" *ngIf = 'showUpdatePopUp'>
         <div id="lightBoxContainer" class="d-flex justify-content-center align-items-center"(click)="onLightBoxContainerClickUpdate($event)">
-            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeUpdatePopUpFunction()'style="top: 23%; right: 35%;">
+            <div class="icon btn-icon d-flex justify-content-center align-items-center position-absolute" (click) = 'closeUpdatePopUpFunction()'>
                 <i class="fa-solid fa-xmark"></i>
             </div>
             
-            <div id="updateCatogryPopUp" class="w-25 bg-white p-5 col-md-8 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
+            <div id="updateCatogryPopUp" class="bg-white p-4 p-sm-5 col-lg-4 col-md-6 col-sm-8 rounded shadow-lg" style="color: black; position: relative;">
                 <form [formGroup] = 'updateCategoryForm' (ngSubmit)="submitUpdateCategoryForm(updateCategoryForm); closeUpdatePopUpFunction()">
 
                  <div class="form-group">   
                      <label for="categoryName" class="form-label">Category Name</label>
-                      <div class="input-group">
+                      <div class="input-group mb-3">
                            <input formControlName="Name" type="text" class="form-control" id="categoryName">
                         </div>
                            <p class="text-danger" *ngIf="updateCategoryForm.get('Name')?.errors?.['required'] && updateCategoryForm.get('Name')?.touched">Category Name is required</p>
