@@ -25,7 +25,7 @@ export class UserbooksComponent {
         this.option = res.body.data.option;
         this.books = res.body.data.docs;
       }
-    });
+    },(err)=>location.reload());
   }
 
   onTabChange(event: any) {
