@@ -48,4 +48,11 @@ export class CBAService {
     return this._httpClient.post(`https://goodreads.onrender.com/${mediaType}`, FormData, {observe: 'response'});
   }
 
+  addReview(id:string, FormData:object):Observable<any> {
+    return this._httpClient.patch(`https://goodreads.onrender.com/book/${id}/review`, FormData , this.requestOptions);
+  }
+  updateReview(id:string, FormData:object):Observable<any> {
+    return this._httpClient.patch(`https://goodreads.onrender.com/book/${id}/review/edit`, FormData , this.requestOptions);
+  }
+
 }

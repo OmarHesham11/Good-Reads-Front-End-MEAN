@@ -3,7 +3,7 @@
 
     <!-- Add -->
     <div class="d-flex justify-content-end mb-3 " style="margin-top: 2%;margin-right: 2%;">
-        <button  type="button" class="btn btn-outline-primary" data-bs-toggle="modal" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
+        <button  type="button" class="btn btn-outline-primary" *ngIf="showAddButton; else addPopUp" (click)="showAddPopUpFunction()">
             <i class="fa">&#xf46d;</i> Add Category
         </button>
     </div>
@@ -34,6 +34,11 @@
         </div>
     </ng-template>
 
+    
+    <div *ngIf="error" class="err mt-3 d-flex justify-content-center">
+        <p class="text-danger">{{error}}</p>
+    </div>
+
     <!-- Table -->
     <table class="table w-75 m-auto  text-center text-white mb-3">
         <thead>
@@ -50,10 +55,10 @@
                 <td><span>{{category.Name}}</span></td>
                 <td>
                     <div class="d-flex justify-content-end">
-                        <button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" (click)="deleteCategory(category._id)">
+                        <button type="button" class="btn btn-outline-danger" (click)="deleteCategory(category._id)">
                           <i class="fa">&#xf1f8;</i>
                         </button>
-                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"  (click)="showUpdatePopUpFunction(category._id, i)">
+                        <button type="button" class="btn btn-outline-primary"  (click)="showUpdatePopUpFunction(category._id, i)">
                           <i class="fa">&#xf044;</i>
                         </button>
                       </div>
@@ -61,10 +66,6 @@
             </tr>
         </tbody>
     </table>
-
-    <div *ngIf="error" class="err mt-3 d-flex justify-content-center">
-        <p class="text-danger">{{error}}</p>
-    </div>
 
     <!-- pagintaion -->
 <div class="d-flex justify-content-center align-items-center">

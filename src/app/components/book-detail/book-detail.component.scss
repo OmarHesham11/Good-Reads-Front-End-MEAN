@@ -12,9 +12,13 @@ img {
    
     padding-bottom: 35px;
 }
+a{
+    text-decoration: none;
+    color          : #fff;
 
-
-
-
+    &:hover {
+        text-decoration: underline;
+    }
+}
 
 

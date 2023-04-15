@@ -28,7 +28,7 @@ export class AuthorsComponent {
   
   photo:any;
   currentAuthorId: string;
-  
+  error:string = '';
   
   constructor(private _CBAService:CBAService){
     //get
@@ -142,8 +142,8 @@ export class AuthorsComponent {
           complete:() => {console.log('complete')}
       })
     },
-      error: (err) => {console.error("err fe el delete")},
-      complete: () => console.log('Complete')
+    error:(err) => {this.error = err.error.error},
+    complete: () => console.log('Complete')
     });
   }
 
