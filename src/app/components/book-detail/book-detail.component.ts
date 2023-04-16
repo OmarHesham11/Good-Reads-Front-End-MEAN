@@ -35,13 +35,17 @@ export class BookDetailComponent {
         }
       }
       this.getLoggedInUser()
+      
     });
   }
 
   getLoggedInUser() {
+
     if (this._auth.currentUser.getValue() && this._auth.currentUser.getValue().role === 'user') {
       const userId = this._auth.currentUser.getValue().id;
       this.userLoggedIn = true;
+      
+
       for (let review of this.book.reviews) {
         if (review.userId._id == userId) {
 
@@ -49,10 +53,15 @@ export class BookDetailComponent {
           this.userReview = review.comment;
           return;
         }
+        
       }
+      
     }
-    this.userLoggedIn = false;
-    return;
+    else{
+      this.userLoggedIn = false;
+      return;
+    }
+   
   }
   addReview(form: NgForm) {
     if (!this.userLoggedIn) {
