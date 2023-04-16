@@ -29,6 +29,7 @@ export class BooksComponent {
   limit: number = 5;
   bookResponse: any = {};
   categoryResponse:any ={};
+  authorResponse:any ={};
 
   // selectedFile!:File;
   photo: any;
@@ -55,6 +56,7 @@ export class BooksComponent {
       if (res.body.message == 'success') {
         this.trendingAuthors = res.body.authors.docs;
         this.allAuthors = res.body.authors.docs;
+        ({ totalDocs: this.authorResponse.totalDocs, limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage } = res.body.authors);
       }
     })
 
@@ -261,7 +263,7 @@ export class BooksComponent {
   selectedCategory:any;
   onSelectCategory(event: MouseEvent){
     event.preventDefault();
-    // event.stopPropagation();
+    
     const target = event.target as HTMLSelectElement;
     const value = target.value;
     if (value === "see-more") {
@@ -277,7 +279,35 @@ export class BooksComponent {
       }
       this.updateBookForm.controls['category'].setValue(null);
       this.bookForm.controls['category'].setValue(null);
-      // target.open = true;
+      
+      const dropdown = target.parentElement;
+      dropdown.classList.add('keep-open');
+      setTimeout(() => {
+      dropdown.classList.remove('keep-open');
+      }, 0);
+    }
+
+  }
+
+  onSelectAuthor(event: MouseEvent){
+    event.preventDefault();
+   
+    const target = event.target as HTMLSelectElement;
+    const value = target.value;
+    if (value === "see-more") {
+      if (this.authorResponse.hasNextPage && this.currentPage < this.authorResponse.totalPages) {
+        this.currentPage++;
+        this._CBAService.getCBA('author', this.currentPage, this.limit).subscribe((res) => {
+          if (res.body.message == 'success') {
+            this.allAuthors.push(...res.body.authors.docs);
+            console.log(this.allAuthors);
+            ({ totalDocs: this.authorResponse.totalDocs, limit: this.authorResponse.limit, totalPages: this.authorResponse.totalPages, page: this.authorResponse.page, hasPrevPage: this.authorResponse.hasPrevPage, hasNextPage: this.authorResponse.hasNextPage } = res.body.authors);
+          }
+        });
+      }
+      this.updateBookForm.controls['author'].setValue(null);
+      this.bookForm.controls['author'].setValue(null);
+      
       const dropdown = target.parentElement;
       dropdown.classList.add('keep-open');
       setTimeout(() => {

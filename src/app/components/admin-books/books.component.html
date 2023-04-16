@@ -29,7 +29,7 @@
                              <label class="form-label">Category</label>
                              <div class="input-group mb-2">
                                 <select formControlName="category" class="form-select" (click)="onSelectCategory($event)">
-                                    <option [value]="category.Name" *ngFor="let category of trendingCategories, let i = index">{{category.Name}}</option>
+                                    <option [value]="category.Name" *ngFor="let category of allCategories, let i = index">{{category.Name}}</option>
                                     <option value="see-more">See more...</option>
                                 </select>
               </div>
@@ -39,8 +39,9 @@
               <div class="form-group">    
                             <label for="bookName" class="form-label">Author</label>
                             <div class="input-group mb-2">
-                            <select formControlName="author" class="form-select" aria-label="Default select example">
-                  <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of trendingAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
+                            <select formControlName="author" class="form-select" aria-label="Default select example" (click)="onSelectAuthor($event)">
+                  <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of allAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
+                  <option value="see-more">See more...</option>
                 </select>
               </div>
               <p class="text-danger" *ngIf="bookForm.get('author')?.errors?.['required'] && bookForm.get('author')?.touched">Book author is required</p>
@@ -142,9 +143,10 @@
          <div class="form-group">    
                        <label for="bookName" class="form-label">Author</label>
                        <div class="input-group mb-2">
-                       <select formControlName="author" class="form-select" aria-label="Default select example">
-             <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of trendingAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
-           </select>
+                        <select formControlName="author" class="form-select" aria-label="Default select example" (click)="onSelectAuthor($event)">
+                          <option [ngValue]="{firstName:author.firstName, lastName:author.lastName}" *ngFor="let author of allAuthors, let i = index">{{author.firstName}} {{author.lastName}}</option>
+                          <option value="see-more">See more...</option>
+                        </select>
          </div>
        </div> 
         
