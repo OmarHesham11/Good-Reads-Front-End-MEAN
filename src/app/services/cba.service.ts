@@ -12,11 +12,8 @@ export class CBAService {
 
   }
 
-  headers = new HttpHeaders({
-    'Authorization': `${this._auth.token()}`
-  });
+
   requestOptions:object = { 
-    //headers: this.headers ,
     observe: 'response'
   };
 

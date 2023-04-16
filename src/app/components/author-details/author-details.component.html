@@ -25,10 +25,12 @@
                 </div>
                 <div class="book mt-3 border border-light" *ngFor="let book of authorBooks">
                     <div class="d-flex justify-content-between">
-                        <div class="book-details d-flex">
-                            <img src="{{book.photo}}" width="150px" alt="">
+                          <div class="book-details d-flex" style="cursor: pointer;">
+                            <img [routerLink]="['/book',book._id]"  [src]="book.photo" width="150px" alt="">
                             <div class="pt-4 ps-4">
-                                <h4 class="fs-2 fw-bold">{{book.name}}</h4>
+                                <a class="book-link" [routerLink]="['/book',book._id]" >
+                                    <h4 class=" text-capitalize">{{book.name}}</h4>
+                                </a>
                                 <div class="rating">
                                     <i [attr.data-star]="book.totalRating/book.ratingNumber || 0"></i>
                                 </div>

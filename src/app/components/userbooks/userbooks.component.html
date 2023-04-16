@@ -19,11 +19,19 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let book of books">
-            <td><img class="image" [src]="book.bookId.photo" alt="anything"></td>
-            <td><span>{{book.bookId.name}}</span></td>
-            <td><span>{{book.bookId.authorId.firstName}} {{book.bookId.authorId.lastName}}</span></td>
-            <td>
+        <tr *ngFor="let book of books" style="cursor: pointer;">
+           
+            <td>  <img [routerLink]="['/book',book.bookId._id]"  [src]="book.bookId.photo"  class="image" alt="">
+             
+                <td>   <a  [routerLink]="['/book',book.bookId._id]" >
+                           <span>{{book.bookId.name}}</span>
+                    </a>
+            <td><a [routerLink]="['/author',book.bookId.authorId._id]">
+                <span >{{book.bookId.authorId.firstName}} {{book.bookId.authorId.lastName}}</span>
+            </a>
+            </td>
+            
+                <td>
     
             <i [attr.data-star]="book.bookId.avgRate || 0" ></i>
             
